@@ -1,0 +1,100 @@
+:root {
+  --bg: #f4f7fb; /* very light blue-gray */
+  --surface: #ffffff; /* card background */
+  --text: #1f2937; /* dark gray text */
+  --muted: #6b7280; /* muted text */
+  --primary: #4b8f8c; /* subtle teal */
+  --primary-pressed: #3f7a77;
+  --glass: rgba(15,23,42,0.04);
+}
+
+/* Global reset / base */
+* { box-sizing: border-box; }
+html, body, #app { height: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  background: var(--surface);
+  box-shadow: 0 1px 3px var(--glass);
+}
+
+nav ul { margin: 0; padding: 0; }
+nav a {
+  text-decoration: none;
+  color: var(--primary);
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 150ms ease, color 150ms ease, transform 80ms ease;
+}
+nav a:hover {
+  background: rgba(75,143,140,0.08);
+  text-decoration: none;
+}
+
+/* Inputs / forms */
+input[type="text"], input[type="email"], input[type="password"], textarea, select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #e6e9ee;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  transition: box-shadow 120ms ease, border-color 120ms ease;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: rgba(75,143,140,0.45);
+  box-shadow: 0 0 0 4px rgba(75,143,140,0.08);
+}
+
+/* Buttons: slightly rounded, non-standard color */
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 140ms ease, transform 80ms ease, box-shadow 120ms ease;
+  box-shadow: 0 1px 2px rgba(15,23,42,0.06);
+}
+button:hover {
+  background: var(--primary-pressed);
+  transform: translateY(-1px);
+}
+button:active { transform: translateY(0); }
+button:focus { box-shadow: 0 0 0 4px rgba(75,143,140,0.12); }
+
+/* Secondary / ghost buttons */
+.btn--secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid rgba(75,143,140,0.16);
+}
+
+/* Small utilities */
+.card {
+  background: var(--surface);
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+}
+
+.muted { color: var(--muted); }
+
+/* Make file input a bit nicer when adjacent to button */
+.upload-row { display: flex; gap: 12px; align-items: center; }

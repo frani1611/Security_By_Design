@@ -1,0 +1,191 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  actions: read
+  packages: write
+  security-events: write
+  id-token: write
+
+env:
+  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/social-media-dashboard
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  debug-token:
+    name: Debug GITHUB_TOKEN access
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+    steps:
+      - name: Show run and token info
+        run: |
+          echo "Run id: ${{ github.run_id }}"
+          echo "Event: ${{ github.event_name }}"
+          echo "Repository: ${{ github.repository }}"
+      - name: Test Actions REST API with GITHUB_TOKEN
+        env:
+          GHTOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          API_URL="https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          echo "Calling: $API_URL"
+          http_status=$(curl -s -o response.json -w "%{http_code}" -H "Authorization: Bearer $GHTOKEN" -H "Accept: application/vnd.github+json" "$API_URL") || true
+          echo "HTTP status: $http_status"
+          echo "Response body:" 
+          cat response.json || true
+
+  sbom:
+    name: Generate SBOM
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Syft
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+      - name: Generate SBOM (CycloneDX JSON)
+        run: |
+          syft packages dir:. -o cyclonedx-json > sbom.cyclonedx.json
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.cyclonedx.json
+
+  codeql:
+    name: CodeQL SAST
+    runs-on: ubuntu-latest
+    needs: sbom
+    steps:
+      - uses: actions/checkout@v4
+      # CodeQL Action v4: update before v3 deprecation (Dec 2026)
+      # Note: Ensure 'Code scanning' is enabled in repository settings
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: javascript
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v4
+      - name: Run CodeQL
+        uses: github/codeql-action/analyze@v4
+
+  secret-scan:
+    name: Secret Scan (gitleaks)
+    runs-on: ubuntu-latest
+    needs: codeql
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run gitleaks
+        uses: zricethezav/gitleaks-action@v2
+        with:
+          args: detect --report-format json --report-path gitleaks-report.json
+      - name: Upload gitleaks report
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-report
+          path: gitleaks-report.json
+      - name: Fail if secrets found
+        run: |
+          if [ -s gitleaks-report.json ] && grep -q '[\[{]' gitleaks-report.json; then
+            echo "Secrets detected by gitleaks, failing pipeline."
+            jq length gitleaks-report.json | grep -q '^0$' || (cat gitleaks-report.json && exit 1)
+          fi
+
+  sca-scan:
+    name: SCA Scan (Trivy)
+    runs-on: ubuntu-latest
+    needs: secret-scan
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install trivy
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
+      - name: Run Trivy filesystem scan
+        run: |
+          trivy fs --format json --output trivy-fs.json .
+      - name: Upload Trivy report
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-report
+          path: trivy-fs.json
+
+  build-and-push:
+    name: Build and push image
+    runs-on: ubuntu-latest
+    needs: sca-scan
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Log in to GHCR
+        env:
+          CR_PAT: ${{ secrets.GHCR_TOKEN }}
+        run: |
+          echo "$CR_PAT" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+      - name: Build and push image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+            ${{ env.IMAGE_NAME }}:latest
+
+  sign-image:
+    name: Sign image with cosign
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    steps:
+      - name: Install Cosign
+        if: github.ref == 'refs/heads/main'
+        uses: sigstore/cosign-installer@v3
+      - name: Sign image (keyless)
+        if: github.ref == 'refs/heads/main'
+        env:
+          COSIGN_EXPERIMENTAL: "true"
+          COSIGN_YES: "true"
+        run: |
+          # Keyless signing via GitHub OIDC
+          cosign sign --keyless ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
+  quality-gate:
+    name: Quality Gate
+    runs-on: ubuntu-latest
+    needs: [sign-image, sca-scan, secret-scan, build-and-push]
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: trivy-report
+          path: reports
+      - name: Check Trivy for CVSS >= 7.0 or HIGH/CRITICAL
+        run: |
+          python3 .github/scripts/quality_gate.py reports/trivy-fs.json
+      - name: Verify cosign signature (keyless)
+        run: |
+          cosign verify --keyless ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} || (echo "Signature missing/invalid" && exit 1)
+
+  deploy:
+    name: Deploy to Kubernetes
+    runs-on: ubuntu-latest
+    needs: quality-gate
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.27.3'
+      - name: Setup kubeconfig
+        env:
+          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
+        run: |
+          echo "$KUBECONFIG_DATA" > kubeconfig
+          export KUBECONFIG=$PWD/kubeconfig
+      - name: Update k8s manifests with new image and apply
+        run: |
+          sed -i "s#IMAGE_PLACEHOLDER#${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}#g" k8s/backend-deployment.yaml || true
+          kubectl apply -f k8s/
