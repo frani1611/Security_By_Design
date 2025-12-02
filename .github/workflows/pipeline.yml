@@ -194,20 +194,13 @@ jobs:
       - name: Install cosign via action
         if: github.ref == 'refs/heads/main'
         uses: sigstore/cosign-installer@v3
-      - name: Log in to GHCR for signing
+      - name: Log in to GHCR for signing (use GHCR_TOKEN or fallback to GITHUB_TOKEN)
         if: github.ref == 'refs/heads/main'
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }}
-      - name: Fallback login to GHCR with GITHUB_TOKEN
-        if: ${{ secrets.GHCR_TOKEN == '' && github.ref == 'refs/heads/main' }}
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ github.token }}
+          password: ${{ secrets.GHCR_TOKEN || github.token }}
       - name: Sign image (keyless) using cosign CLI
         if: github.ref == 'refs/heads/main'
         env:
