@@ -223,6 +223,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: [sign-image, sca-scan, secret-scan, build-and-push]
     steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python (ensure python3 available)
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
