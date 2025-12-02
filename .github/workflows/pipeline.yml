@@ -84,10 +84,19 @@ jobs:
           # Install dependencies and gitleaks (use sudo to ensure /usr/local/bin is writable)
           sudo apt-get update -y
           sudo apt-get install -y jq ca-certificates
-          curl -sSfL https://raw.githubusercontent.com/zricethezav/gitleaks/master/install.sh | sudo bash -s -- -b /usr/local/bin
+          # Remove any existing gitleaks to avoid shadowing older binaries
+          sudo rm -f /usr/local/bin/gitleaks /usr/bin/gitleaks || true
+          # Download latest gitleaks release binary and install
+          GITLEAKS_URL="https://github.com/zricethezav/gitleaks/releases/latest/download/gitleaks-linux-amd64"
+          curl -sSLf "$GITLEAKS_URL" -o /tmp/gitleaks
+          sudo mv /tmp/gitleaks /usr/local/bin/gitleaks
+          sudo chmod +x /usr/local/bin/gitleaks
+          # Ensure /usr/local/bin is in PATH
+          export PATH=/usr/local/bin:$PATH
           # Print version for debugging (non-fatal)
           gitleaks version || true
           # Run detect but don't let a non-zero exit (findings) stop the job — report will be checked later
+          set -x
           gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true
       - name: Upload gitleaks report
         uses: actions/upload-artifact@v4
@@ -162,9 +171,13 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           set -e
+          echo "Removing any existing cosign binaries"
+          sudo rm -f /usr/local/bin/cosign /usr/bin/cosign || true
           echo "Installing latest cosign binary from GitHub releases"
-          curl -sSLf "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64" -o /usr/local/bin/cosign
-          chmod +x /usr/local/bin/cosign
+          curl -sSLf "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64" -o /tmp/cosign
+          sudo mv /tmp/cosign /usr/local/bin/cosign
+          sudo chmod +x /usr/local/bin/cosign
+          export PATH=/usr/local/bin:$PATH
           cosign version || true
       - name: Sign image (keyless)
         if: github.ref == 'refs/heads/main'
