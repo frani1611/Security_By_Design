@@ -86,11 +86,25 @@ jobs:
           sudo apt-get install -y jq ca-certificates
           # Remove any existing gitleaks to avoid shadowing older binaries
           sudo rm -f /usr/local/bin/gitleaks /usr/bin/gitleaks || true
-          # Download latest gitleaks release binary and install
-          GITLEAKS_URL="https://github.com/zricethezav/gitleaks/releases/latest/download/gitleaks-linux-amd64"
-          curl -sSLf "$GITLEAKS_URL" -o /tmp/gitleaks
-          sudo mv /tmp/gitleaks /usr/local/bin/gitleaks
-          sudo chmod +x /usr/local/bin/gitleaks
+          # Prefer the upstream install script; fallback to direct asset download if it fails
+          set -e
+          echo "Attempting to install gitleaks via install.sh"
+          if curl -sSfL https://raw.githubusercontent.com/zricethezav/gitleaks/master/install.sh | sudo bash -s -- -b /usr/local/bin; then
+            echo "gitleaks installed via install.sh"
+          else
+            echo "install.sh failed, attempting direct asset download"
+            ARCH=$(uname -m)
+            case "$ARCH" in
+              x86_64|amd64) ASSET="gitleaks-linux-amd64" ;;
+              aarch64|arm64) ASSET="gitleaks-linux-arm64" ;;
+              *) ASSET="gitleaks-linux-amd64" ;;
+            esac
+            GITLEAKS_URL="https://github.com/zricethezav/gitleaks/releases/latest/download/${ASSET}"
+            echo "Downloading $GITLEAKS_URL"
+            curl -sSL --retry 3 --retry-delay 2 -f "$GITLEAKS_URL" -o /tmp/gitleaks
+            sudo mv /tmp/gitleaks /usr/local/bin/gitleaks
+            sudo chmod +x /usr/local/bin/gitleaks
+          fi
           # Ensure /usr/local/bin is in PATH
           export PATH=/usr/local/bin:$PATH
           # Print version for debugging (non-fatal)
@@ -173,10 +187,15 @@ jobs:
           set -e
           echo "Removing any existing cosign binaries"
           sudo rm -f /usr/local/bin/cosign /usr/bin/cosign || true
-          echo "Installing latest cosign binary from GitHub releases"
-          curl -sSLf "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64" -o /tmp/cosign
-          sudo mv /tmp/cosign /usr/local/bin/cosign
-          sudo chmod +x /usr/local/bin/cosign
+          echo "Trying to download cosign binary from GitHub releases"
+          COSIGN_URL="https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64"
+          if curl -sSL --retry 3 --retry-delay 2 -f "$COSIGN_URL" -o /tmp/cosign; then
+            sudo mv /tmp/cosign /usr/local/bin/cosign
+            sudo chmod +x /usr/local/bin/cosign
+          else
+            echo "Direct cosign download failed (HTTP 404?). Falling back to sigstore installer action may be required."
+            exit 1
+          fi
           export PATH=/usr/local/bin:$PATH
           cosign version || true
       - name: Sign image (keyless)
