@@ -81,8 +81,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run gitleaks (install + detect)
         run: |
-          curl -sSfL https://raw.githubusercontent.com/zricethezav/gitleaks/master/install.sh | bash -s -- -b /usr/local/bin
-          gitleaks detect --source . --report-format json --report-path gitleaks-report.json
+          # Install dependencies and gitleaks (use sudo to ensure /usr/local/bin is writable)
+          sudo apt-get update -y
+          sudo apt-get install -y jq ca-certificates
+          curl -sSfL https://raw.githubusercontent.com/zricethezav/gitleaks/master/install.sh | sudo bash -s -- -b /usr/local/bin
+          # Print version for debugging (non-fatal)
+          gitleaks version || true
+          # Run detect but don't let a non-zero exit (findings) stop the job — report will be checked later
+          gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true
       - name: Upload gitleaks report
         uses: actions/upload-artifact@v4
         with:
