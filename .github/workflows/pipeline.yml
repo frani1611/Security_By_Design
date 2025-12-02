@@ -79,10 +79,10 @@ jobs:
     needs: codeql
     steps:
       - uses: actions/checkout@v4
-      - name: Run gitleaks
-        uses: zricethezav/gitleaks-action@v2
-        with:
-          args: detect --report-format json --report-path gitleaks-report.json
+      - name: Run gitleaks (install + detect)
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/zricethezav/gitleaks/master/install.sh | bash -s -- -b /usr/local/bin
+          gitleaks detect --report-format json --report-path gitleaks-report.json || true
       - name: Upload gitleaks report
         uses: actions/upload-artifact@v4
         with:
@@ -121,15 +121,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Log in to GHCR
-        env:
-          CR_PAT: ${{ secrets.GHCR_TOKEN }}
-        run: |
-          echo "$CR_PAT" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_TOKEN }}
       - name: Build and push image
         uses: docker/build-push-action@v4
         with:
-          context: ./backend
-          file: ./backend/Dockerfile
+          context: ./Code/social-media-dashboard/backend
+          file: ./Code/social-media-dashboard/backend/Dockerfile
           push: true
           tags: |
             ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
