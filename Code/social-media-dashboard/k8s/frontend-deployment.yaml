@@ -18,9 +18,9 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: docker.io/frani1611/social-media-dashboard:ccdc3cb7c55cbf7583819813faae145449ba20ba
+          image: IMAGE_PLACEHOLDER_FRONTEND
           ports:
-            - containerPort: 3000
+            - containerPort: 80
           env:
             - name: VITE_API_URL
               value: "http://backend:3000"  # backend service listens on 3000
