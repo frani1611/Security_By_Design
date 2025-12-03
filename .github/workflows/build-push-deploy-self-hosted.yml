@@ -29,7 +29,8 @@ jobs:
       - name: Build and push image
         run: |
           IMAGE=${{ steps.set-image.outputs.image }}
-          docker build -t $IMAGE Code/social-media-dashboard
+          # Build from the backend folder where the Dockerfile is located
+          docker build -t $IMAGE Code/social-media-dashboard/backend
           docker push $IMAGE
 
   deploy:
