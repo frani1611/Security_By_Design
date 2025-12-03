@@ -1,0 +1,59 @@
+name: Build, Push and Deploy (self-hosted)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and Push
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.set-image.outputs.image }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set image name
+        id: set-image
+        run: |
+          echo "image=docker.io/${{ secrets.DOCKERHUB_USERNAME }}/social-media-dashboard:${{ github.sha }}" >> $GITHUB_OUTPUT
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push image
+        run: |
+          IMAGE=${{ steps.set-image.outputs.image }}
+          docker build -t $IMAGE Code/social-media-dashboard
+          docker push $IMAGE
+
+  deploy:
+    name: Deploy on self-hosted runner
+    needs: build
+    runs-on: [self-hosted, linux]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Replace IMAGE_PLACEHOLDER and apply manifests
+        env:
+          IMAGE: ${{ needs.build.outputs.image }}
+        run: |
+          # Expectation: this job runs on a self-hosted runner which has access to the local k3s cluster
+          # and has kubectl configured (or /etc/rancher/k3s/k3s.yaml available to the runner user).
+          sed -i "s#IMAGE_PLACEHOLDER#${IMAGE}#g" Code/social-media-dashboard/k8s/backend-deployment.yaml || true
+          kubectl apply -f Code/social-media-dashboard/k8s/
+
+      - name: Wait for rollout
+        run: |
+          # Wait for the 'backend' deployment created in Code/social-media-dashboard/k8s/backend-deployment.yaml
+          kubectl rollout status deployment/backend -n default --timeout=120s || true
+
+      - name: Notes
+        run: |
+          echo "If your image is private, ensure the k3s cluster has image pull credentials (imagePullSecrets) or the runner host is logged in to Docker Hub."
