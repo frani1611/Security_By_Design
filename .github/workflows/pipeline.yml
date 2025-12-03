@@ -246,9 +246,12 @@ jobs:
       - name: Install cosign CLI
         uses: sigstore/cosign-installer@v3
 
-      - name: Verify cosign signature (keyless)
+      - name: Verify cosign signature (keyless/auto)
         run: |
-          cosign verify --keyless ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} || (echo "Signature missing/invalid" && exit 1)
+          # Newer cosign versions may not accept the --keyless flag; verify without the flag.
+          # Use verbose output to aid debugging if verification fails.
+          cosign version || true
+          cosign verify --verbose ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} || (echo "Signature missing/invalid" && exit 1)
 
   deploy:
     name: Deploy to Kubernetes
