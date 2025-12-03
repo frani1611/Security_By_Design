@@ -252,6 +252,7 @@ jobs:
           # to the GitHub actor that ran the workflow to avoid accepting unrelated certs.
           cosign version || true
           cosign verify --verbose --certificate-identity-regexp ".*${{ github.actor }}.*" \
+            --certificate-oidc-issuer-regexp "https://token.actions.githubusercontent.com" \
             ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} || (echo "Signature missing/invalid" && exit 1)
 
   deploy:
