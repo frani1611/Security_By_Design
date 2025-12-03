@@ -33,6 +33,13 @@ jobs:
           docker build -t $IMAGE Code/social-media-dashboard/backend
           docker push $IMAGE
 
+      - name: Publish image output
+        run: |
+          # Ensure the job output 'image' is set from the actual built image
+          IMAGE=${{ steps.set-image.outputs.image }}
+          echo "image=${IMAGE}" >> $GITHUB_OUTPUT
+          echo "Built and published image: ${IMAGE}"
+
   deploy:
     name: Deploy on self-hosted runner
     needs: build
