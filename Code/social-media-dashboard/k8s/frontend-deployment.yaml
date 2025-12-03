@@ -23,7 +23,7 @@ spec:
             - containerPort: 3000
           env:
             - name: VITE_API_URL
-              value: "http://backend:5000"  # Adjust according to your backend service name
+              value: "http://backend:3000"  # backend service listens on 3000
           resources:
             limits:
               memory: "512Mi"

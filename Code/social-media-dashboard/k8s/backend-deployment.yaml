@@ -21,7 +21,7 @@ spec:
         - containerPort: 3000
         env:
         - name: MONGODB_URI
-          value: mongodb://mongodb-service:27017/your-database-name
+          value: mongodb://mongodb:27017/your-database-name
         - name: CLOUDINARY_URL
           valueFrom:
             secretKeyRef:
