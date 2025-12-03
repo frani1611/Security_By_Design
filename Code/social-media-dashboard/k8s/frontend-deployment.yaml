@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: IMAGE_PLACEHOLDER_FRONTEND
+          image: docker.io/frani1611/social-media-dashboard-frontend:2b9453c31dbb3dec8126260ab94eddc57e592a06
           ports:
             - containerPort: 80
           env:
