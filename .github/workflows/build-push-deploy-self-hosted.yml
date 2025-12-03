@@ -76,7 +76,8 @@ jobs:
             echo "ERROR: IMAGE is empty — aborting to avoid applying manifests with an empty image." >&2
             exit 1
           fi
-          sed -i "s#IMAGE_PLACEHOLDER#${IMAGE}#g" Code/social-media-dashboard/k8s/backend-deployment.yaml || true
+          # Replace placeholder in all manifests under k8s/ (backend, frontend, etc.)
+          sed -i "s#IMAGE_PLACEHOLDER#${IMAGE}#g" Code/social-media-dashboard/k8s/*.yaml || true
           kubectl apply -f Code/social-media-dashboard/k8s/
 
       - name: Wait for rollout
