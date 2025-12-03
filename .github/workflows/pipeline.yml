@@ -269,8 +269,15 @@ jobs:
         env:
           KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
         run: |
+          if [ -z "$KUBECONFIG_DATA" ]; then
+            echo "KUBECONFIG secret is not set. Please add it to repository secrets." && exit 1
+          fi
+          # Write kubeconfig to workspace and restrict permissions
           echo "$KUBECONFIG_DATA" > kubeconfig
-          export KUBECONFIG=$PWD/kubeconfig
+          chmod 600 kubeconfig
+          # Persist KUBECONFIG for subsequent steps
+          echo "KUBECONFIG=$PWD/kubeconfig" >> $GITHUB_ENV
+          echo "Wrote kubeconfig and exported KUBECONFIG"
       - name: Update k8s manifests with new image and apply
         run: |
           # Manifests are located in the Code/social-media-dashboard/k8s directory
