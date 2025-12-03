@@ -9,7 +9,8 @@ const authMiddleware = async (req, res, next) => {
         const token = req.headers.authorization?.split(' ')[1];
         if (!token) return res.status(401).json({ message: 'No token provided' });
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const secret = process.env.JWT_SECRET || 'dev-secret';
+        const decoded = jwt.verify(token, secret, { algorithms: ['HS256'] });
         const userId = decoded._id || decoded.id || decoded.userId;
 
         if (!userId) return res.status(401).json({ message: 'Invalid token payload' });

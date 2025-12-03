@@ -128,7 +128,7 @@ app.post('/login', async (req, res) => {
     const token = jwt.sign(
       { _id: user._id.toString(), username: user.username, email: user.email },
       process.env.JWT_SECRET || 'dev-secret',
-      { expiresIn: '7d' }
+      { expiresIn: '7d', algorithm: 'HS256' }
     );
 
     res.json({ message: 'Login erfolgreich!', token });
