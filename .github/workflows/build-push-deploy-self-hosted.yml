@@ -43,6 +43,16 @@ jobs:
           echo "::set-output name=image::${IMAGE}"
           echo "Built and published image: ${IMAGE}"
 
+      - name: Save image tag to file
+        run: |
+          echo "${{ steps.set-image.outputs.image }}" > image.txt
+
+      - name: Upload image tag artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-tag
+          path: image.txt
+
   deploy:
     name: Deploy on self-hosted runner
     needs: build
@@ -51,13 +61,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Download image tag artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: image-tag
+          path: .
+
       - name: Replace IMAGE_PLACEHOLDER and apply manifests
-        env:
-          IMAGE: ${{ needs.build.outputs.image }}
         run: |
-          # Expectation: this job runs on a self-hosted runner which has access to the local k3s cluster
-          # and has kubectl configured (or /etc/rancher/k3s/k3s.yaml available to the runner user).
-          # Debug: ensure IMAGE is set before modifying manifests
+          # Read the image tag produced by the build job
+          IMAGE=$(cat image.txt)
           echo "Image to deploy: '${IMAGE}'"
           if [ -z "${IMAGE}" ]; then
             echo "ERROR: IMAGE is empty — aborting to avoid applying manifests with an empty image." >&2
