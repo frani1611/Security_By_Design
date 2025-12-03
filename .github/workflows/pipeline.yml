@@ -273,5 +273,6 @@ jobs:
           export KUBECONFIG=$PWD/kubeconfig
       - name: Update k8s manifests with new image and apply
         run: |
-          sed -i "s#IMAGE_PLACEHOLDER#${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}#g" k8s/backend-deployment.yaml || true
-          kubectl apply -f k8s/
+          # Manifests are located in the Code/social-media-dashboard/k8s directory
+          sed -i "s#IMAGE_PLACEHOLDER#${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}#g" Code/social-media-dashboard/k8s/backend-deployment.yaml || true
+          kubectl apply -f Code/social-media-dashboard/k8s/
