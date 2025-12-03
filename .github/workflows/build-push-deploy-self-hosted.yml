@@ -47,6 +47,12 @@ jobs:
         run: |
           # Expectation: this job runs on a self-hosted runner which has access to the local k3s cluster
           # and has kubectl configured (or /etc/rancher/k3s/k3s.yaml available to the runner user).
+          # Debug: ensure IMAGE is set before modifying manifests
+          echo "Image to deploy: '${IMAGE}'"
+          if [ -z "${IMAGE}" ]; then
+            echo "ERROR: IMAGE is empty — aborting to avoid applying manifests with an empty image." >&2
+            exit 1
+          fi
           sed -i "s#IMAGE_PLACEHOLDER#${IMAGE}#g" Code/social-media-dashboard/k8s/backend-deployment.yaml || true
           kubectl apply -f Code/social-media-dashboard/k8s/
 
