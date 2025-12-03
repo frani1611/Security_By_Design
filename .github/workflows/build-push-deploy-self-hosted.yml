@@ -39,6 +39,8 @@ jobs:
           # Ensure the job output 'image' is set from the actual built image
           IMAGE=${{ steps.set-image.outputs.image }}
           echo "image=${IMAGE}" >> $GITHUB_OUTPUT
+          # also set a step output (works with older runner syntax and ensures steps.publish.outputs.image is set)
+          echo "::set-output name=image::${IMAGE}"
           echo "Built and published image: ${IMAGE}"
 
   deploy:
