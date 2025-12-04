@@ -22,8 +22,14 @@ spec:
         env:
         - name: PORT
           value: "3000"
+        # Use DB credentials from Kubernetes Secret so the app authenticates to MongoDB
         - name: MONGODB_URI
-          value: mongodb://mongodb:27017/your-database-name
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: uri
+        - name: DB_NAME
+          value: Security_By_Design
         - name: CLOUDINARY_URL
           valueFrom:
             secretKeyRef:
