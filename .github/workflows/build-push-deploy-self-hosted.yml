@@ -75,8 +75,11 @@ jobs:
 
       - name: Save image tags to files
         run: |
-          echo "${{ steps.set-image.outputs.image }}" > image-backend.txt
-          echo "${{ steps.set-image.outputs.image_frontend }}" > image-frontend.txt
+          # Use the published outputs (may point to GHCR if GHCR_TOKEN was set)
+          IMAGE=${{ steps.publish.outputs.image }}
+          IMAGE_FRONTEND=${{ steps.publish.outputs.image_frontend }}
+          echo "${IMAGE}" > image-backend.txt
+          echo "${IMAGE_FRONTEND}" > image-frontend.txt
 
       - name: Upload image tag artifacts
         uses: actions/upload-artifact@v4
@@ -130,7 +133,15 @@ jobs:
           # Replace placeholders in all manifests under k8s/ (backend, frontend, etc.)
           sed -i "s#IMAGE_PLACEHOLDER#${IMAGE}#g" Code/social-media-dashboard/k8s/*.yaml || true
           sed -i "s#IMAGE_PLACEHOLDER_FRONTEND#${IMAGE_FRONTEND}#g" Code/social-media-dashboard/k8s/*.yaml || true
+          echo "---- Manifests after replacement (preview) ----"
+          sed -n '1,160p' Code/social-media-dashboard/k8s/frontend-deployment.yaml || true
+          sed -n '1,160p' Code/social-media-dashboard/k8s/backend-deployment.yaml || true
           kubectl apply -f Code/social-media-dashboard/k8s/
+          # Ensure deployments explicitly use desired images as fallback
+          kubectl set image deployment/backend backend=${IMAGE} || true
+          kubectl set image deployment/frontend frontend=${IMAGE_FRONTEND} || true
+          kubectl rollout status deployment/backend -n default --timeout=120s || true
+          kubectl rollout status deployment/frontend -n default --timeout=120s || true
 
       - name: Wait for rollout
         run: |

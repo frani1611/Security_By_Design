@@ -180,6 +180,32 @@ jobs:
             ${{ env.IMAGE_NAME }}:latest
           # build-push-action provides step output 'digest' when pushing
 
+      - name: Build and push frontend image
+        id: build-frontend
+        uses: docker/build-push-action@v4
+        with:
+          context: ./Code/social-media-dashboard/frontend
+          file: ./Code/social-media-dashboard/frontend/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/social-media-dashboard-frontend:${{ env.IMAGE_TAG }}
+            ghcr.io/${{ github.repository_owner }}/social-media-dashboard-frontend:latest
+
+      - name: Save image tags to files
+        run: |
+          # Backend image (GHCR) and frontend image (GHCR)
+          echo "${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}" > image-backend.txt
+          echo "ghcr.io/${{ github.repository_owner }}/social-media-dashboard-frontend:${{ env.IMAGE_TAG }}" > image-frontend.txt
+      - name: Upload image tag artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-tag-backend
+          path: image-backend.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: image-tag-frontend
+          path: image-frontend.txt
+
   sign-image:
     name: Sign image with cosign
     runs-on: ubuntu-latest
@@ -274,6 +300,33 @@ jobs:
       # whose 'server:' points to a reachable API endpoint.
       - name: Update k8s manifests with new image and apply
         run: |
-          # Manifests are located in the Code/social-media-dashboard/k8s directory
-          sed -i "s#IMAGE_PLACEHOLDER#${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}#g" Code/social-media-dashboard/k8s/backend-deployment.yaml || true
+          # Read image tags produced by the build job (downloaded by artifact step in other workflows)
+          # If artifacts are present in workspace, prefer them; fallback to env-based name.
+          if [ -f image-backend.txt ]; then
+            IMAGE_BACKEND=$(cat image-backend.txt)
+          else
+            IMAGE_BACKEND=${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          fi
+          if [ -f image-frontend.txt ]; then
+            IMAGE_FRONTEND=$(cat image-frontend.txt)
+          else
+            IMAGE_FRONTEND=ghcr.io/${{ github.repository_owner }}/social-media-dashboard-frontend:${{ env.IMAGE_TAG }}
+          fi
+          echo "Backend image to deploy: '${IMAGE_BACKEND}'"
+          echo "Frontend image to deploy: '${IMAGE_FRONTEND}'"
+          if [ -z "${IMAGE_BACKEND}" ] || [ -z "${IMAGE_FRONTEND}" ]; then
+            echo "ERROR: one of the image variables is empty — aborting to avoid applying manifests with empty image." >&2
+            exit 1
+          fi
+          # Replace placeholders in all manifests under k8s/ (backend, frontend, etc.)
+          sed -i "s#IMAGE_PLACEHOLDER#${IMAGE_BACKEND}#g" Code/social-media-dashboard/k8s/*.yaml || true
+          sed -i "s#IMAGE_PLACEHOLDER_FRONTEND#${IMAGE_FRONTEND}#g" Code/social-media-dashboard/k8s/*.yaml || true
+          echo "---- Manifests after replacement (preview) ----"
+          sed -n '1,160p' Code/social-media-dashboard/k8s/frontend-deployment.yaml || true
+          sed -n '1,160p' Code/social-media-dashboard/k8s/backend-deployment.yaml || true
           kubectl apply -f Code/social-media-dashboard/k8s/
+          # Ensure deployments explicitly use desired images as fallback
+          kubectl set image deployment/backend backend=${IMAGE_BACKEND} || true
+          kubectl set image deployment/frontend frontend=${IMAGE_FRONTEND} || true
+          kubectl rollout status deployment/backend -n default --timeout=120s || true
+          kubectl rollout status deployment/frontend -n default --timeout=120s || true
