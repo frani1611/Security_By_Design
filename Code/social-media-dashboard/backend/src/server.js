@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ObjectId } = require('mongodb');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -57,6 +58,15 @@ async function start() {
     db = client.db(dbName);
 
     app.locals.db = db; // Make db accessible in routes/controllers via req.app.locals.db
+
+    // Also connect Mongoose so Mongoose-based models/controllers work
+    try {
+      await mongoose.connect(mongoUrl);
+      console.log('Mongoose connected');
+    } catch (mErr) {
+      console.error('Mongoose connection error:', mErr);
+      // don't exit here; the native client is connected and app can still function for driver-based parts
+    }
 
     console.log('MongoDB connected');
   } catch (err) {
