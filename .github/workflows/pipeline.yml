@@ -331,5 +331,6 @@ jobs:
           # Ensure deployments explicitly use desired images as fallback
           kubectl set image deployment/backend backend=${IMAGE_BACKEND} || true
           kubectl set image deployment/frontend frontend=${IMAGE_FRONTEND} || true
-          kubectl rollout status deployment/backend -n default --timeout=120s || true
-          kubectl rollout status deployment/frontend -n default --timeout=120s || true
+          # Increase rollout timeout to handle slower image pulls on self-hosted runner
+          kubectl rollout status deployment/backend -n default --timeout=10m || true
+          kubectl rollout status deployment/frontend -n default --timeout=10m || true
