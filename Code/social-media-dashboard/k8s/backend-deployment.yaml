@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: docker.io/frani1611/social-media-dashboard:ccdc3cb7c55cbf7583819813faae145449ba20ba
+        image: IMAGE_PLACEHOLDER
         ports:
         - containerPort: 3000
         env:

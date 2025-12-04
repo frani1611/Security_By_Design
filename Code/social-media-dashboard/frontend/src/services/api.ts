@@ -4,10 +4,17 @@ import axios from 'axios';
 
 export type AuthResponse = { message: string; token?: string; id?: string };
 
-// Backend-URL anpassen, falls nötig (z.B. 'http://localhost:5000')
-const apiClient = axios.create({
-  baseURL: 'http://localhost:5000',
-});
+// Backend-URL anpassen: benutze Vite env var `VITE_API_URL` oder Fallback
+const rawBase = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL)
+  ? String(import.meta.env.VITE_API_URL)
+  : 'http://localhost:5000';
+
+// Normalize base: remove trailing slashes and an optional trailing '/api' so we avoid
+// accidental double '/api/api' when endpoints also use '/api/...'.
+let apiBase = rawBase.replace(/\/+$/g, '');
+if (apiBase.endsWith('/api')) apiBase = apiBase.replace(/\/api$/g, '');
+
+const apiClient = axios.create({ baseURL: apiBase });
 
 export async function login(usernameOrEmail: string, password: string): Promise<AuthResponse> {
   const res = await apiClient.post('/login', { username: usernameOrEmail, password });
