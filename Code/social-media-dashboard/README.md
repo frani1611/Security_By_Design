@@ -9,113 +9,125 @@ Das Social Media Dashboard ist eine Anwendung, die es Benutzern ermöglicht, Bil
 - **Datenbank:** MongoDB
 - **Cloud-Speicher:** Cloudinary
 - **Containerisierung:** Docker
-- **Orchestrierung:** k3s
+- **Orchestrierung:** Kubernetes
 
 ## Projektstruktur
 ```
-social-media-dashboard
-├── frontend
+social-media-dashboard/
+├── docker-compose.yml               # Lokale Entwicklungsumgebung
+├── README.md                        # Diese Datei
+├── PASSWORD_HASHING.md              # Dokumentation: Passwort-Sicherheit
+│
+├── frontend/                        # Vue 3 + TypeScript Frontend
 │   ├── package.json
 │   ├── vite.config.ts
-│   ├── public
-│   │   └── index.html
-│   └── src
+│   ├── index.html
+│   ├── Dockerfile
+│   └── src/
 │       ├── main.ts
 │       ├── App.vue
-│       ├── components
+│       ├── components/
 │       │   └── Header.vue
-│       ├── views
-│       │   ├── Dashboard.vue
-│       │   └── Auth.vue
-│       ├── router
+│       ├── views/
+│       │   ├── Home.vue
+│       │   ├── Auth.vue
+│       │   └── Dashboard.vue
+│       ├── router/
 │       │   └── index.ts
-│       ├── store
-│       │   └── index.ts
-│       ├── services
+│       ├── services/
 │       │   └── api.ts
-│       └── types
-│           └── index.ts
-├── backend
+│       ├── store/
+│       │   └── index.ts
+│       ├── types/
+│       │   └── index.ts
+│       ├── utils/
+│       │   └── inactivityTimer.ts
+│       └── styles/
+│           └── global.css
+│
+├── backend/                        # Node.js + Express Backend
 │   ├── package.json
 │   ├── Dockerfile
 │   ├── .env.example
-│   └── src
+│   └── src/
 │       ├── app.js
 │       ├── server.js
-│       ├── controllers
+│       ├── config/
+│       │   └── db.js
+│       ├── controllers/
 │       │   ├── authController.js
+│       │   ├── googleAuthController.js
 │       │   └── uploadController.js
-│       ├── routes
-│       │   └── index.js
-│       ├── models
-│       │   └── user.model.js
-│       ├── services
-│       │   └── cloudinary.service.js
-│       ├── middleware
+│       ├── middleware/
 │       │   └── auth.middleware.js
-│       └── config
-│           └── db.js
-├── k8s
-│   ├── frontend-deployment.yaml
-│   ├── backend-deployment.yaml
-│   ├── mongodb-statefulset.yaml
-│   └── ingress.yaml
-├── docker-compose.yml
-├── .github
-│   └── workflows
-│       └── ci.yml
-├── .gitignore
-└── README.md
+│       ├── models/
+│       │   └── user.model.js
+│       ├── routes/
+│       │   └── index.js
+│       ├── services/
+│       │   └── cloudinary.service.js
+│       └── utils/
+│           └── validation.js
+│
+├── k8s/                            # Kubernetes Manifests & Security
+│   ├── backend-deployment.yaml     # Backend Deployment
+│   ├── frontend-deployment.yaml    # Frontend Deployment
+│   ├── mongodb-statefulset.yaml    # MongoDB StatefulSet
+│   ├── ingress.yaml                # Ingress Configuration
+│   ├── policies/                   # Network & Security Policies
+│   │   └── (Placeholder for future policies)
+│   ├── rbac/                       # Role-Based Access Control
+│   │   └── (Placeholder for future RBAC configs)
+│   └── certs/                      # TLS Zertifikate
+│       └── (Placeholder for certificates)
+│
+├── .github/                        # GitHub-Konfiguration
+│   └── workflows/                  # GitHub Actions CI/CD
+│       └── (Placeholder for workflows)
+│
+├── scripts/                        # Automation Scripts
+│   └── (Placeholder for deployment scripts)
+│
+└── config/                         # Globale Konfiguration
+    └── (Placeholder for config files)
 ```
 
 ## Installation und Ausführung
 
-### 1. Backend
-- Navigiere zum Backend-Verzeichnis:
-  ```
-  cd backend
-  ```
-- Installiere die Abhängigkeiten:
-  ```
-  npm install
-  ```
-- Erstelle die Umgebungsvariablen:
-  - Kopiere die `.env.example` in eine `.env` und passe die Werte an.
-- Starte den Server:
-  ```
-  node src/server.js
-  ```
+### Lokale Entwicklung (Docker Compose)
+```bash
+# Docker Compose starten (Frontend, Backend, MongoDB)
+docker-compose up
+```
 
-### 2. Frontend
-- Navigiere zum Frontend-Verzeichnis:
-  ```
-  cd frontend
-  ```
-- Installiere die Abhängigkeiten:
-  ```
-  npm install
-  ```
-- Starte die Entwicklungsumgebung:
-  ```
-  npm run dev
-  ```
+Zugriff auf:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:3001
+- MongoDB: localhost:27017
 
-### 3. Docker und k3s
-- Stelle sicher, dass Docker und k3s installiert sind.
-- Baue die Docker-Images:
-  ```
-  docker-compose build
-  ```
-- Starte die Anwendung mit Docker Compose:
-  ```
-  docker-compose up
-  ```
-- Für die Bereitstellung in k3s, verwende die YAML-Dateien im `k8s`-Verzeichnis.
+### Backend einzeln
+```bash
+cd backend
+npm install
+npm run dev
+```
 
-## Sicherheitsanforderungen
-- Multi-Faktor-Authentifizierung (MFA)
-- Rollenbasiertes Berechtigungssystem (Admin, User)
-- Sichere Authentifizierung und Datenverschlüsselung
+### Frontend einzeln
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-## Lizenz
-Dieses Projekt steht unter der MIT-Lizenz.
+### Kubernetes Deployment
+
+Die K8s Manifests sind vorbereitet in `k8s/`:
+```bash
+# Manifests deployen
+kubectl apply -f k8s/
+
+# Status prüfen
+kubectl get pods
+kubectl logs -f deployment/backend
+```
+
