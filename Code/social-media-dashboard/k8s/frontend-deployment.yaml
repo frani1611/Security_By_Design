@@ -18,12 +18,12 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: IMAGE_PLACEHOLDER
+          image: docker.io/frani1611/social-media-dashboard-frontend:2b9453c31dbb3dec8126260ab94eddc57e592a06
           ports:
-            - containerPort: 3000
+            - containerPort: 80
           env:
             - name: VITE_API_URL
-              value: "http://backend:5000"  # Adjust according to your backend service name
+              value: "http://backend:3000"  # backend service listens on 3000
           resources:
             limits:
               memory: "512Mi"
@@ -31,3 +31,5 @@ spec:
             requests:
               memory: "256Mi"
               cpu: "250m"
+      imagePullSecrets:
+      - name: regcred

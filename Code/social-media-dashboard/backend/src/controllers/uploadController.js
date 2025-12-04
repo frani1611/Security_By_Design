@@ -4,9 +4,25 @@ const { uploadBuffer } = require('../services/cloudinary.service');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
 
+// Helper: sanitize strings passed to Cloudinary to avoid argument injection
+const sanitizeForCloudinary = (input) => {
+    if (!input) return '';
+    return String(input)
+        .replace(/[&\s\/\\?#%<>:\"'`|{}]/g, '-')
+        .replace(/-+/g, '-')
+        .slice(0, 200);
+};
+
 // Use memory storage so we can pipe the buffer to Cloudinary
 const storage = multer.memoryStorage();
-const upload = multer({ storage });
+const upload = multer({ 
+    storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // limit uploads to 5MB
+    fileFilter: (req, file, cb) => {
+        if (file && file.mimetype && file.mimetype.startsWith('image/')) return cb(null, true);
+        cb(new Error('Invalid file type, only images are allowed'));
+    }
+});
 
 // Simple upload endpoint (keeps compatibility with existing route)
 exports.uploadImage = async (req, res) => {
@@ -59,9 +75,10 @@ exports.uploadPost = async (req, res) => {
     if (!req.file) return res.status(400).json({ message: 'Kein Bild hochgeladen.' });
 
     try {
+        const safeUser = sanitizeForCloudinary(req.user?.username || 'user');
         const uploadResult = await uploadBuffer(req.file.buffer, {
             folder: 'user_posts',
-            public_id: `${req.user?.username || 'user'}_${Date.now()}`,
+            public_id: `${safeUser}_${Date.now()}`,
         });
 
         const imageUrl = uploadResult.secure_url;
@@ -135,7 +152,8 @@ exports.getAllPosts = async (req, res) => {
             const token = auth.split(' ')[1];
             try {
                 const secret = process.env.JWT_SECRET || 'dev-secret';
-                const decoded = jwt.verify(token, secret);
+                // Require a specific algorithm to avoid insecure defaults / alg:none attacks
+                const decoded = jwt.verify(token, secret, { algorithms: ['HS256'] });
 
                 if (decoded) {
                     if (decoded.username) {

@@ -1,0 +1,118 @@
+name: Build, Push and Deploy (self-hosted)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and Push
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.publish.outputs.image }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set image names
+        id: set-image
+        run: |
+          echo "image=docker.io/${{ secrets.DOCKERHUB_USERNAME }}/social-media-dashboard:${{ github.sha }}" >> $GITHUB_OUTPUT
+          echo "image_frontend=docker.io/${{ secrets.DOCKERHUB_USERNAME }}/social-media-dashboard-frontend:${{ github.sha }}" >> $GITHUB_OUTPUT
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push backend and frontend images
+        run: |
+          IMAGE=${{ steps.set-image.outputs.image }}
+          IMAGE_FRONTEND=${{ steps.set-image.outputs.image_frontend }}
+          # Build backend
+          docker build -t $IMAGE Code/social-media-dashboard/backend
+          docker push $IMAGE
+          # Build frontend
+          docker build -t $IMAGE_FRONTEND Code/social-media-dashboard/frontend
+          docker push $IMAGE_FRONTEND
+
+      - name: Publish image output
+        id: publish
+        run: |
+          IMAGE=${{ steps.set-image.outputs.image }}
+          IMAGE_FRONTEND=${{ steps.set-image.outputs.image_frontend }}
+          echo "image=${IMAGE}" >> $GITHUB_OUTPUT
+          echo "image_frontend=${IMAGE_FRONTEND}" >> $GITHUB_OUTPUT
+          echo "::set-output name=image::${IMAGE}"
+          echo "::set-output name=image_frontend::${IMAGE_FRONTEND}"
+          echo "Built and published images: ${IMAGE} ${IMAGE_FRONTEND}"
+
+      - name: Save image tags to files
+        run: |
+          echo "${{ steps.set-image.outputs.image }}" > image-backend.txt
+          echo "${{ steps.set-image.outputs.image_frontend }}" > image-frontend.txt
+
+      - name: Upload image tag artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-tag-backend
+          path: image-backend.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: image-tag-frontend
+          path: image-frontend.txt
+
+  deploy:
+    name: Deploy on self-hosted runner
+    needs: build
+    runs-on: [self-hosted, linux]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.27.3'
+
+      - name: Show kubectl client version
+        run: |
+          kubectl version --client --short || true
+
+      - name: Download image tag artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: image-tag-backend
+          path: .
+      - name: Download frontend image tag artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: image-tag-frontend
+          path: .
+
+      - name: Replace IMAGE_PLACEHOLDER and apply manifests
+        run: |
+          # Read the image tags produced by the build job
+          IMAGE=$(cat image-backend.txt)
+          IMAGE_FRONTEND=$(cat image-frontend.txt)
+          echo "Backend image to deploy: '${IMAGE}'"
+          echo "Frontend image to deploy: '${IMAGE_FRONTEND}'"
+          if [ -z "${IMAGE}" ] || [ -z "${IMAGE_FRONTEND}" ]; then
+            echo "ERROR: one of the image variables is empty — aborting to avoid applying manifests with empty image." >&2
+            exit 1
+          fi
+          # Replace placeholders in all manifests under k8s/ (backend, frontend, etc.)
+          sed -i "s#IMAGE_PLACEHOLDER#${IMAGE}#g" Code/social-media-dashboard/k8s/*.yaml || true
+          sed -i "s#IMAGE_PLACEHOLDER_FRONTEND#${IMAGE_FRONTEND}#g" Code/social-media-dashboard/k8s/*.yaml || true
+          kubectl apply -f Code/social-media-dashboard/k8s/
+
+      - name: Wait for rollout
+        run: |
+          # Wait for the 'backend' deployment created in Code/social-media-dashboard/k8s/backend-deployment.yaml
+          kubectl rollout status deployment/backend -n default --timeout=120s || true
+
+      - name: Notes
+        run: |
+          echo "If your image is private, ensure the k3s cluster has image pull credentials (imagePullSecrets) or the runner host is logged in to Docker Hub."

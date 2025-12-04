@@ -236,13 +236,28 @@ jobs:
       - name: Check Trivy for CVSS >= 7.0 or HIGH/CRITICAL
         run: |
           python3 .github/scripts/quality_gate.py reports/trivy-fs.json
-      - name: Verify cosign signature (keyless)
+      - name: Log in to GHCR (if image is private)
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN || github.token }}
+
+      - name: Install cosign CLI
+        uses: sigstore/cosign-installer@v3
+
+      - name: Verify cosign signature (keyless/actor-restricted)
         run: |
-          cosign verify --keyless ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} || (echo "Signature missing/invalid" && exit 1)
+          # Verify keyless signatures but restrict accepted certificate identities
+          # to the GitHub actor that ran the workflow to avoid accepting unrelated certs.
+          cosign version || true
+          cosign verify --verbose --certificate-identity-regexp ".*${{ github.actor }}.*" \
+            --certificate-oidc-issuer-regexp "https://token.actions.githubusercontent.com" \
+            ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} || (echo "Signature missing/invalid" && exit 1)
 
   deploy:
     name: Deploy to Kubernetes
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux]
     needs: quality-gate
     steps:
       - uses: actions/checkout@v4
@@ -250,13 +265,15 @@ jobs:
         uses: azure/setup-kubectl@v3
         with:
           version: 'v1.27.3'
-      - name: Setup kubeconfig
-        env:
-          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
-        run: |
-          echo "$KUBECONFIG_DATA" > kubeconfig
-          export KUBECONFIG=$PWD/kubeconfig
+      # NOTE: This job runs on a self-hosted runner that already has access to the
+      # target k3s cluster (kubeconfig copied to the runner user's ~/.kube/config).
+      # Do NOT write a kubeconfig that points at 127.0.0.1 from repository secrets
+      # into the workflow — hosted runners cannot reach that address and fail.
+      # If you need to run this job on a hosted runner, replace this job or add
+      # a separate deploy workflow that uses a CI-safe ServiceAccount kubeconfig
+      # whose 'server:' points to a reachable API endpoint.
       - name: Update k8s manifests with new image and apply
         run: |
-          sed -i "s#IMAGE_PLACEHOLDER#${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}#g" k8s/backend-deployment.yaml || true
-          kubectl apply -f k8s/
+          # Manifests are located in the Code/social-media-dashboard/k8s directory
+          sed -i "s#IMAGE_PLACEHOLDER#${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}#g" Code/social-media-dashboard/k8s/backend-deployment.yaml || true
+          kubectl apply -f Code/social-media-dashboard/k8s/
