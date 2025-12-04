@@ -319,8 +319,11 @@ jobs:
             exit 1
           fi
           # Replace placeholders in all manifests under k8s/ (backend, frontend, etc.)
-          sed -i "s#IMAGE_PLACEHOLDER#${IMAGE_BACKEND}#g" Code/social-media-dashboard/k8s/*.yaml || true
+          # Replace the frontend-specific placeholder first to avoid partially
+          # replacing the string `IMAGE_PLACEHOLDER_FRONTEND` when the generic
+          # `IMAGE_PLACEHOLDER` is substituted earlier (substring collision).
           sed -i "s#IMAGE_PLACEHOLDER_FRONTEND#${IMAGE_FRONTEND}#g" Code/social-media-dashboard/k8s/*.yaml || true
+          sed -i "s#IMAGE_PLACEHOLDER#${IMAGE_BACKEND}#g" Code/social-media-dashboard/k8s/*.yaml || true
           echo "---- Manifests after replacement (preview) ----"
           sed -n '1,160p' Code/social-media-dashboard/k8s/frontend-deployment.yaml || true
           sed -n '1,160p' Code/social-media-dashboard/k8s/backend-deployment.yaml || true
