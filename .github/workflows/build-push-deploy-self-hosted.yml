@@ -119,6 +119,21 @@ jobs:
           name: image-tag-frontend
           path: .
 
+      - name: Wait for Kubernetes API
+        run: |
+          echo "Waiting for Kubernetes API to become ready..."
+          # Retry readyz up to 2.5 minutes (30 * 5s)
+          for i in $(seq 1 30); do
+            if kubectl get --raw=/readyz >/dev/null 2>&1; then
+              echo "Kubernetes API is ready"
+              exit 0
+            fi
+            echo "API not ready yet (attempt $i/30) - sleeping 5s"
+            sleep 5
+          done
+          echo "ERROR: Kubernetes API not ready after 150s" >&2
+          exit 1
+
       - name: Replace IMAGE_PLACEHOLDER and apply manifests
         run: |
           # Read the image tags produced by the build job
