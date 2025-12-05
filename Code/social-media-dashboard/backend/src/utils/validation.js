@@ -1,6 +1,8 @@
 // backend/src/utils/validation.js
 // Input validation and sanitization utilities to prevent injection attacks
 
+const logger = require('./logger');
+
 /**
  * Validate and sanitize email address
  * Prevents: NoSQL injection, XSS, command injection
@@ -44,6 +46,12 @@ function validateEmail(email) {
 
     for (const pattern of dangerousPatterns) {
         if (pattern.test(sanitized)) {
+            logger.warn('Possible injection attempt detected in email', {
+                event: 'INJECTION_ATTEMPT',
+                field: 'email',
+                pattern: pattern.toString(),
+                value: sanitized.substring(0, 50) // Log only first 50 chars
+            });
             throw new Error('Invalid characters detected in email');
         }
     }
@@ -87,6 +95,12 @@ function validateUsername(username) {
 
     for (const pattern of dangerousPatterns) {
         if (pattern.test(sanitized)) {
+            logger.warn('Possible injection attempt detected in username', {
+                event: 'INJECTION_ATTEMPT',
+                field: 'username',
+                pattern: pattern.toString(),
+                value: sanitized.substring(0, 30)
+            });
             throw new Error('Invalid characters detected in username');
         }
     }
@@ -114,6 +128,12 @@ function validatePassword(password) {
 
     // Block null bytes and control characters
     if (/\0/.test(password) || /[\x00-\x1F\x7F]/.test(password)) {
+        logger.warn('Possible injection attempt detected in password', {
+            event: 'INJECTION_ATTEMPT',
+            field: 'password',
+            pattern: 'null bytes or control characters',
+            value: '[REDACTED]'
+        });
         throw new Error('Password contains invalid characters');
     }
 

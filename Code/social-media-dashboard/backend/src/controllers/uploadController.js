@@ -3,6 +3,7 @@
 const { uploadBuffer } = require('../services/cloudinary.service');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
+const logger = require('../utils/logger');
 
 // Helper: sanitize strings passed to Cloudinary to avoid argument injection
 const sanitizeForCloudinary = (input) => {
@@ -20,6 +21,13 @@ const upload = multer({
     limits: { fileSize: 5 * 1024 * 1024 }, // limit uploads to 5MB
     fileFilter: (req, file, cb) => {
         if (file && file.mimetype && file.mimetype.startsWith('image/')) return cb(null, true);
+        logger.warn('Invalid file type upload attempt', {
+            event: 'UPLOAD_INVALID_FILE_TYPE',
+            mimetype: file?.mimetype,
+            filename: file?.originalname,
+            ip: req.ip,
+            userAgent: req.headers['user-agent']
+        });
         cb(new Error('Invalid file type, only images are allowed'));
     }
 });
@@ -27,10 +35,33 @@ const upload = multer({
 // Simple upload endpoint (keeps compatibility with existing route)
 exports.uploadImage = async (req, res) => {
     try {
-        if (!req.file) return res.status(400).json({ message: 'No file uploaded.' });
+        if (!req.file) {
+            logger.warn('Upload attempt without file', {
+                event: 'UPLOAD_NO_FILE',
+                ip: req.ip,
+                userAgent: req.headers['user-agent']
+            });
+            return res.status(400).json({ message: 'No file uploaded.' });
+        }
+
+        logger.info('Starting image upload to Cloudinary', {
+            event: 'UPLOAD_START',
+            filename: req.file.originalname,
+            mimetype: req.file.mimetype,
+            size: req.file.size,
+            ip: req.ip,
+            userAgent: req.headers['user-agent']
+        });
 
         const result = await uploadBuffer(req.file.buffer, { folder: 'uploads' });
         const imageUrl = result.secure_url;
+
+        logger.info('Cloudinary upload successful', {
+            event: 'CLOUDINARY_UPLOAD_SUCCESS',
+            imageUrl: imageUrl,
+            publicId: result.public_id,
+            ip: req.ip
+        });
 
         // Save image metadata into DB (Posts collection)
         const db = req.app && req.app.locals && req.app.locals.db;
@@ -57,9 +88,23 @@ exports.uploadImage = async (req, res) => {
         const insertResult = await posts.insertOne(doc);
         const saved = Object.assign({ _id: insertResult.insertedId.toString() }, doc);
 
+        logger.info('Image upload completed successfully', {
+            event: 'UPLOAD_SUCCESS',
+            postId: insertResult.insertedId.toString(),
+            username: username,
+            imageUrl: imageUrl,
+            ip: req.ip
+        });
+
         return res.status(201).json({ message: 'Bild erfolgreich hochgeladen und gespeichert', post: saved });
     } catch (error) {
-        console.error('uploadImage error:', error && error.stack ? error.stack : error);
+        logger.error('Image upload error', {
+            event: 'UPLOAD_ERROR',
+            error: error.message,
+            stack: error.stack,
+            ip: req.ip,
+            userAgent: req.headers['user-agent']
+        });
         const payload = { message: 'Error uploading image.' };
         if (process.env.NODE_ENV === 'development') payload.error = error && (error.message || error.toString());
         return res.status(500).json(payload);
@@ -72,9 +117,30 @@ exports.upload = upload.single('image'); // 'image' is the field name in the for
 // Upload a post (image + optional text) for authenticated user and save to DB
 exports.uploadPost = async (req, res) => {
     const { text } = req.body;
-    if (!req.file) return res.status(400).json({ message: 'Kein Bild hochgeladen.' });
+    if (!req.file) {
+        logger.warn('Post upload attempt without file', {
+            event: 'POST_UPLOAD_NO_FILE',
+            userId: req.user?._id,
+            username: req.user?.username,
+            ip: req.ip,
+            userAgent: req.headers['user-agent']
+        });
+        return res.status(400).json({ message: 'Kein Bild hochgeladen.' });
+    }
 
     try {
+        logger.info('Starting post upload', {
+            event: 'POST_UPLOAD_START',
+            userId: req.user?._id,
+            username: req.user?.username,
+            filename: req.file.originalname,
+            mimetype: req.file.mimetype,
+            size: req.file.size,
+            hasText: !!text,
+            ip: req.ip,
+            userAgent: req.headers['user-agent']
+        });
+
         const safeUser = sanitizeForCloudinary(req.user?.username || 'user');
         const uploadResult = await uploadBuffer(req.file.buffer, {
             folder: 'user_posts',
@@ -88,7 +154,7 @@ exports.uploadPost = async (req, res) => {
         if (!db) return res.status(500).json({ message: 'Datenbank nicht verbunden.' });
 
         const posts = db.collection(process.env.DB_COLLECTION_POSTS || 'Posts');
-        await posts.insertOne({
+        const insertResult = await posts.insertOne({
             username: req.user?.username || 'unknown',
             imageUrl,
             text: text || '',
@@ -96,9 +162,26 @@ exports.uploadPost = async (req, res) => {
             likes: [],
         });
 
+        logger.info('Post uploaded successfully', {
+            event: 'POST_UPLOAD_SUCCESS',
+            postId: insertResult.insertedId.toString(),
+            userId: req.user?._id,
+            username: req.user?.username,
+            imageUrl: imageUrl,
+            ip: req.ip
+        });
+
         res.json({ message: 'Beitrag gespeichert.' });
     } catch (err) {
-        console.error('uploadPost error:', err && err.stack ? err.stack : err);
+        logger.error('Post upload error', {
+            event: 'POST_UPLOAD_ERROR',
+            userId: req.user?._id,
+            username: req.user?.username,
+            error: err.message,
+            stack: err.stack,
+            ip: req.ip,
+            userAgent: req.headers['user-agent']
+        });
         const payload = { message: 'Fehler beim Hochladen.' };
         if (process.env.NODE_ENV === 'development') payload.error = err && (err.message || err.toString());
         res.status(500).json(payload);
@@ -129,7 +212,14 @@ exports.getUserPosts = async (req, res) => {
 
         return res.json(normalized);
     } catch (err) {
-        console.error('getUserPosts error:', err && err.stack ? err.stack : err);
+        logger.error('Error fetching user posts', {
+            event: 'GET_USER_POSTS_ERROR',
+            userId: req.user?._id,
+            username: req.user?.username,
+            error: err.message,
+            stack: err.stack,
+            ip: req.ip
+        });
         return res.status(500).json({ message: 'Fehler beim Laden der Beiträge.' });
     }
 };
@@ -213,7 +303,14 @@ exports.getAllPosts = async (req, res) => {
 
         return res.json({ posts: normalized, total });
     } catch (err) {
-        console.error('getAllPosts error:', err && err.stack ? err.stack : err);
+        logger.error('Error fetching all posts', {
+            event: 'GET_ALL_POSTS_ERROR',
+            error: err.message,
+            stack: err.stack,
+            limit: req.query.limit,
+            skip: req.query.skip,
+            ip: req.ip
+        });
         return res.status(500).json({ message: 'Fehler beim Laden der Beiträge.' });
     }
 };
