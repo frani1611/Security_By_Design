@@ -3,8 +3,6 @@ name: Build, Push and Deploy (self-hosted)
 on:
   push:
     branches: [ main ]
-  # Allow manual runs from the Actions tab
-  workflow_dispatch:
 
 jobs:
   build:
@@ -109,34 +107,6 @@ jobs:
       - name: Show kubectl client version
         run: |
           kubectl version --client --short || true
-
-      - name: Configure kubeconfig from Secrets
-        env:
-          KUBECONFIG_SECRET: ${{ secrets.KUBECONFIG }}
-          KUBECONFIG_B64_SECRET: ${{ secrets.KUBECONFIG_B64 }}
-        run: |
-          mkdir -p "$HOME/.kube"
-          if [ -n "$KUBECONFIG_SECRET" ]; then
-            echo "Writing kubeconfig from secret KUBECONFIG"
-            printf '%s' "$KUBECONFIG_SECRET" > "$HOME/.kube/config"
-          elif [ -n "$KUBECONFIG_B64_SECRET" ]; then
-            echo "Writing kubeconfig from secret KUBECONFIG_B64 (base64)"
-            printf '%s' "$KUBECONFIG_B64_SECRET" | base64 -d > "$HOME/.kube/config"
-          else
-            echo "No KUBECONFIG secret provided; skipping kubeconfig write"
-          fi
-          chmod 600 "$HOME/.kube/config" || true
-        shell: bash
-
-      - name: Debug kubeconfig & cluster availability
-        run: |
-          echo "whoami: $(whoami)"
-          echo "HOME=$HOME"
-          echo "Contents of $HOME/.kube (masked)" && ls -la $HOME/.kube || true
-          echo "server entries in kubeconfig:" && grep -E '^\s*server:' $HOME/.kube/config || true
-          echo "kubectl client version:" && kubectl version --client || true
-          echo "kubectl cluster-info (may fail if cluster unreachable):" && kubectl cluster-info || true
-        shell: bash
 
       - name: Download image tag artifacts
         uses: actions/download-artifact@v4
