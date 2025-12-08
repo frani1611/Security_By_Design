@@ -18,9 +18,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
+    volumes:
+      - ./backend/certs:/app/certs:ro
     environment:
       - MONGODB_URI=mongodb://mongodb:27017/social_media_dashboard
       - CLOUDINARY_URL=your_cloudinary_url
+      - TLS_ENABLED=true
+      - TLS_CERT_PATH=/app/certs/server.crt
+      - TLS_KEY_PATH=/app/certs/server.key
     depends_on:
       - mongodb
 

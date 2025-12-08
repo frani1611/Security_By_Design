@@ -75,4 +75,65 @@ Das Dashboard soll es Benutzern ermöglichen, Inhalte (z. B. Bilder oder Posts) 
 - **Beschreibung:**  
   Automatisiertes Build-, Test- und Deployment-Setup für kontinuierliche Integration und Auslieferung.  
 
+---
+
+## Schnellstart
+
+### Backend starten (mit TLS/HTTPS)
+
+```bash
+cd Code/social-media-dashboard/backend
+
+# Zertifikate generieren (einmalig)
+node generate-certs.js
+
+# TLS aktivieren und starten
+$env:TLS_ENABLED="true"
+npm start
+```
+
+**Ergebnis:** Backend läuft auf `https://localhost:5000` mit TLS-Verschlüsselung
+
+### Frontend starten
+
+```bash
+cd Code/social-media-dashboard/frontend
+
+npm install
+npm run dev
+```
+
+**Ergebnis:** Frontend läuft auf `http://localhost:5173`
+
+### Docker Compose starten (mit TLS)
+
+```bash
+cd Code/social-media-dashboard
+
+docker-compose up --build
+```
+
+- **Frontend:** http://localhost:3000
+- **Backend:** https://localhost:5000 (mit TLS)
+- **MongoDB:** localhost:27017
+
+---
+
+## TLS/HTTPS Konfiguration
+
+Die Anwendung ist **TLS-ready** mit selbstsigniertem Zertifikat:
+
+| Komponente | TLS-Status | Zertifikat |
+|-----------|-----------|-----------|
+| Backend | ✅ HTTPS | `certs/server.crt` + `certs/server.key` |
+| Docker | ✅ HTTPS | Auto-generiert beim Build |
+| Kubernetes | ✅ HTTPS | cert-manager ready (Let's Encrypt) |
+
+**Zertifikat-Details:**
+- Gültig für 365 Tage
+- CN: localhost
+- RSA 2048-Bit
+- Selbstsigniert (Entwicklung/Testing)
+
+**Für Production:** Verwende echte Zertifikate (Let's Encrypt, CA-signiert)
 

@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
 const app = express();
 const routes = require('./routes/index');
 
@@ -154,9 +157,45 @@ app.use('/api', routes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+
+// TLS/HTTPS Configuration
+const TLS_ENABLED = process.env.TLS_ENABLED === 'true';
+const TLS_CERT_PATH = process.env.TLS_CERT_PATH || path.join(__dirname, '../certs/server.crt');
+const TLS_KEY_PATH = process.env.TLS_KEY_PATH || path.join(__dirname, '../certs/server.key');
+
+if (TLS_ENABLED) {
+  try {
+    const certPath = path.resolve(TLS_CERT_PATH);
+    const keyPath = path.resolve(TLS_KEY_PATH);
+    
+    if (!fs.existsSync(certPath) || !fs.existsSync(keyPath)) {
+      console.warn('TLS certificates not found. Run: node generate-certs.js');
+      console.warn('Falling back to HTTP...');
+      app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+      });
+    } else {
+      const options = {
+        cert: fs.readFileSync(certPath),
+        key: fs.readFileSync(keyPath)
+      };
+      https.createServer(options, app).listen(PORT, () => {
+        console.log(`Server is running on https://localhost:${PORT}`);
+        console.log('TLS/HTTPS enabled');
+      });
+    }
+  } catch (error) {
+    console.error('TLS initialization error:', error.message);
+    console.log('Falling back to HTTP...');
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
+  }
+} else {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+}
 
 // Graceful shutdown
 process.on('SIGINT', async () => {
