@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
+  namespace: social-media-dashboard
   labels:
     app: social-media-dashboard
 spec:
@@ -16,9 +17,19 @@ spec:
         app: social-media-dashboard
         tier: frontend
     spec:
+      serviceAccountName: frontend-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 2000
       containers:
         - name: frontend
           image: IMAGE_PLACEHOLDER_FRONTEND
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
           ports:
             - containerPort: 80
           env:

@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
+  namespace: social-media-dashboard
   labels:
     app: social-media-dashboard
     tier: frontend

@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: social-media-dashboard-ingress
+  namespace: social-media-dashboard
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     # TLS annotations for cert-manager (if using Let's Encrypt)

@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mongodb
+  namespace: social-media-dashboard
   labels:
     app: mongodb
 spec:
@@ -15,9 +16,20 @@ spec:
       labels:
         app: mongodb
     spec:
+      serviceAccountName: mongodb-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 2000
       containers:
       - name: mongodb
         image: mongo:latest
+        securityContext:
+          allowPrivilegeEscalation: false
+          # DB needs writable data directory; rootfs cannot be read-only
+          readOnlyRootFilesystem: false
+          capabilities:
+            drop: ["ALL"]
         ports:
         - containerPort: 27017
         env:
