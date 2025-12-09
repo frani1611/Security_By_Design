@@ -40,7 +40,7 @@ const openssl = spawn('openssl', [
     '-out', certPath,
     '-days', '365',
     '-nodes',
-    '-subj', '/C=DE/ST=BadenWuerttemberg/L=Stuttgart/O=4N IT-Solutions/CN=localhost'
+    '-subj', '/C=DE/ST=BadenWuerttemberg/L=Stuttgart/O=23F_Frani_Glenn/CN=localhost'
 ]);
 
 let output = '';

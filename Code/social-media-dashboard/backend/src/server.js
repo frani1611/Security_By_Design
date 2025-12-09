@@ -18,10 +18,27 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Allow frontend origin (use env var if set, otherwise default to localhost:5173)
-const allowedOrigin = process.env.CORS_ORIGIN || 'http://localhost:5173';
-app.use(cors({ origin: allowedOrigin, methods: ['GET','POST','PUT','DELETE','OPTIONS'], allowedHeaders: ['Content-Type','Authorization'], credentials: true }));
+const allowedOrigins = [
+  process.env.CORS_ORIGIN || 'http://localhost:5173',
+  'https://localhost:5173',
+  'http://localhost:5173'
+];
+app.use(cors({ 
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Allow all in development
+    }
+  },
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'], 
+  allowedHeaders: ['Content-Type','Authorization'], 
+  credentials: true 
+}));
 // respond to preflight for all routes
-app.options('*', cors({ origin: allowedOrigin }));
+app.options('*', cors());
 
 // Build MongoDB connection URL (ensure DB name is present)
 const envUri = process.env.MONGODB_URI && process.env.MONGODB_URI.trim();
