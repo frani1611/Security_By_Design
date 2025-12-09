@@ -17,6 +17,21 @@ dotenv.config();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Simple fallback CORS headers - ensures browser receives CORS headers
+// even if other middleware fails. This is intentionally permissive for
+// local development; controlled by `CORS_ORIGIN` env var when present.
+app.use((req, res, next) => {
+  const origin = process.env.CORS_ORIGIN || req.headers.origin || '*';
+  res.header('Access-Control-Allow-Origin', origin === 'null' ? '*' : origin);
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  // Allow credentials if explicitly requested in env
+  if (process.env.CORS_ALLOW_CREDENTIALS === 'true') {
+    res.header('Access-Control-Allow-Credentials', 'true');
+  }
+  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  next();
+});
 // Allow frontend origin (use env var if set, otherwise default to localhost:5173)
 const allowedOrigins = [
   process.env.CORS_ORIGIN || 'http://localhost:5173',
