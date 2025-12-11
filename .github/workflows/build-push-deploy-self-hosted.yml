@@ -45,6 +45,10 @@ jobs:
           docker build -t $IMAGE Code/social-media-dashboard/backend
           docker push $IMAGE
           # Build frontend
+          permissions:
+            contents: read
+            packages: write
+
           docker build -t $IMAGE_FRONTEND Code/social-media-dashboard/frontend
           docker push $IMAGE_FRONTEND
 

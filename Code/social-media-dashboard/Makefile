@@ -5,8 +5,8 @@ REGISTRY ?= myregistry.local:5000
 TAG ?= latest
 BACKEND_IMAGE ?= $(REGISTRY)/social-backend:$(TAG)
 FRONTEND_IMAGE ?= $(REGISTRY)/social-frontend:$(TAG)
-NAMESPACE ?= social-dashboard
-SECRET_NAME ?= social-dashboard-secrets
+NAMESPACE ?= social-media-dashboard
+SECRET_NAME ?= social-media-dashboard-secrets
 DOCKER ?= docker
 KUBECTL ?= kubectl
 ENV_FILE ?= backend/.env
@@ -127,8 +127,8 @@ k8s-set-images:
 	fi; \
 	echo "Setting backend image to: $$IMG_BACKEND"; \
 	echo "Setting frontend image to: $$IMG_FRONTEND"; \
-	-$(KUBECTL) set image -n $(NAMESPACE) deployment/backend backend=$$IMG_BACKEND --record; \
-	-$(KUBECTL) set image -n $(NAMESPACE) deployment/frontend frontend=$$IMG_FRONTEND --record
+	$(KUBECTL) set image -n $(NAMESPACE) deployment/backend backend=$$IMG_BACKEND --record || true; \
+	$(KUBECTL) set image -n $(NAMESPACE) deployment/frontend frontend=$$IMG_FRONTEND --record || true
 
 deploy: build push k8s-create-namespace k8s-create-secrets k8s-deploy k8s-set-images
 
