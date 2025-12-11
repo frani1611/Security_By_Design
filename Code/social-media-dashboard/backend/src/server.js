@@ -17,6 +17,7 @@ dotenv.config();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 // Allow frontend origin (use env var if set, otherwise default to localhost:5173)
 const allowedOrigins = [
   process.env.CORS_ORIGIN || 'http://localhost:5173',

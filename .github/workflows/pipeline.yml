@@ -334,3 +334,4 @@ jobs:
           # Increase rollout timeout to handle slower image pulls on self-hosted runner
           kubectl rollout status deployment/backend -n default --timeout=10m || true
           kubectl rollout status deployment/frontend -n default --timeout=10m || true
+
