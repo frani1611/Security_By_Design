@@ -31,7 +31,7 @@ spec:
               service:
                 name: backend
                 port:
-                  number: 5000
+                  number: 3000
     - host: your-domain.com
       http:
         paths:
@@ -48,4 +48,4 @@ spec:
               service:
                 name: backend
                 port:
-                  number: 5000
+                  number: 3000

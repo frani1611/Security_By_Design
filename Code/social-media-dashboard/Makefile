@@ -12,13 +12,19 @@ NAMESPACE ?= social-media-dashboard
 K3D_CLUSTER ?= social-cluster
 ENV_FILE ?= backend/.env
 
+# Read GHCR credentials from the ENV file by default so users don't need to
+# export them into their shell. These can still be overridden by passing
+# GHCR_USER/GHCR_TOKEN/GHCR_EMAIL on the `make` command line or environment.
+GHCR_USER ?= $(shell grep -m1 '^GHCR_USER=' $(ENV_FILE) || true | cut -d'=' -f2-)
+GHCR_TOKEN ?= $(shell grep -m1 '^GHCR_TOKEN=' $(ENV_FILE) || true | cut -d'=' -f2-)
+GHCR_EMAIL ?= $(shell grep -m1 '^GHCR_EMAIL=' $(ENV_FILE) || true | cut -d'=' -f2-)
 # GHCR image owner/tag (required for pull step)
 OWNER ?=
 TAG ?= latest
 IMG_BACKEND_GHCR ?= ghcr.io/$(OWNER)/social-media-dashboard:$(TAG)
 IMG_FRONTEND_GHCR ?= ghcr.io/$(OWNER)/social-media-dashboard-frontend:$(TAG)
 
-.PHONY: help pull-ghcr cluster-k3d start-k3d certmanager-k3d k8s-create-secrets \
+.PHONY: help pull-ghcr cluster-k3d start-k3d certmanager-k3d k8s-create-secrets k8s-create-regcred \
 	k8s-deploy k8s-set-images load-k3d deploy-k3d wait-k3d k3d-up clean status logs
 
 help:
@@ -30,6 +36,7 @@ help:
 	@echo "  make load-k3d                             # import images into k3d"
 	@echo "  make deploy-k3d                           # apply k8s manifests and set images"
 	@echo "  make k8s-create-secrets                   # create secrets from $(ENV_FILE)"
+
 	@echo "  make clean                                # delete k3d cluster $(K3D_CLUSTER)"
 	@echo
 
@@ -81,14 +88,39 @@ k8s-create-secrets:
 		$(KUBECTL) create secret generic jwt-secret -n $(NAMESPACE) --from-literal=secret="$$JWT_VAL" --dry-run=client -o yaml | $(KUBECTL) apply -f -; \
 	fi
 
-	# mongodb
+	# mongodb: always use the local in-cluster MongoDB URI for development
 	@DB_USER=$$(grep -m1 '^DB_ADMIN=' $(ENV_FILE) | cut -d'=' -f2-); \
 	DB_PASS=$$(grep -m1 '^DB_PASSWORD=' $(ENV_FILE) | cut -d'=' -f2-); \
 	DB_NAME_VAL=$$(grep -m1 '^DB_NAME=' $(ENV_FILE) | cut -d'=' -f2-); \
+	if [ -z "$$DB_NAME_VAL" ]; then DB_NAME_VAL="Security_By_Design"; fi; \
 	if [ -n "$$DB_USER" ] && [ -n "$$DB_PASS" ]; then \
-		URI_VAL="mongodb://$$DB_USER:$$DB_PASS@mongodb:27017/$$DB_NAME_VAL"; \
-		$(KUBECTL) create secret generic mongodb-secret -n $(NAMESPACE) --from-literal=username="$$DB_USER" --from-literal=password="$$DB_PASS" --from-literal=uri="$$URI_VAL" --dry-run=client -o yaml | $(KUBECTL) apply -f -; \
+		URI_VAL="mongodb://$$DB_USER:$$DB_PASS@mongodb:27017/$$DB_NAME_VAL?authSource=admin"; \
+		echo "[k3d] Creating mongodb-secret using local mongodb service"; \
+		$(KUBECTL) create secret generic mongodb-secret -n $(NAMESPACE) --from-literal=DB_ADMIN="$$DB_USER" --from-literal=DB_PASSWORD="$$DB_PASS" --from-literal=username="$$DB_USER" --from-literal=password="$$DB_PASS" --from-literal=uri="$$URI_VAL" --dry-run=client -o yaml | $(KUBECTL) apply -f -; \
 	fi
+
+	# Ensure Docker registry secret 'regcred' is created (if GHCR credentials present)
+	@echo "[k3d] Ensuring Docker registry secret 'regcred' (if GHCR credentials present)"
+	@$(MAKE) k8s-create-regcred || true
+
+# Atlas SRV support removed — Makefile always creates a local in-cluster MongoDB secret for development
+
+# Create Docker registry secret for GHCR if credentials present in $(ENV_FILE)
+.PHONY: k8s-create-regcred
+k8s-create-regcred:
+	@GHCR_USER_VAL=$$(grep -m1 '^GHCR_USER=' $(ENV_FILE) | cut -d'=' -f2-); \
+	GHCR_TOKEN_VAL=$$(grep -m1 '^GHCR_TOKEN=' $(ENV_FILE) | cut -d'=' -f2-); \
+	GHCR_EMAIL_VAL=$$(grep -m1 '^GHCR_EMAIL=' $(ENV_FILE) | cut -d'=' -f2-); \
+	if [ -n "$$GHCR_USER_VAL" ] && [ -n "$$GHCR_TOKEN_VAL" ]; then \
+		echo "[k3d] Creating/updating Docker registry secret 'regcred' in namespace $(NAMESPACE)"; \
+		$(KUBECTL) create namespace $(NAMESPACE) --dry-run=client -o yaml | $(KUBECTL) apply -f -; \
+		$(KUBECTL) create secret docker-registry regcred -n $(NAMESPACE) --docker-server=ghcr.io --docker-username="$$GHCR_USER_VAL" --docker-password="$$GHCR_TOKEN_VAL" --docker-email="$$GHCR_EMAIL_VAL" --dry-run=client -o yaml | $(KUBECTL) apply -f -; \
+	else \
+		echo "[k3d] GHCR credentials not provided in $(ENV_FILE) (GHCR_USER/GHCR_TOKEN) — skipping regcred creation"; \
+	fi
+
+# Ensure regcred is created (if credentials available) when creating all secrets
+
 
 # Apply manifests from k8s/ into the namespace
 k8s-deploy:
@@ -116,10 +148,14 @@ load-k3d:
 	done
 
 # Apply manifests and set images to GHCR values
-deploy-k3d: k8s-deploy
-	@echo "[k3d] Writing GHCR image refs to image-*.txt and setting images"
+deploy-k3d:
+	@echo "[k3d] Writing GHCR image refs to image-*.txt"
 	@echo $(IMG_BACKEND_GHCR) > image-backend.txt || true
 	@echo $(IMG_FRONTEND_GHCR) > image-frontend.txt || true
+	@echo "[k3d] Replacing IMAGE_PLACEHOLDER values in k8s manifests (frontend first)"
+	@sed -i "s#IMAGE_PLACEHOLDER_FRONTEND#$(IMG_FRONTEND_GHCR)#g" k8s/*.yaml || true
+	@sed -i "s#IMAGE_PLACEHOLDER#$(IMG_BACKEND_GHCR)#g" k8s/*.yaml || true
+	@$(MAKE) k8s-deploy || true
 	@$(MAKE) k8s-set-images || true
 
 # Wait for rollouts

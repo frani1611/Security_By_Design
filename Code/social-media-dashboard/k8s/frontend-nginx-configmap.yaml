@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-nginx-conf
+  namespace: social-media-dashboard
+data:
+  default.conf: |
+    server {
+      listen 80;
+      server_name _;
+
+      root /usr/share/nginx/html;
+      index index.html;
+
+      # serve static files directly, fallback to index.html for SPA routes
+      location / {
+        try_files $uri $uri/ /index.html;
+      }
+
+      # optional: serve /api proxied by ingress/service; keep default behavior
+      location /api/ {
+        proxy_pass http://backend:3000/api/;
+      }
+
+      location = /50x.html {
+        root /usr/share/nginx/html;
+      }
+    }
