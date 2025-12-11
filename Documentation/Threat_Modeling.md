@@ -8,12 +8,12 @@
 |------------|--------------|-------------|
 | **User (Browser)** | Endnutzer der Webanwendung | Chrome/Firefox/Safari |
 | **Frontend** | Vue.js Single Page Application | Vue 3 + TypeScript + Vite |
-| **Backend API** | RESTful API Server | Node.js + Express |
-| **MongoDB** | NoSQL Datenbank | MongoDB 7.x |
+| **Backend API** | RESTful API Server | Node.js + Express (Port 5000) |
+| **MongoDB** | NoSQL Datenbank | MongoDB 7.x (Port 27017) |
 | **Google OAuth** | Externer Authentifizierungsdienst | Google Identity Services |
 | **Cloudinary** | Externer Media Storage | Cloudinary API |
-| **CI/CD Pipeline** | GitHub Actions | YAML Workflows |
-| **Kubernetes Cluster** | Container Orchestrierung | K8s |
+| **CI/CD Pipeline** | ⚠️ Nicht implementiert (delegiert) | GitHub Actions (geplant) |
+| **Kubernetes Cluster** | Container Orchestrierung | K8s (TLS-ready) |
 
 ### 1.2 Data Flow Diagram mit Vertrauensgrenzen
 
@@ -26,7 +26,7 @@
 │  │ (Browser)│                                     │   (External)    ││
 │  └────┬─────┘                                     └─────────────────┘│
 │       │                                                               │
-│       │ HTTPS (Trust Boundary 1)                                     │
+│       │ HTTP (Dev) / HTTPS-ready (Prod) - Trust Boundary 1          │
 │       │                                                               │
 └───────┼───────────────────────────────────────────────────────────────┘
         │
@@ -36,42 +36,46 @@
 │                                                                       │
 │  ┌─────────────────────────────────────────────────────────────────┐│
 │  │                    Kubernetes Ingress                            ││
-│  │                  (TLS Termination + Routing)                     ││
+│  │        (TLS-Ready mit cert-manager, aber in Dev: HTTP)          ││
 │  └──────────────────────────┬──────────────────────────────────────┘│
 │                              │                                        │
 │                              ▼                                        │
-│  ┌─────────────────────────────────────────────────────────────────┐│
+│  ┌─────────────────────────────────────────────────────────────┐│
 │  │                   Frontend Service (Vue.js)                      ││
-│  │              - Static Assets (HTML/JS/CSS)                       ││
-│  │              - Client-Side Routing                               ││
-│  │              - JWT Token Storage (localStorage)                  ││
+│  │              - Static Assets (HTML/JS/CSS) - Port 5173          ││
+│  │              - Client-Side Routing (Vue Router)                  ││
+│  │              - JWT Token Storage (localStorage - nicht HttpOnly)││
 │  └──────────────────────────┬──────────────────────────────────────┘│
 │                              │                                        │
-└──────────────────────────────┼────────────────────────────────────────┘
+└──────────────────────────────┼────────────────────────────────────┘
                                │
-                               │ HTTP/REST API (Trust Boundary 3)
+                               │ HTTP/HTTPS REST API (Trust Boundary 3)
                                │ Bearer Token (JWT)
+                               │ TLS-Ready: Backend unterstützt HTTPS (TLS_ENABLED=true)
+                               │ Development: HTTP (TLS_ENABLED=false)
+                               │ Routes: /login, /register, /upload (kein /api Prefix)
                                ▼
 ┌─────────────────────────────────────────────────────────────────────┐
 │              BACKEND ZONE (Trust Boundary 4)                         │
 │                                                                       │
-│  ┌─────────────────────────────────────────────────────────────────┐│
-│  │                    Backend Service (Node.js)                     ││
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │               Backend Service (Node.js - Port 5000)              ││
 │  │  ┌────────────────────────────────────────────────────────────┐ ││
 │  │  │  Controllers:                                               │ ││
-│  │  │  - authController.js (Login/Register)                      │ ││
-│  │  │  - googleAuthController.js (OAuth)                         │ ││
-│  │  │  - uploadController.js (Media Upload)                      │ ││
+│  │  │  - authController.js (Login/Register + Winston Logging)    │ ││
+│  │  │  - googleAuthController.js (OAuth + Logging)               │ ││
+│  │  │  - uploadController.js (Media Upload + Logging)            │ ││
 │  │  └────────────────────────────────────────────────────────────┘ ││
 │  │  ┌────────────────────────────────────────────────────────────┐ ││
 │  │  │  Middleware:                                                │ ││
-│  │  │  - auth.middleware.js (JWT Verification)                   │ ││
-│  │  │  - validation.js (Input Sanitization)                      │ ││
+│  │  │  - auth.middleware.js (JWT Verification + Logging)         │ ││
+│  │  │  - validation.js (Input Sanitization + Injection Logging)  │ ││
 │  │  └────────────────────────────────────────────────────────────┘ ││
 │  └──────────────────┬───────────────────────┬─────────────────────┘│
 │                     │                       │                        │
-│                     │                       │ HTTPS API              │
-│                     │                       │ (Trust Boundary 5)     │
+│                     │                       │ HTTP/HTTPS (TLS-Ready)     │
+│                     │                       │ (Dev: HTTP, Prod: HTTPS)   │
+│                     │                       │ (Trust Boundary 5)         │
 │                     │                       ▼                        │
 │                     │            ┌─────────────────────┐             │
 │                     │            │   Cloudinary API    │             │
@@ -86,24 +90,25 @@
 ┌─────────────────────────────────────────────────────────────────────┐
 │                   DATABASE ZONE (Trust Boundary 7)                   │
 │                                                                       │
-│  ┌─────────────────────────────────────────────────────────────────┐│
-│  │                    MongoDB StatefulSet                           ││
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │                MongoDB StatefulSet (Port 27017)                  ││
 │  │  Collections:                                                    ││
 │  │  - users (username, email, passwordHash, googleId, role)        ││
 │  │  - posts (userId, content, imageUrl, createdAt)                 ││
-│  │  - sessions (optional: for token blacklisting)                  ││
+│  │  ⚠️ KEINE sessions Collection (kein Token Blacklisting)          ││
 │  └─────────────────────────────────────────────────────────────────┘│
 │                                                                       │
 └───────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────┐
-│                 CI/CD ZONE (Trust Boundary 8)                        │
+│              CI/CD ZONE (Trust Boundary 8) - ⚠️ NICHT IMPLEMENTIERT  │
 │                                                                       │
 │  ┌─────────────────────────────────────────────────────────────────┐│
-│  │                      GitHub Actions Pipeline                     ││
+│  │                      GitHub Actions Pipeline (GEPLANT)           ││
 │  │  - Code Push → Tests → SAST/SCA → Build → Sign → Deploy        ││
 │  │  - Secrets Management (GitHub Secrets)                          ││
 │  │  - Container Registry Access                                    ││
+│  │  - Status: Delegiert an Teammitglied (siehe TO-DO.md)          ││
 │  └─────────────────────────────────────────────────────────────────┘│
 │                                                                       │
 └───────────────────────────────────────────────────────────────────────┘
@@ -114,14 +119,14 @@
 | ID | Grenze | Von | Nach | Beschreibung |
 |----|--------|-----|------|--------------|
 | **TB-0** | Internet | User | Frontend | Öffentliches Internet, keine Vertrauensstellung |
-| **TB-1** | HTTPS | User Browser | Ingress | TLS-verschlüsselt, Certificate Validation |
+| **TB-1** | HTTP/HTTPS | User Browser | Ingress | TLS-ready aber in Dev: HTTP (TLS_ENABLED=false) |
 | **TB-2** | DMZ | Ingress | Frontend | Innerhalb K8s Cluster, aber öffentlich erreichbar |
-| **TB-3** | API Gateway | Frontend | Backend | JWT-basierte Authentifizierung erforderlich |
+| **TB-3** | API Gateway | Frontend | Backend | JWT Auth + HTTPS-ready (Dev: HTTP, Prod: HTTPS) |
 | **TB-4** | Backend Zone | Backend | Internal Services | Service-to-Service Kommunikation |
 | **TB-5** | External API | Backend | Cloudinary | HTTPS mit API Keys |
 | **TB-6** | Database | Backend | MongoDB | MongoDB Authentication + Network Policy |
 | **TB-7** | Database Zone | - | MongoDB | Isolierte Datenbank, nur Backend-Zugriff |
-| **TB-8** | CI/CD | GitHub Actions | K8s Cluster | Service Account mit minimalen Rechten |
+| **TB-8** | CI/CD | GitHub Actions | K8s Cluster | ⚠️ Nicht implementiert (geplant) |
 
 ---
 
@@ -203,7 +208,7 @@
 
 | STRIDE | Bedrohung | Risiko | Gegenmaßnahme | Implementiert? |
 |--------|-----------|--------|---------------|----------------|
-| **S** | MITM Attack (Man-in-the-Middle) | KRITISCH | - TLS 1.3 Encryption<br>- HSTS Headers | ⚠️ TEILWEISE (TLS-Ready, aber nicht erzwungen) |
+| **S** | MITM Attack (Man-in-the-Middle) | KRITISCH | - TLS 1.3 Encryption<br>- HSTS Headers | ✅ JA (TLS-Ready: Backend hat TLS Support, Zertifikate generiert)<br>⚠️ Dev-Mode: TLS_ENABLED=false für lokales Testing |
 | **T** | Credential Stuffing | HOCH | - Strong Password Policy (min 10 chars)<br>- bcrypt Hashing<br>- Rate Limiting | ⚠️ TEILWEISE (Rate Limiting fehlt) |
 | **I** | Password Leakage in Transit | KRITISCH | - HTTPS/TLS Encryption | ✅ JA (wenn TLS aktiviert) |
 
@@ -212,7 +217,7 @@
 | STRIDE | Bedrohung | Risiko | Gegenmaßnahme | Implementiert? |
 |--------|-----------|--------|---------------|----------------|
 | **T** | NoSQL Injection via Query | HOCH | - Parameterized Queries (Mongoose)<br>- Input Sanitization | ✅ JA |
-| **I** | Unencrypted Connection | MITTEL | - TLS für MongoDB Connection<br>- Verschlüsselung at Rest | ❌ NEIN |
+| **I** | Unencrypted Connection | MITTEL | - TLS für MongoDB Connection<br>- Verschlüsselung at Rest | ❌ NEIN (MongoDB läuft auf mongodb://localhost:27017 ohne TLS) |
 
 #### **Datenfluss 3: Backend → Cloudinary (Image Upload)**
 
@@ -227,7 +232,7 @@
 | STRIDE | Bedrohung | Risiko | Gegenmaßnahme | Implementiert? |
 |--------|-----------|--------|---------------|----------------|
 | **S** | Compromised Pipeline Account | KRITISCH | - Service Account mit Minimal Permissions<br>- RBAC in Kubernetes | ⚠️ TEILWEISE (SA fehlt) |
-| **T** | Malicious Code Injection | KRITISCH | - Code Review + PR Approvals<br>- SAST/SCA Scans<br>- Image Signing | ❌ NEIN (Pipeline fehlt noch) |
+| **T** | Malicious Code Injection | KRITISCH | - Code Review + PR Approvals<br>- SAST/SCA Scans<br>- Image Signing | ❌ NEIN (Pipeline nicht implementiert - delegiert) |
 | **I** | Secrets Leakage in Logs | HOCH | - Secret Scanning (Gitleaks)<br>- Masked Secrets in CI Logs | ❌ NEIN |
 | **E** | Pipeline runs with Admin Rights | HOCH | - Least Privilege Service Account<br>- Namespace Isolation | ❌ NEIN |
 
@@ -797,10 +802,10 @@ KRITISCHER PFAD (Höchste Wahrscheinlichkeit)
     A.2 (Network Sniffing)
          │ 
          ▼
-    HTTP Traffic (kein TLS)
+    HTTP Traffic (TLS_ENABLED=false in Dev)
          │
          ▼
-    JWT Token Theft
+    JWT Token Theft (Wireshark auf localhost)
          │
          ▼
     Replay Attack (Token noch gültig, 7 Tage)
