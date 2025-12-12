@@ -139,39 +139,34 @@ jobs:
           sudo apt-get install -y jq ca-certificates
           # Remove any existing gitleaks to avoid shadowing older binaries
           sudo rm -f /usr/local/bin/gitleaks /usr/bin/gitleaks || true
-          
-          # Direct download approach (more reliable than install script)
-          ARCH=$(uname -m)
-          case "$ARCH" in
-            x86_64|amd64) ASSET="gitleaks_9.0.0_linux_amd64.tar.gz" ;;
-            aarch64|arm64) ASSET="gitleaks_9.0.0_linux_arm64.tar.gz" ;;
-            *) ASSET="gitleaks_9.0.0_linux_amd64.tar.gz" ;;
-          esac
-          
-          GITLEAKS_URL="https://github.com/gitleaks/gitleaks/releases/download/v9.0.0/${ASSET}"
-          echo "Downloading $GITLEAKS_URL"
-          curl -sSL --retry 3 --retry-delay 2 -f "$GITLEAKS_URL" -o /tmp/gitleaks.tar.gz
-          
-          # Extract and install
-          cd /tmp
-          tar -xzf gitleaks.tar.gz
-          sudo mv gitleaks /usr/local/bin/gitleaks
-          sudo chmod +x /usr/local/bin/gitleaks
-          
-          # Verify installation
-          which gitleaks
-          /usr/local/bin/gitleaks version
-          
-          # Run detect but don't let a non-zero exit (findings) stop the job — report will be checked later
-          cd $GITHUB_WORKSPACE
-          /usr/local/bin/gitleaks detect --source . --report-format json --report-path evidence/secrets/gitleaks-report-${{ github.run_id }}.json || true
-          
-          # Copy for backward compatibility
-          if [ -f evidence/secrets/gitleaks-report-${{ github.run_id }}.json ]; then
-            cp evidence/secrets/gitleaks-report-${{ github.run_id }}.json gitleaks-report.json
+          # Prefer the upstream install script; fallback to direct asset download if it fails
+          set -e
+          echo "Attempting to install gitleaks via install.sh"
+          if curl -sSfL https://raw.githubusercontent.com/zricethezav/gitleaks/master/install.sh | sudo bash -s -- -b /usr/local/bin; then
+            echo "gitleaks installed via install.sh"
           else
-            echo "[]" > gitleaks-report.json
+            echo "install.sh failed, attempting direct asset download"
+            ARCH=$(uname -m)
+            case "$ARCH" in
+              x86_64|amd64) ASSET="gitleaks-linux-amd64" ;;
+              aarch64|arm64) ASSET="gitleaks-linux-arm64" ;;
+              *) ASSET="gitleaks-linux-amd64" ;;
+            esac
+            GITLEAKS_URL="https://github.com/zricethezav/gitleaks/releases/latest/download/${ASSET}"
+            echo "Downloading $GITLEAKS_URL"
+            curl -sSL --retry 3 --retry-delay 2 -f "$GITLEAKS_URL" -o /tmp/gitleaks
+            sudo mv /tmp/gitleaks /usr/local/bin/gitleaks
+            sudo chmod +x /usr/local/bin/gitleaks
           fi
+          # Ensure /usr/local/bin is in PATH
+          export PATH=/usr/local/bin:$PATH
+          # Print version for debugging (non-fatal)
+          gitleaks version || true
+          # Run detect but don't let a non-zero exit (findings) stop the job — report will be checked later
+          set -x
+          gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true
+          # Copy to evidence directory with run ID
+          cp gitleaks-report.json evidence/secrets/gitleaks-report-${{ github.run_id }}.json
       - name: Upload gitleaks report
         uses: actions/upload-artifact@v4
         with:
