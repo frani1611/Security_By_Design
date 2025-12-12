@@ -31,9 +31,13 @@ export const register = registerUser;
 
 // Upload / other API helpers (use '/api/...' if your server routes are namespaced)
 export async function uploadImage(formData: FormData) {
+  // Require login: attach JWT if present
+  const token = localStorage.getItem('token');
+  const headers: Record<string,string> = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
   // Do not set Content-Type here — let the browser populate the correct
   // multipart/form-data boundary header for FormData.
-  const res = await apiClient.post('/api/upload', formData);
+  const res = await apiClient.post('/api/upload', formData, { headers });
   return res.data;
 }
 
@@ -60,6 +64,14 @@ export async function getPosts(limit = 10, skip = 0) {
   if (token) headers['Authorization'] = `Bearer ${token}`;
   const res = await apiClient.get(`/api/posts?limit=${limit}&skip=${skip}`, { headers });
   return res.data as { posts: any[]; total: number };
+}
+
+export async function deleteUserPost(postId: string) {
+  const token = localStorage.getItem('token');
+  const headers: Record<string,string> = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  const res = await apiClient.delete(`/api/posts/${postId}`, { headers });
+  return res.data as { message: string; id: string };
 }
 
 // Alias für Komponenten, die uploadImageService importieren

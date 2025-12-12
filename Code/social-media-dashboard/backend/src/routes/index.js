@@ -12,13 +12,16 @@ router.post('/login', authController.login);
 // Google OAuth route
 router.post('/auth/google', googleAuthController.googleLogin);
 
-// Upload routes
-router.post('/upload', uploadController.upload, uploadController.uploadImage);
+// Upload routes (require authentication)
+router.post('/upload', authMiddleware, uploadController.upload, uploadController.uploadImage);
 // Upload a post (image + text) for authenticated users
 router.post('/upload-post', authMiddleware, uploadController.upload, uploadController.uploadPost);
 // Get authenticated user's posts
 router.get('/user-posts', authMiddleware, uploadController.getUserPosts);
 // Get recent posts (paginated). Excludes current user's posts if Authorization header provided.
 router.get('/posts', uploadController.getAllPosts);
+
+// Delete a post (requires authentication, only own posts)
+router.delete('/posts/:id', authMiddleware, uploadController.deletePost);
 
 module.exports = router;

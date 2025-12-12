@@ -314,3 +314,79 @@ exports.getAllPosts = async (req, res) => {
         return res.status(500).json({ message: 'Fehler beim Laden der Beiträge.' });
     }
 };
+
+// Delete a post owned by the authenticated user
+exports.deletePost = async (req, res) => {
+    const logger = require('../utils/logger');
+    try {
+        const db = req.app && req.app.locals && req.app.locals.db;
+        if (!db) {
+            logger.error('Delete post: Database not connected');
+            return res.status(500).json({ message: 'Datenbank nicht verbunden.' });
+        }
+
+        const user = req.user;
+        if (!user || !user._id) {
+            logger.warn('Delete post: Unauthorized - no user in request', { path: req.path });
+            return res.status(401).json({ message: 'Nicht autorisiert.' });
+        }
+
+        const postId = req.params.id;
+        if (!postId) {
+            logger.warn('Delete post: No post ID provided', { userId: user._id });
+            return res.status(400).json({ message: 'Post-ID erforderlich.' });
+        }
+
+        const posts = db.collection(process.env.DB_COLLECTION_POSTS || 'Posts');
+        const { ObjectId } = require('mongodb');
+        
+        let _id;
+        try {
+            _id = new ObjectId(postId);
+        } catch (e) {
+            logger.warn('Delete post: Invalid post ID format', { postId, userId: user._id });
+            return res.status(400).json({ message: 'Ungültige Post-ID.' });
+        }
+
+        const post = await posts.findOne({ _id });
+        if (!post) {
+            logger.warn('Delete post: Post not found', { postId, userId: user._id });
+            return res.status(404).json({ message: 'Beitrag nicht gefunden.' });
+        }
+        
+        logger.info('Delete post: Checking ownership', { 
+            postUsername: post.username, 
+            userUsername: user.username,
+            postId 
+        });
+        
+        if (String(post.username) !== String(user.username)) {
+            logger.warn('Delete post: Permission denied', { 
+                postUsername: post.username, 
+                userUsername: user.username,
+                postId,
+                userId: user._id 
+            });
+            return res.status(403).json({ message: 'Verboten: Dies ist nicht dein Beitrag.' });
+        }
+
+        // Optional: delete from Cloudinary if publicId stored
+        try {
+            if (post.publicId) {
+                const { cloudinary } = require('../services/cloudinary.service');
+                await cloudinary.uploader.destroy(post.publicId);
+                logger.info('Delete post: Cloudinary image deleted', { publicId: post.publicId });
+            }
+        } catch (e) {
+            // continue even if cloudinary delete fails
+            logger.error('Cloudinary delete failed:', { error: e && (e.stack || e), postId });
+        }
+
+        const result = await posts.deleteOne({ _id });
+        logger.info('Delete post: Successfully deleted', { postId, userId: user._id, deletedCount: result.deletedCount });
+        return res.json({ message: 'Beitrag gelöscht.', id: postId });
+    } catch (err) {
+        logger.error('DELETE post error:', { error: err && (err.stack || err), postId: req.params.id });
+        return res.status(500).json({ message: 'Serverfehler beim Löschen: ' + (err.message || 'Unbekannter Fehler') });
+    }
+};

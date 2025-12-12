@@ -37,6 +37,7 @@
           <p><strong>Likes:</strong> {{ (selectedPost?.likes || []).length }}</p>
           <div style="margin-top:12px">
             <button class="btn" @click="closeDetail">Close</button>
+            <button v-if="canDeleteSelected" class="btn btn--danger" @click="onDeleteSelected" style="margin-left:8px">Delete</button>
           </div>
         </div>
       </div>
@@ -47,7 +48,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
-import { uploadImageService, uploadPost, getUserPosts } from '../services/api';
+import { uploadImageService, uploadPost, getUserPosts, deleteUserPost } from '../services/api';
 
 export default defineComponent({
   name: 'Dashboard',
@@ -59,6 +60,14 @@ export default defineComponent({
     const showUploadModal = computed(() => store.state.showUploadModal);
     const selectedPost = ref<any | null>(null);
     const showDetail = ref(false);
+    const canDeleteSelected = computed(() => {
+      const token = localStorage.getItem('token');
+      if (!token || !selectedPost.value) return false;
+      // Allow delete only if the selected post belongs to the logged-in user
+      // We only have username here; in a real app we'd also verify user id.
+      // For now, if token exists, we allow delete of user's own posts list.
+      return true;
+    });
 
     const openDetail = (post: any) => {
       selectedPost.value = post;
@@ -68,6 +77,24 @@ export default defineComponent({
     const closeDetail = () => {
       showDetail.value = false;
       selectedPost.value = null;
+    };
+
+    const onDeleteSelected = async () => {
+      if (!selectedPost.value) return;
+      const id = selectedPost.value._id || selectedPost.value.id;
+      if (!id) return;
+      if (!confirm('Möchtest du diesen Beitrag wirklich löschen?')) return;
+      try {
+        await deleteUserPost(String(id));
+        // remove from uploads list
+        uploads.value = uploads.value.filter(p => (p._id || p.id) !== id);
+        closeDetail();
+        alert('Beitrag erfolgreich gelöscht!');
+      } catch (e: any) {
+        console.error('Delete failed:', e);
+        const errorMsg = e?.response?.data?.message || e?.message || 'Löschen fehlgeschlagen.';
+        alert(`Fehler beim Löschen: ${errorMsg}`);
+      }
     };
 
     const formatDate = (d: any) => {
@@ -171,6 +198,8 @@ export default defineComponent({
       openDetail,
       closeDetail,
       formatDate,
+      canDeleteSelected,
+      onDeleteSelected,
     };
   },
 });
@@ -215,6 +244,9 @@ export default defineComponent({
 }
 .btn--secondary {
   margin-left: 8px;
+}
+.btn--danger {
+  background: #d32f2f;
 }
 
 /* Modal content tweaks */
