@@ -17,7 +17,7 @@ if (apiBase.endsWith('/api')) apiBase = apiBase.replace(/\/api$/g, '');
 const apiClient = axios.create({ baseURL: apiBase });
 
 export async function login(usernameOrEmail: string, password: string): Promise<AuthResponse> {
-  const res = await apiClient.post('/login', { email: usernameOrEmail, password });
+  const res = await apiClient.post('/login', { username: usernameOrEmail, password });
   return res.data;
 }
 
