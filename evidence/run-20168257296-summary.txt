@@ -1,0 +1,20 @@
+Pipeline Run Evidence Summary
+================================
+Run ID: 20168257296
+Run Number: 83
+Timestamp: 2025-12-12T13:31:34Z
+Commit SHA: e7de7b66d7245aac533aa0228381e9d3be5aed40
+Branch/Tag: refs/heads/main
+Actor: frani1611
+
+Files Generated:
+evidence/secrets/gitleaks-report-20168257296.json
+evidence/run-20168257296-summary.txt
+evidence/sast/sast-metadata-20168257296.txt
+evidence/sca/trivy-fs-20168257296.json
+evidence/sca/sca-metadata-20168257296.txt
+evidence/sbom/sbom-20168257296.cyclonedx.json
+evidence/signing/verify-metadata-20168257296.txt
+evidence/signing/verify-log-20168257296.txt
+evidence/signing/signing-metadata-20168257296.txt
+evidence/signing/signing-log-20168257296.txt
