@@ -1,0 +1,13 @@
+Pipeline Run Evidence Summary
+================================
+Run ID: 20167624479
+Run Number: 77
+Timestamp: 2025-12-12T13:05:28Z
+Commit SHA: fb13a9f8e4e292696b464220b25d794b33ec85ce
+Branch/Tag: refs/heads/main
+Actor: frani1611
+
+Files Generated:
+evidence/sast/sast-metadata-20167624479.txt
+evidence/run-20167624479-summary.txt
+evidence/sbom/sbom-20167624479.cyclonedx.json
