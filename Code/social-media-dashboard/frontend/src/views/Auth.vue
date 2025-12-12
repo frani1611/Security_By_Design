@@ -80,7 +80,12 @@ export default {
     const error = ref('');
   const router = useRouter();
   const store = useStore();
-    const googleClientId = ref(import.meta.env.VITE_GOOGLE_CLIENT_ID || '');
+    // Read from runtime config or fallback to build-time env
+    const googleClientId = ref(
+      (window as any).ENV_CONFIG?.VITE_GOOGLE_CLIENT_ID || 
+      (import.meta as any).env?.VITE_GOOGLE_CLIENT_ID || 
+      ''
+    );
 
     // Handle classic form auth
     const handleSubmit = async () => {

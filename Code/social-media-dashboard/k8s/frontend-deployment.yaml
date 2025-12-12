@@ -43,6 +43,11 @@ spec:
           env:
             - name: VITE_API_URL
               value: "http://backend:3000"  # backend service listens on 3000
+            - name: VITE_GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: google-oauth-secret
+                  key: GOOGLE_CLIENT_ID
           resources:
             limits:
               memory: "512Mi"

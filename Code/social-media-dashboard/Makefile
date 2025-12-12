@@ -99,6 +99,14 @@ k8s-create-secrets:
 		$(KUBECTL) create secret generic mongodb-secret -n $(NAMESPACE) --from-literal=DB_ADMIN="$$DB_USER" --from-literal=DB_PASSWORD="$$DB_PASS" --from-literal=username="$$DB_USER" --from-literal=password="$$DB_PASS" --from-literal=uri="$$URI_VAL" --dry-run=client -o yaml | $(KUBECTL) apply -f -; \
 	fi
 
+	# google oauth
+	@GOOGLE_CLIENT_ID=$$(grep -m1 '^GOOGLE_CLIENT_ID=' $(ENV_FILE) | cut -d'=' -f2-); \
+	GOOGLE_CLIENT_SECRET=$$(grep -m1 '^GOOGLE_CLIENT_SECRET=' $(ENV_FILE) | cut -d'=' -f2-); \
+	if [ -n "$$GOOGLE_CLIENT_ID" ] && [ -n "$$GOOGLE_CLIENT_SECRET" ]; then \
+		echo "[k3d] Creating google-oauth-secret"; \
+		$(KUBECTL) create secret generic google-oauth-secret -n $(NAMESPACE) --from-literal=GOOGLE_CLIENT_ID="$$GOOGLE_CLIENT_ID" --from-literal=GOOGLE_CLIENT_SECRET="$$GOOGLE_CLIENT_SECRET" --dry-run=client -o yaml | $(KUBECTL) apply -f -; \
+	fi
+
 	# Ensure Docker registry secret 'regcred' is created (if GHCR credentials present)
 	@echo "[k3d] Ensuring Docker registry secret 'regcred' (if GHCR credentials present)"
 	@$(MAKE) k8s-create-regcred || true
