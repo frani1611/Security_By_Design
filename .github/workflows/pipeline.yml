@@ -31,6 +31,30 @@ jobs:
           echo "Run id: ${{ github.run_id }}"
           echo "Event: ${{ github.event_name }}"
           echo "Repository: ${{ github.repository }}"
+      - name: Create evidence directory structure
+        run: |
+          mkdir -p evidence/run
+          mkdir -p evidence/sast
+          mkdir -p evidence/sbom
+          mkdir -p evidence/sca
+          mkdir -p evidence/secrets
+          mkdir -p evidence/signing
+          echo "Evidence directories created for run ${{ github.run_id }}"
+      - name: Save run metadata
+        run: |
+          echo "Run ID: ${{ github.run_id }}" > evidence/run/run-metadata.txt
+          echo "Run Number: ${{ github.run_number }}" >> evidence/run/run-metadata.txt
+          echo "Event: ${{ github.event_name }}" >> evidence/run/run-metadata.txt
+          echo "Repository: ${{ github.repository }}" >> evidence/run/run-metadata.txt
+          echo "Branch/Tag: ${{ github.ref }}" >> evidence/run/run-metadata.txt
+          echo "Commit SHA: ${{ github.sha }}" >> evidence/run/run-metadata.txt
+          echo "Actor: ${{ github.actor }}" >> evidence/run/run-metadata.txt
+          echo "Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> evidence/run/run-metadata.txt
+      - name: Upload run logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-run
+          path: evidence/run/
       - name: Test Actions REST API with GITHUB_TOKEN
         env:
           GHTOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -47,17 +71,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Create evidence directories
+        run: mkdir -p evidence/sbom
       - name: Install Syft
         run: |
           curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
       - name: Generate SBOM (CycloneDX JSON)
         run: |
-          syft packages dir:. -o cyclonedx-json > sbom.cyclonedx.json
+          syft packages dir:. -o cyclonedx-json > evidence/sbom/sbom-${{ github.run_id }}.cyclonedx.json
+          cp evidence/sbom/sbom-${{ github.run_id }}.cyclonedx.json sbom.cyclonedx.json
       - name: Upload SBOM artifact
         uses: actions/upload-artifact@v4
         with:
           name: sbom
           path: sbom.cyclonedx.json
+      - name: Upload SBOM to evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-sbom
+          path: evidence/sbom/
 
   codeql:
     name: CodeQL SAST
@@ -65,6 +97,8 @@ jobs:
     needs: sbom
     steps:
       - uses: actions/checkout@v4
+      - name: Create evidence directories
+        run: mkdir -p evidence/sast
       # CodeQL Action v4: update before v3 deprecation (Dec 2026)
       # Note: Ensure 'Code scanning' is enabled in repository settings
       - name: Initialize CodeQL
@@ -75,6 +109,20 @@ jobs:
         uses: github/codeql-action/autobuild@v4
       - name: Run CodeQL
         uses: github/codeql-action/analyze@v4
+        with:
+          upload: true
+          output: evidence/sast
+      - name: Save SAST metadata
+        run: |
+          echo "SAST Tool: CodeQL" > evidence/sast/sast-metadata-${{ github.run_id }}.txt
+          echo "Run ID: ${{ github.run_id }}" >> evidence/sast/sast-metadata-${{ github.run_id }}.txt
+          echo "Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> evidence/sast/sast-metadata-${{ github.run_id }}.txt
+          echo "Language: JavaScript" >> evidence/sast/sast-metadata-${{ github.run_id }}.txt
+      - name: Upload SAST evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-sast
+          path: evidence/sast/
 
   secret-scan:
     name: Secret Scan (gitleaks)
@@ -82,6 +130,8 @@ jobs:
     needs: codeql
     steps:
       - uses: actions/checkout@v4
+      - name: Create evidence directories
+        run: mkdir -p evidence/secrets
       - name: Run gitleaks (install + detect)
         run: |
           # Install dependencies and gitleaks (use sudo to ensure /usr/local/bin is writable)
@@ -115,11 +165,18 @@ jobs:
           # Run detect but don't let a non-zero exit (findings) stop the job — report will be checked later
           set -x
           gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true
+          # Copy to evidence directory with run ID
+          cp gitleaks-report.json evidence/secrets/gitleaks-report-${{ github.run_id }}.json
       - name: Upload gitleaks report
         uses: actions/upload-artifact@v4
         with:
           name: gitleaks-report
           path: gitleaks-report.json
+      - name: Upload secrets evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-secrets
+          path: evidence/secrets/
       - name: Fail if secrets found
         run: |
           if [ -s gitleaks-report.json ] && grep -q '[\[{]' gitleaks-report.json; then
@@ -133,17 +190,31 @@ jobs:
     needs: secret-scan
     steps:
       - uses: actions/checkout@v4
+      - name: Create evidence directories
+        run: mkdir -p evidence/sca
       - name: Install trivy
         run: |
           curl -sSfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
       - name: Run Trivy filesystem scan
         run: |
-          trivy fs --format json --output trivy-fs.json .
+          trivy fs --format json --output evidence/sca/trivy-fs-${{ github.run_id }}.json .
+          cp evidence/sca/trivy-fs-${{ github.run_id }}.json trivy-fs.json
+      - name: Generate SCA summary
+        run: |
+          echo "SCA Tool: Trivy" > evidence/sca/sca-metadata-${{ github.run_id }}.txt
+          echo "Run ID: ${{ github.run_id }}" >> evidence/sca/sca-metadata-${{ github.run_id }}.txt
+          echo "Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> evidence/sca/sca-metadata-${{ github.run_id }}.txt
+          trivy --version >> evidence/sca/sca-metadata-${{ github.run_id }}.txt || true
       - name: Upload Trivy report
         uses: actions/upload-artifact@v4
         with:
           name: trivy-report
           path: trivy-fs.json
+      - name: Upload SCA evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-sca
+          path: evidence/sca/
 
   build-and-push:
     name: Build and push image
@@ -214,6 +285,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-push
     steps:
+      - name: Create evidence directories
+        run: mkdir -p evidence/signing
       - name: Prepare debug info (non-sensitive)
         if: github.ref == 'refs/heads/main'
         run: |
@@ -245,7 +318,22 @@ jobs:
             IMAGE_REF="${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
           fi
           echo "Signing image: $IMAGE_REF"
-          cosign sign "$IMAGE_REF"
+          cosign sign "$IMAGE_REF" 2>&1 | tee evidence/signing/signing-log-${{ github.run_id }}.txt
+      - name: Save signing metadata
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "Image signed successfully" > evidence/signing/signing-metadata-${{ github.run_id }}.txt
+          echo "Image: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}" >> evidence/signing/signing-metadata-${{ github.run_id }}.txt
+          echo "Digest: ${{ needs.build-and-push.outputs.image_digest }}" >> evidence/signing/signing-metadata-${{ github.run_id }}.txt
+          echo "Run ID: ${{ github.run_id }}" >> evidence/signing/signing-metadata-${{ github.run_id }}.txt
+          echo "Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> evidence/signing/signing-metadata-${{ github.run_id }}.txt
+          echo "Actor: ${{ github.actor }}" >> evidence/signing/signing-metadata-${{ github.run_id }}.txt
+          cosign version >> evidence/signing/signing-metadata-${{ github.run_id }}.txt || true
+      - name: Upload signing evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-signing
+          path: evidence/signing/
 
   quality-gate:
     name: Quality Gate
@@ -275,6 +363,8 @@ jobs:
       - name: Install cosign CLI
         uses: sigstore/cosign-installer@v3
 
+      - name: Create evidence directories
+        run: mkdir -p evidence/signing
       - name: Verify cosign signature (keyless/actor-restricted)
         run: |
           # Verify keyless signatures but restrict accepted certificate identities
@@ -282,7 +372,123 @@ jobs:
           cosign version || true
           cosign verify --verbose --certificate-identity-regexp ".*${{ github.actor }}.*" \
             --certificate-oidc-issuer-regexp "https://token.actions.githubusercontent.com" \
-            ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} || (echo "Signature missing/invalid" && exit 1)
+            ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} 2>&1 | tee evidence/signing/verify-log-${{ github.run_id }}.txt || (echo "Signature missing/invalid" && exit 1)
+      - name: Save verification metadata
+        run: |
+          echo "Image signature verified successfully" > evidence/signing/verify-metadata-${{ github.run_id }}.txt
+          echo "Image: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}" >> evidence/signing/verify-metadata-${{ github.run_id }}.txt
+          echo "Run ID: ${{ github.run_id }}" >> evidence/signing/verify-metadata-${{ github.run_id }}.txt
+          echo "Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> evidence/signing/verify-metadata-${{ github.run_id }}.txt
+          echo "Actor: ${{ github.actor }}" >> evidence/signing/verify-metadata-${{ github.run_id }}.txt
+      - name: Upload verification evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-signing-verify
+          path: evidence/signing/
+
+  commit-evidence:
+    name: Commit Evidence to Repository
+    runs-on: ubuntu-latest
+    needs: [quality-gate, sbom, codeql, secret-scan, sca-scan, sign-image]
+    if: always() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Create evidence directories in repo
+        run: |
+          mkdir -p evidence/run
+          mkdir -p evidence/sast
+          mkdir -p evidence/sbom
+          mkdir -p evidence/sca
+          mkdir -p evidence/secrets
+          mkdir -p evidence/signing
+      
+      - name: Download all evidence artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: evidence-artifacts
+      
+      - name: Organize evidence files
+        run: |
+          # Copy run metadata
+          if [ -d "evidence-artifacts/evidence-run" ]; then
+            cp -r evidence-artifacts/evidence-run/* evidence/run/ 2>/dev/null || true
+          fi
+          
+          # Copy SBOM
+          if [ -d "evidence-artifacts/evidence-sbom" ]; then
+            cp -r evidence-artifacts/evidence-sbom/* evidence/sbom/ 2>/dev/null || true
+          fi
+          
+          # Copy SAST
+          if [ -d "evidence-artifacts/evidence-sast" ]; then
+            cp -r evidence-artifacts/evidence-sast/* evidence/sast/ 2>/dev/null || true
+          fi
+          
+          # Copy secrets
+          if [ -d "evidence-artifacts/evidence-secrets" ]; then
+            cp -r evidence-artifacts/evidence-secrets/* evidence/secrets/ 2>/dev/null || true
+          fi
+          
+          # Copy SCA
+          if [ -d "evidence-artifacts/evidence-sca" ]; then
+            cp -r evidence-artifacts/evidence-sca/* evidence/sca/ 2>/dev/null || true
+          fi
+          
+          # Copy signing (from both sign and verify jobs)
+          if [ -d "evidence-artifacts/evidence-signing" ]; then
+            cp -r evidence-artifacts/evidence-signing/* evidence/signing/ 2>/dev/null || true
+          fi
+          if [ -d "evidence-artifacts/evidence-signing-verify" ]; then
+            cp -r evidence-artifacts/evidence-signing-verify/* evidence/signing/ 2>/dev/null || true
+          fi
+          
+          # Create summary file
+          echo "Pipeline Run Evidence Summary" > evidence/run-${{ github.run_id }}-summary.txt
+          echo "================================" >> evidence/run-${{ github.run_id }}-summary.txt
+          echo "Run ID: ${{ github.run_id }}" >> evidence/run-${{ github.run_id }}-summary.txt
+          echo "Run Number: ${{ github.run_number }}" >> evidence/run-${{ github.run_id }}-summary.txt
+          echo "Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> evidence/run-${{ github.run_id }}-summary.txt
+          echo "Commit SHA: ${{ github.sha }}" >> evidence/run-${{ github.run_id }}-summary.txt
+          echo "Branch/Tag: ${{ github.ref }}" >> evidence/run-${{ github.run_id }}-summary.txt
+          echo "Actor: ${{ github.actor }}" >> evidence/run-${{ github.run_id }}-summary.txt
+          echo "" >> evidence/run-${{ github.run_id }}-summary.txt
+          echo "Files Generated:" >> evidence/run-${{ github.run_id }}-summary.txt
+          find evidence -type f -name "*${{ github.run_id }}*" >> evidence/run-${{ github.run_id }}-summary.txt
+      
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Commit and push evidence
+        run: |
+          git add evidence/
+          if git diff --staged --quiet; then
+            echo "No evidence changes to commit"
+          else
+            git commit -m "Add evidence from pipeline run ${{ github.run_id }}
+
+            Run Number: ${{ github.run_number }}
+            Event: ${{ github.event_name }}
+            Commit: ${{ github.sha }}
+            Actor: ${{ github.actor }}
+            
+            Evidence includes:
+            - SBOM (Syft)
+            - SAST (CodeQL)
+            - Secret Scan (gitleaks)
+            - SCA (Trivy)
+            - Image Signing (Cosign)
+            - Run Metadata"
+            
+            # Push to the current branch
+            git push origin HEAD:${{ github.ref_name }}
+          fi
 
   # Note: Deployments are no longer performed in this pipeline. The pipeline
   # now only builds and pushes images to GHCR. Deployment should be done via
