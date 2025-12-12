@@ -143,12 +143,12 @@ jobs:
           # Direct download approach (more reliable than install script)
           ARCH=$(uname -m)
           case "$ARCH" in
-            x86_64|amd64) ASSET="gitleaks_9.0.0_linux_x64.tar.gz" ;;
+            x86_64|amd64) ASSET="gitleaks_9.0.0_linux_amd64.tar.gz" ;;
             aarch64|arm64) ASSET="gitleaks_9.0.0_linux_arm64.tar.gz" ;;
-            *) ASSET="gitleaks_9.0.0_linux_x64.tar.gz" ;;
+            *) ASSET="gitleaks_9.0.0_linux_amd64.tar.gz" ;;
           esac
           
-          GITLEAKS_URL="https://github.com/zricethezav/gitleaks/releases/download/v9.0.0/${ASSET}"
+          GITLEAKS_URL="https://github.com/gitleaks/gitleaks/releases/download/v9.0.0/${ASSET}"
           echo "Downloading $GITLEAKS_URL"
           curl -sSL --retry 3 --retry-delay 2 -f "$GITLEAKS_URL" -o /tmp/gitleaks.tar.gz
           
