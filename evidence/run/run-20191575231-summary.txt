@@ -1,0 +1,20 @@
+Pipeline Run Evidence Summary
+================================
+Run ID: 20191575231
+Run Number: 89
+Timestamp: 2025-12-13T11:47:00Z
+Commit SHA: 68f51a2466854ae977a8047eca5855e876c7be67
+Branch/Tag: refs/heads/main
+Actor: frani1611
+
+Files Generated:
+evidence/secrets/gitleaks-report-20191575231.json
+evidence/sast/sast-metadata-20191575231.txt
+evidence/run/run-20191575231-summary.txt
+evidence/sca/trivy-fs-20191575231.json
+evidence/sca/sca-metadata-20191575231.txt
+evidence/sbom/sbom-20191575231.cyclonedx.json
+evidence/signing/verify-metadata-20191575231.txt
+evidence/signing/signing-metadata-20191575231.txt
+evidence/signing/verify-log-20191575231.txt
+evidence/signing/signing-log-20191575231.txt
