@@ -18,7 +18,6 @@
 Das **Social Media Dashboard** ist eine sicherheitsorientierte Webanwendung, die Benutzern ermöglicht:
 - Sich sicher zu registrieren und anzumelden
 - Bilder hochzuladen und zu verwalten
-- Rollen-basierte Zugriffskontrolle (Benutzer/Admin)
 - Passwörter sicher zu speichern (bcrypt-verschlüsselt)
 - Sich mit Google OAuth anzumelden (Single Sign-On)
 
@@ -463,28 +462,7 @@ spec:
           port: 27017
 ```
 
-#### **5.2 Service Accounts (RBAC)**
-```yaml
-# Jeder Pod hat Minimal-Permissions
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: backend-sa
-
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: backend-role
-rules:
-  # Backend darf eigene Secrets lesen
-  - apiGroups: [""]
-    resources: ["secrets"]
-    verbs: ["get"]
-    resourceNames: ["db-secret"]
-```
-
-#### **5.3 Pod Security Context**
+#### **5.2 Pod Security Context**
 ```yaml
 # Deployment mit Security-Härtung
 spec:

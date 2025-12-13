@@ -12,8 +12,8 @@
 | **MongoDB** | NoSQL Datenbank | MongoDB 7.x (Port 27017) |
 | **Google OAuth** | Externer Authentifizierungsdienst | Google Identity Services |
 | **Cloudinary** | Externer Media Storage | Cloudinary API |
-| **CI/CD Pipeline** | ⚠️ Nicht implementiert (delegiert) | GitHub Actions (geplant) |
-| **Kubernetes Cluster** | Container Orchestrierung | K8s (TLS-ready) |
+| **CI/CD Pipeline** | Workflow nach jedem Push auf Main | GitHub Actions |
+| **Kubernetes Cluster** | Container Orchestrierung | K3D (TLS-ready) |
 
 ### 1.2 Data Flow Diagram mit Vertrauensgrenzen
 
@@ -25,13 +25,13 @@
 |----|--------|-----|------|--------------|
 | **TB-0** | Internet | User | Frontend | Öffentliches Internet, keine Vertrauensstellung |
 | **TB-1** | HTTP/HTTPS | User Browser | Ingress | TLS-ready aber in Dev: HTTP (TLS_ENABLED=false) |
-| **TB-2** | DMZ | Ingress | Frontend | Innerhalb K8s Cluster, aber öffentlich erreichbar |
+| **TB-2** | DMZ | Ingress | Frontend | Innerhalb K3D Cluster, aber öffentlich erreichbar |
 | **TB-3** | API Gateway | Frontend | Backend | JWT Auth + HTTPS-ready (Dev: HTTP, Prod: HTTPS) |
 | **TB-4** | Backend Zone | Backend | Internal Services | Service-to-Service Kommunikation |
 | **TB-5** | External API | Backend | Cloudinary | HTTPS mit API Keys |
 | **TB-6** | Database | Backend | MongoDB | MongoDB Authentication + Network Policy |
 | **TB-7** | Database Zone | - | MongoDB | Isolierte Datenbank, nur Backend-Zugriff |
-| **TB-8** | CI/CD | GitHub Actions | K8s Cluster | ⚠️ Nicht implementiert (geplant) |
+| **TB-8** | CI/CD | GitHub Actions | K3D | Image-Deployment auf K3D |
 
 ---
 
@@ -136,10 +136,10 @@
 
 | STRIDE | Bedrohung | Risiko | Gegenmaßnahme | Implementiert? |
 |--------|-----------|--------|---------------|----------------|
-| **S** | Compromised Pipeline Account | KRITISCH | - Service Account mit Minimal Permissions<br>- RBAC in Kubernetes | ⚠️ TEILWEISE (SA fehlt) |
-| **T** | Malicious Code Injection | KRITISCH | - Code Review + PR Approvals<br>- SAST/SCA Scans<br>- Image Signing | ❌ NEIN (Pipeline nicht implementiert - delegiert) |
-| **I** | Secrets Leakage in Logs | HOCH | - Secret Scanning (Gitleaks)<br>- Masked Secrets in CI Logs | ❌ NEIN |
-| **E** | Pipeline runs with Admin Rights | HOCH | - Least Privilege Service Account<br>- Namespace Isolation | ❌ NEIN |
+| **S** | Compromised Pipeline Account | KRITISCH | - Service Account mit Minimal Permissions<br>- RBAC in Kubernetes | ✅ SA implementiert |
+| **T** | Malicious Code Injection | KRITISCH | - Code Review + PR Approvals<br>- SAST/SCA Scans<br>- Image Signing | ⚠️ TEILWEISE |
+| **I** | Secrets Leakage in Logs | HOCH | - Secret Scanning (Gitleaks)<br>- Masked Secrets in CI Logs | ✅ Secret Scanning implementiert |
+| **E** | Pipeline runs with Admin Rights | HOCH | - Least Privilege Service Account<br>- Namespace Isolation | ✅ Implementiert |
 
 ---
 
@@ -324,7 +324,7 @@ Ziel des Angreifers: Persistenter Admin‑Zugriff auf MongoDB, vollständige Exf
    └──────┬──────┘                └──────┬──────┘               │ JWT/Role     │
           │                              │                       └──────────────┘
    ┌──────┴──────┐                ┌──────┴──────┐                
-   │ A3: Remote  │                │ B3: K8s/CI  │
+   │ A3: Remote  │                │ B3: K3D/CI  │
    │ Zugriff per │                │ Secret Leak │
    │ mongosh     │                └─────────────┘
    └─────────────┘
@@ -358,8 +358,8 @@ Details pro Pfad und Gegenmaßnahmen
 - PATH B – Zugangsdaten‑Kompromiss
   - B1: Leaks aus `.env`, ConfigMaps, Logs oder Git‑Historie (DB URI/User/Pass).
   - B2: Schwache/rotierte Passwörter fehlen; Reuse across envs → leicht zu bruten.
-  - B3: Secret‑Leak aus CI/K8s (ServiceAccount, falsch gesetzte RBAC/Secrets).
-  - Gegenmaßnahmen: Secret‑Management (K8s Secrets/External Vault), regelmäßige Rotation, starke Passwörter, `Least Privilege` für DB‑User, CI RBAC hardening.
+  - B3: Secret‑Leak aus CI/K3D (ServiceAccount, falsch gesetzte RBAC/Secrets).
+  - Gegenmaßnahmen: Secret‑Management (K3D Secrets/External Vault), regelmäßige Rotation, starke Passwörter, `Least Privilege` für DB‑User, CI RBAC hardening.
 
 - PATH C – App‑Layer Angriff
   - C1: NoSQL Injection/unsichere Queries → unautorisierter DB‑Zugriff über Backend.
@@ -375,7 +375,7 @@ Exfiltration, Manipulation, Persistenz (nach Admin‑Zugriff)
 Mitigation ‑ Priorisierte Maßnahmen (Top 10)
 
 1. Kubernetes NetworkPolicies: nur Backend → MongoDB, deny‑all default.
-2. Secrets Hardening: K8s Secrets/Vault, keine Secrets in Logs/Repos.
+2. Secrets Hardening: K3D Secrets/Vault, keine Secrets in Logs/Repos.
 3. Passwort‑Policy für DB‑User: starke, unique, regelmäßige Rotation.
 4. DB‑Rollen trennen: `read`/`write` getrennt, kein `readWriteAnyDatabase` im App‑User.
 5. TLS für DB‑Verbindung: `mongodb+srv`/TLS erzwingen, Zertifikate verwalten.

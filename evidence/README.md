@@ -1,34 +1,34 @@
-# Evidence Directory
+# Evidence Verzeichnis
 
-This directory contains security scan reports and artifacts from CI/CD pipeline runs.
+Dieses Verzeichnis enthält Sicherheits-Scan-Berichte und Artefakte aus CI/CD-Pipeline-Durchläufen.
 
-## Structure
+## Struktur
 
-Each pipeline run creates subdirectories organized by Run ID:
+Jeder Pipeline-Durchlauf erstellt nach Run ID organisierte Unterverzeichnisse:
 
 ```
 evidence/
-├── run/          # Pipeline run metadata and logs
+├── run/          # Pipeline-Durchlauf-Metadaten und Logs
 ├── sast/         # Static Application Security Testing (CodeQL)
 ├── sbom/         # Software Bill of Materials (Syft)
 ├── sca/          # Software Composition Analysis (Trivy)
-├── secrets/      # Secret scanning (gitleaks)
-└── signing/      # Image signing and verification (Cosign)
+├── secrets/      # Secret-Scanning (gitleaks)
+└── signing/      # Image-Signierung und -Verifizierung (Cosign)
 ```
 
-## File Naming Convention
+## Dateibenennungskonvention
 
-All files are prefixed with the GitHub Actions Run ID for traceability:
-- `{report-type}-{run_id}.{extension}`
-- Example: `trivy-fs-1234567890.json`
+Alle Dateien sind zur Nachverfolgbarkeit mit der GitHub Actions Run ID präfixiert:
+- `{report-typ}-{run_id}.{erweiterung}`
+- Beispiel: `trivy-fs-1234567890.json`
 
-## Retention
+## Aufbewahrung
 
-Files are committed to the repository by the CI/CD pipeline and retained indefinitely unless manually cleaned up.
+Dateien werden von der CI/CD-Pipeline ins Repository committed und unbegrenzt aufbewahrt, sofern sie nicht manuell bereinigt werden.
 
-## Access
+## Zugriff
 
-All evidence files are part of the Git repository history and can be accessed via:
-- Git history: `git log -- evidence/`
-- GitHub UI: Browse the evidence/ directory
-- Pipeline artifacts: GitHub Actions → Workflow Run → Artifacts
+Alle Evidence-Dateien sind Teil der Git-Repository-Historie und können abgerufen werden über:
+- Git-Historie: `git log -- evidence/`
+- GitHub UI: Durchsuchen des evidence/ Verzeichnisses
+- Pipeline-Artefakte: GitHub Actions → Workflow Run → Artifacts
