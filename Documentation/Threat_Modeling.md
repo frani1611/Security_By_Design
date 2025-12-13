@@ -387,487 +387,109 @@ logging:
 
 ---
 
-## 3. Attack Tree - Worst Case Szenario
+## 3. Attack Tree – Worst Case: Vollständige Kompromittierung der Datenbank (MongoDB)
 
-### **Worst Case: Vollständige Kompromittierung des Systems mit Datenexfiltration**
-
-**Ziel des Angreifers:** Admin-Zugriff erlangen + alle User-Daten (Passwörter, Posts, persönliche Infos) stehlen
+Ziel des Angreifers: Persistenter Admin‑Zugriff auf MongoDB, vollständige Exfiltration und Manipulation aller Daten (Users, Posts), inkl. Passwort‑Hashes und Metadaten.
 
 ```
-                    ┌─────────────────────────────────────────────┐
-                    │  ZIEL: Vollständige System-Kompromittierung  │
-                    │  + Datenexfiltration aller User-Daten       │
-                    └───────────────────┬─────────────────────────┘
-                                        │
-                    ┌───────────────────┴───────────────────┐
-                    │          OR (Einer reicht)            │
-                    └───────────┬───────────────────────────┘
-                                │
-                ┌───────────────┴────────────────┐
-                │                                │
-                ▼                                ▼
-    ┌───────────────────────┐      ┌───────────────────────────┐
-    │  PATH 1: Frontend     │      │  PATH 2: Backend/DB       │
-    │  Compromise           │      │  Direct Access            │
-    └───────────┬───────────┘      └─────────────┬─────────────┘
-                │                                  │
-                │                                  │
-    ┌───────────┴─────────────────┐   ┌───────────┴──────────────────┐
-    │                             │   │                              │
-    ▼                             ▼   ▼                              ▼
-┌─────────┐               ┌─────────┐ ┌─────────┐            ┌──────────┐
-│ 1.1 XSS │               │ 1.2 JWT │ │ 2.1 SQL │            │ 2.2 K8s  │
-│ Attack  │               │ Theft   │ │ Injection│            │ Exploit  │
-└────┬────┘               └────┬────┘ └────┬────┘            └─────┬────┘
-     │                         │           │                       │
-     │                         │           │                       │
+                         ┌────────────────────────────────────────────┐
+                         │ ROOT: MongoDB vollständig kompromittiert   │
+                         │ (Admin-Zugriff + Datenexfiltration)        │
+                         └───────────────┬────────────────────────────┘
+                                         │
+                              ┌──────────┴──────────┐
+                              │         OR          │
+                              └──────────┬──────────┘
+                                         │
+          ┌──────────────────────────────┼──────────────────────────────┐
+          │                              │                              │
+          ▼                              ▼                              ▼
+  PATH A: Netz-Exposition         PATH B: Zugangsdaten‑Kompromiss  PATH C: App‑Layer Angriff
+  (Direkter DB-Zugriff)           (Creds/Secrets Leak)             (Injection/Bypass)
+          │                              │                              │
+   ┌──────┴──────┐                ┌──────┴──────┐                ┌──────┴──────┐
+   │ A1: Port    │                │ B1: .env    │                │ C1: NoSQL   │
+   │ 27017 offen │                │/Config Leak │                │ Injection   │
+   └──────┬──────┘                └──────┬──────┘                └──────┬──────┘
+          │                              │                              │
+   ┌──────┴──────┐                ┌──────┴──────┐                ┌──────┴──────┐
+   │ A2: Kein    │                │ B2: Schwache │               │ C2: Auth‑    │
+   │ Network     │                │ DB‑Passwörter│               │ Bypass via   │
+   │ Policy      │                │/Reuse        │               │ gestohlenes  │
+   └──────┬──────┘                └──────┬──────┘               │ JWT/Role     │
+          │                              │                       └──────────────┘
+   ┌──────┴──────┐                ┌──────┴──────┐                
+   │ A3: Remote  │                │ B3: K8s/CI  │
+   │ Zugriff per │                │ Secret Leak │
+   │ mongosh     │                └─────────────┘
+   └─────────────┘
+
+          ┌──────────────────────────────────────────────────────────┐
+          │                 KONVERGENZ (ANY)                         │
+          └───────────────┬──────────────────────────────────────────┘
+                          │
+                          ▼
+              Admin‑Zugriff auf MongoDB (readWriteAnyDatabase)
+                          │
+          ┌───────────────┴────────────────────────┐
+          │                AND                      │
+          └───────────────┬────────────────────────┘
+                          │
+                          ▼
+              Daten‑Dump (mongodump/aggregation) + Manipulation
+                          │
+                          ▼
+              Persistenz (neuer Admin‑User, Backdoor‑Trigger)
 ```
 
-### **Detaillierter Attack Tree:**
+Details pro Pfad und Gegenmaßnahmen
 
-```
-┌───────────────────────────────────────────────────────────────────┐
-│                    ROOT: System Compromise                        │
-│              (Admin Access + Data Exfiltration)                   │
-└───────────────────────────────┬───────────────────────────────────┘
-                                │
-                    ┌───────────┴───────────┐
-                    │         OR            │
-                    └───────────┬───────────┘
-                                │
-        ┌───────────────────────┼───────────────────────┐
-        │                       │                       │
-        ▼                       ▼                       ▼
-┌───────────────┐   ┌───────────────────┐   ┌─────────────────┐
-│  PATH A:      │   │    PATH B:        │   │   PATH C:       │
-│  Frontend     │   │    Backend API    │   │   Infrastructure│
-│  Exploitation │   │    Exploitation   │   │   Exploitation  │
-└───────┬───────┘   └─────────┬─────────┘   └────────┬────────┘
-        │                     │                       │
-        │                     │                       │
-────────┴─────────────────────┴───────────────────────┴────────
+- PATH A – Netz‑Exposition
+  - A1: Port 27017 extern erreichbar; Scanner (Shodan/Nmap) finden offene MongoDB.
+  - A2: Keine Kubernetes NetworkPolicies; seitlicher Zugriff aus kompromittiertem Pod.
+  - A3: Direkter Zugriff via `mongosh`/`mongodump` mit erratenen/geleakten Creds.
+  - Gegenmaßnahmen: NetworkPolicies (deny‑all, nur Backend → DB), Service nicht extern exposen, IP‑Allowlist, Firewall, Kubernetes `ClusterIP` für MongoDB.
 
+- PATH B – Zugangsdaten‑Kompromiss
+  - B1: Leaks aus `.env`, ConfigMaps, Logs oder Git‑Historie (DB URI/User/Pass).
+  - B2: Schwache/rotierte Passwörter fehlen; Reuse across envs → leicht zu bruten.
+  - B3: Secret‑Leak aus CI/K8s (ServiceAccount, falsch gesetzte RBAC/Secrets).
+  - Gegenmaßnahmen: Secret‑Management (K8s Secrets/External Vault), regelmäßige Rotation, starke Passwörter, `Least Privilege` für DB‑User, CI RBAC hardening.
 
-═══════════════════════════════════════════════════════════════════
-PATH A: Frontend Exploitation
-═══════════════════════════════════════════════════════════════════
+- PATH C – App‑Layer Angriff
+  - C1: NoSQL Injection/unsichere Queries → unautorisierter DB‑Zugriff über Backend.
+  - C2: Auth‑Bypass mit gestohlenem Admin‑JWT/fehlerhafter RBAC → privilegierte DB‑Operationen via API.
+  - Gegenmaßnahmen: strikte Input‑Validierung/Sanitization (Entfernung `$`/`.`), Parametrisierung, Defense‑in‑Depth (RBAC im Backend + DB‑Rollen getrennt), kurze Token‑TTL, HttpOnly Cookies statt localStorage.
 
-┌─────────────────────────────────────────────────┐
-│  A.1: Cross-Site Scripting (XSS) Attack         │
-│  Schwierigkeit: MITTEL | Impact: HOCH           │
-└──────────────────────┬──────────────────────────┘
-                       │
-            ┌──────────┴───────────┐
-            │        AND           │
-            └──────────┬───────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   ┌────────┐    ┌─────────┐    ┌──────────┐
-   │ A.1.1  │    │ A.1.2   │    │  A.1.3   │
-   │Find XSS│    │ Inject  │    │  Steal   │
-   │Entry   │───►│Malicious│───►│  JWT     │
-   │Point   │    │ Script  │    │  Token   │
-   └────────┘    └─────────┘    └──────────┘
-      │              │                │
-      │              │                │
-   Comment       <script>        localStorage
-   Field         payload         .getItem('token')
-   Post Title    alert(1)
-   Profile Bio
+Exfiltration, Manipulation, Persistenz (nach Admin‑Zugriff)
 
+- Daten‑Exfiltration: `mongodump --archive`, große Aggregationsqueries, Export Collections.
+- Manipulation: Update/Delete ganzer Collections, Passwort‑Hash‑Ersetzung, Rollenänderungen.
+- Persistenz: Neuer Admin‑User, Änderung Auth‑Mechanismen, Backdoor‑Trigger über Scheduled Jobs.
 
-   Gegenmaßnahmen:
-   ❌ Kein Content Security Policy (CSP)
-   ⚠️  Vue.js sanitiert automatisch (v-html nicht genutzt)
-   ❌ JWT in localStorage (nicht HttpOnly Cookie)
+Mitigation ‑ Priorisierte Maßnahmen (Top 10)
 
+1. Kubernetes NetworkPolicies: nur Backend → MongoDB, deny‑all default.
+2. Secrets Hardening: K8s Secrets/Vault, keine Secrets in Logs/Repos.
+3. Passwort‑Policy für DB‑User: starke, unique, regelmäßige Rotation.
+4. DB‑Rollen trennen: `read`/`write` getrennt, kein `readWriteAnyDatabase` im App‑User.
+5. TLS für DB‑Verbindung: `mongodb+srv`/TLS erzwingen, Zertifikate verwalten.
+6. IP‑Allowlist/Firewall: nur Cluster‑intern, keine öffentliche Exposition von 27017.
+7. CI/CD RBAC: Least Privilege, getrennte Namespaces, Secret‑Zugriff minimieren.
+8. Audit/Change Streams: DB‑Änderungen nachverfolgbar, Alarmierung bei Admin‑Aktionen.
+9. Backup/Restore Schutz: Signierte/verschlüsselte Backups, Zugriff nur für Backup‑Service.
+10. App‑Layer Schutz: strikte Validierung, Rate‑Limiting, kurze Token‑TTL, HttpOnly Cookies.
 
-┌─────────────────────────────────────────────────┐
-│  A.2: Session Hijacking via Network Sniffing    │
-│  Schwierigkeit: NIEDRIG | Impact: HOCH          │
-└──────────────────────┬──────────────────────────┘
-                       │
-            ┌──────────┴───────────┐
-            │        AND           │
-            └──────────┬───────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   ┌────────┐    ┌─────────┐    ┌──────────┐
-   │ A.2.1  │    │ A.2.2   │    │  A.2.3   │
-   │ MITM   │───►│ Sniff   │───►│  Replay  │
-   │ Setup  │    │ JWT     │    │  Token   │
-   └────────┘    └─────────┘    └──────────┘
-      │              │                │
-      │              │                │
-   Public WiFi   Wireshark      Authorization:
-   ARP Spoofing  tcpdump        Bearer <token>
-   DNS Hijack
-
-
-   Gegenmaßnahmen:
-   ⚠️  TLS-Ready aber nicht erzwungen
-   ❌ Kein HSTS Header
-   ✅ Token Expiry (7 Tage) - begrenzt Window
-
-
-┌─────────────────────────────────────────────────┐
-│  A.3: Phishing Attack on User Credentials       │
-│  Schwierigkeit: NIEDRIG | Impact: MITTEL        │
-└──────────────────────┬──────────────────────────┘
-                       │
-            ┌──────────┴───────────┐
-            │        AND           │
-            └──────────┬───────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   ┌────────┐    ┌─────────┐    ┌──────────┐
-   │ A.3.1  │    │ A.3.2   │    │  A.3.3   │
-   │ Clone  │───►│ Send    │───►│  Harvest │
-   │ Login  │    │ Phishing│    │  Creds   │
-   │ Page   │    │ Email   │    │          │
-   └────────┘    └─────────┘    └──────────┘
-      │              │                │
-      │              │                │
-   Copy HTML/CSS  Social Eng.    POST to
-   Fake Domain    Urgent Link    Real API
-   
-   
-   Gegenmaßnahmen:
-   ⚠️  Keine 2FA/MFA (nur Google SSO optional)
-   ❌ Kein Email Verification
-   ✅ bcrypt macht Credential Stuffing ineffizient
-
-
-═══════════════════════════════════════════════════════════════════
-PATH B: Backend API Exploitation
-═══════════════════════════════════════════════════════════════════
-
-┌─────────────────────────────────────────────────┐
-│  B.1: NoSQL Injection Attack                    │
-│  Schwierigkeit: HOCH | Impact: KRITISCH         │
-└──────────────────────┬──────────────────────────┘
-                       │
-            ┌──────────┴───────────┐
-            │        AND           │
-            └──────────┬───────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   ┌────────┐    ┌─────────┐    ┌──────────┐
-   │ B.1.1  │    │ B.1.2   │    │  B.1.3   │
-   │ Find   │───►│ Inject  │───►│  Extract │
-   │ Input  │    │ Payload │    │  Data    │
-   │ Point  │    │         │    │          │
-   └────────┘    └─────────┘    └──────────┘
-      │              │                │
-      │              │                │
-   /api/auth/login  {"username":   All users
-   email param      {"$ne": null}}  passwords
-   
-   Beispiel Payload:
-   POST /api/auth/login
-   {
-     "email": {"$ne": null},
-     "password": {"$ne": null}
-   }
-   
-   Ergebnis ohne Schutz: Login als erster User (oft Admin)
-   
-   Gegenmaßnahmen:
-   ✅ Input Sanitization (validation.js)
-   ✅ Removal von $ und . Operatoren
-   ✅ Type Checking (nur Strings erlaubt)
-   ✅ Mongoose Schema Validation
-
-
-┌─────────────────────────────────────────────────┐
-│  B.2: JWT Token Forging / Manipulation          │
-│  Schwierigkeit: SEHR HOCH | Impact: KRITISCH    │
-└──────────────────────┬──────────────────────────┘
-                       │
-            ┌──────────┴───────────┐
-            │        AND           │
-            └──────────┬───────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   ┌────────┐    ┌─────────┐    ┌──────────┐
-   │ B.2.1  │    │ B.2.2   │    │  B.2.3   │
-   │ Obtain │───►│ Crack   │───►│  Forge   │
-   │ Valid  │    │ JWT     │    │  Admin   │
-   │ JWT    │    │ Secret  │    │  Token   │
-   └────────┘    └─────────┘    └──────────┘
-      │              │                │
-      │              │                │
-   Phishing/XSS   Brute-Force    jwt.io mit
-   Network Sniff  Dictionary     role: "Admin"
-   
-   Angriff:
-   - JWT Secret aus .env leaken (z.B. Git History)
-   - Oder: Brute-Force JWT Secret (falls schwach)
-   - Token manipulieren: { "role": "Admin" }
-   
-   Gegenmaßnahmen:
-   ✅ JWT_SECRET in Environment Variable
-   ✅ .env nicht in Git (in .gitignore)
-   ⚠️  Keine Secret Rotation
-   ❌ Secret könnte schwach sein (manuell gesetzt)
-
-
-┌─────────────────────────────────────────────────┐
-│  B.3: API Brute-Force Attack                    │
-│  Schwierigkeit: NIEDRIG | Impact: MITTEL        │
-└──────────────────────┬──────────────────────────┘
-                       │
-            ┌──────────┴───────────┐
-            │        AND           │
-            └──────────┬───────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   ┌────────┐    ┌─────────┐    ┌──────────┐
-   │ B.3.1  │    │ B.3.2   │    │  B.3.3   │
-   │ Collect│───►│ Brute   │───►│  Access  │
-   │ Valid  │    │ Force   │    │  Account │
-   │ Emails │    │ Passwords│    │          │
-   └────────┘    └─────────┘    └──────────┘
-      │              │                │
-      │              │                │
-   Social Media   Hydra/Burp      Use valid
-   OSINT          rockyou.txt     credentials
-   
-   Angriff:
-   - Liste von echten Emails sammeln
-   - Passwort-Wörterbuch (rockyou.txt)
-   - Automatisierte Login-Versuche
-   
-   Gegenmaßnahmen:
-   ✅ bcrypt Cost Factor 10 (~100ms) verlangsamt Brute-Force
-   ❌ Kein Rate Limiting (unbegrenzte Versuche möglich)
-   ❌ Kein Account Lockout nach X Fehlversuchen
-   ❌ Keine CAPTCHA
-
-
-┌─────────────────────────────────────────────────┐
-│  B.4: Malicious File Upload (Cloudinary)        │
-│  Schwierigkeit: MITTEL | Impact: HOCH           │
-└──────────────────────┬──────────────────────────┘
-                       │
-            ┌──────────┴───────────┐
-            │        AND           │
-            └──────────┬───────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   ┌────────┐    ┌─────────┐    ┌──────────┐
-   │ B.4.1  │    │ B.4.2   │    │  B.4.3   │
-   │ Upload │───►│ Execute │───►│  Exploit │
-   │ Malware│    │ Script  │    │  Users   │
-   └────────┘    └─────────┘    └──────────┘
-      │              │                │
-      │              │                │
-   .svg mit       XSS via Image   Drive-by
-   <script>       Render          Download
-   
-   Angriff:
-   POST /api/upload
-   Content-Type: image/svg+xml
-   <svg><script>alert(document.cookie)</script></svg>
-   
-   Gegenmaßnahmen:
-   ⚠️  Basic File Type Validation (Multer)
-   ❌ Kein Virus Scanning
-   ❌ Keine Content Type Verification (nur Extension)
-   ⚠️  Cloudinary macht Sanitization (teilweise)
-
-
-═══════════════════════════════════════════════════════════════════
-PATH C: Infrastructure Exploitation
-═══════════════════════════════════════════════════════════════════
-
-┌─────────────────────────────────────────────────┐
-│  C.1: Kubernetes Pod Escape                     │
-│  Schwierigkeit: SEHR HOCH | Impact: KRITISCH    │
-└──────────────────────┬──────────────────────────┘
-                       │
-            ┌──────────┴───────────┐
-            │        AND           │
-            └──────────┬───────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   ┌────────┐    ┌─────────┐    ┌──────────┐
-   │ C.1.1  │    │ C.1.2   │    │  C.1.3   │
-   │ Exploit│───►│ Escape  │───►│  Access  │
-   │ Pod    │    │ to Node │    │  Cluster │
-   └────────┘    └─────────┘    └──────────┘
-      │              │                │
-      │              │                │
-   CVE-2022-xxx   Container       kubectl
-   Vulnerable     Breakout        secrets
-   Image
-   
-   Angriff:
-   - Privileged Container ausnutzen
-   - Mount Host Filesystem
-   - Access to /var/run/docker.sock
-   
-   Gegenmaßnahmen:
-   ❌ Kein runAsNonRoot: true
-   ❌ Kein readOnlyRootFilesystem
-   ❌ allowPrivilegeEscalation nicht gesetzt
-   ❌ Capabilities nicht gedroppt
-
-
-┌─────────────────────────────────────────────────┐
-│  C.2: MongoDB Direct Access (Network)           │
-│  Schwierigkeit: MITTEL | Impact: KRITISCH       │
-└──────────────────────┬──────────────────────────┘
-                       │
-            ┌──────────┴───────────┐
-            │        AND           │
-            └──────────┬───────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   ┌────────┐    ┌─────────┐    ┌──────────┐
-   │ C.2.1  │    │ C.2.2   │    │  C.2.3   │
-   │ Access │───►│ Brute   │───►│  Dump    │
-   │ MongoDB│    │ Force   │    │  Database│
-   │ Port   │    │ Auth    │    │          │
-   └────────┘    └─────────┘    └──────────┘
-      │              │                │
-      │              │                │
-   Port 27017     Weak Password   mongodump
-   exposed        admin/admin     --all
-   
-   Angriff:
-   - MongoDB Port von außen erreichbar
-   - Default Credentials testen
-   - Direkter DB-Zugriff ohne Application Layer
-   
-   Gegenmaßnahmen:
-   ⚠️  MongoDB Authentication aktiviert
-   ❌ Keine Network Policy (Port 27017 offen)
-   ❌ Keine IP Whitelist
-   ✅ MongoDB nur intern (mongodb-service)
-
-
-┌─────────────────────────────────────────────────┐
-│  C.3: CI/CD Pipeline Compromise                 │
-│  Schwierigkeit: HOCH | Impact: KRITISCH         │
-└──────────────────────┬──────────────────────────┘
-                       │
-            ┌──────────┴───────────┐
-            │        AND           │
-            └──────────┬───────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   ┌────────┐    ┌─────────┐    ┌──────────┐
-   │ C.3.1  │    │ C.3.2   │    │  C.3.3   │
-   │ Steal  │───►│ Inject  │───►│  Deploy  │
-   │ GitHub │    │ Backdoor│    │  Malware │
-   │ Secrets│    │ Code    │    │          │
-   └────────┘    └─────────┘    └──────────┘
-      │              │                │
-      │              │                │
-   Phishing       Malicious PR    Auto-deploy
-   Repo Access    Supply Chain    to Prod
-   
-   Angriff:
-   - GitHub Account Compromise (Developer)
-   - Secrets in Workflow Files leaken
-   - Malicious Dependency (npm package)
-   - Pipeline deployed ohne Review
-   
-   Gegenmaßnahmen:
-   ❌ Keine Secret Scanning (Gitleaks)
-   ❌ Keine SAST/SCA in Pipeline
-   ❌ Keine Image Signing
-   ❌ Keine Branch Protection (PR Review Required)
-
-
-═══════════════════════════════════════════════════════════════════
-KRITISCHER PFAD (Höchste Wahrscheinlichkeit)
-═══════════════════════════════════════════════════════════════════
-
-┌─────────────────────────────────────────────────────────────────┐
-│         MOST LIKELY ATTACK PATH (Lowest Complexity)             │
-└─────────────────────────────────────────────────────────────────┘
-
-    A.2 (Network Sniffing)
-         │ 
-         ▼
-    HTTP Traffic (TLS_ENABLED=false in Dev)
-         │
-         ▼
-    JWT Token Theft (Wireshark auf localhost)
-         │
-         ▼
-    Replay Attack (Token noch gültig, 7 Tage)
-         │
-         ▼
-    Vollständiger Account-Zugriff
-         │
-         ▼
-    [ODER] → Admin Account → Voller System-Zugriff
-    [ODER] → User Account → Persönliche Daten
-
-Schwierigkeit: NIEDRIG
-Wahrscheinlichkeit: HOCH (ohne TLS)
-Impact: KRITISCH
-Dauer: < 1 Stunde
-
-
-═══════════════════════════════════════════════════════════════════
-ZWEITER KRITISCHER PFAD (Höchster Impact)
-═══════════════════════════════════════════════════════════════════
-
-    B.1 (NoSQL Injection)
-         │
-         ▼
-    Bypass Input Validation (falls Lücke)
-         │
-         ▼
-    MongoDB Query Manipulation
-         │
-         ▼
-    Admin Login ohne Password
-         │
-         ▼
-    Voller Datenbankzugriff
-         │
-         ▼
-    Exfiltration aller User-Daten
-
-Schwierigkeit: HOCH (dank validation.js)
-Wahrscheinlichkeit: NIEDRIG
-Impact: KRITISCH
-Dauer: 2-4 Stunden (Exploit-Entwicklung)
-
-
-═══════════════════════════════════════════════════════════════════
-Zusammenfassung: Attack Path Metrics
-═══════════════════════════════════════════════════════════════════
+Attack Path Metrics (DB‑fokussiert)
 
 | Attack Path | Schwierigkeit | Wahrscheinlichkeit | Impact    | Priorität |
 |-------------|---------------|--------------------|-----------|-----------:|
-| A.2 (MITM)  | NIEDRIG       | HOCH (ohne TLS)    | KRITISCH  | 1         |
-| B.3 (Brute) | NIEDRIG       | MITTEL             | MITTEL    | 2         |
-| A.3 (Phish) | NIEDRIG       | MITTEL             | MITTEL    | 3         |
-| B.1 (NoSQL) | HOCH          | NIEDRIG            | KRITISCH  | 4         |
-| C.2 (DB)    | MITTEL        | NIEDRIG            | KRITISCH  | 5         |
-| B.4 (Upload)| MITTEL        | MITTEL             | HOCH      | 6         |
-| C.3 (CI/CD) | HOCH          | NIEDRIG            | KRITISCH  | 7         |
-| C.1 (K8s)   | SEHR HOCH     | SEHR NIEDRIG       | KRITISCH  | 8         |
-| A.1 (XSS)   | MITTEL        | NIEDRIG            | HOCH      | 9         |
-| B.2 (JWT)   | SEHR HOCH     | SEHR NIEDRIG       | KRITISCH  | 10        |
-```
+| A1/A2 (Netz) | NIEDRIG       | MITTEL             | KRITISCH  | 1         |
+| B1/B3 (Secrets) | MITTEL     | MITTEL             | KRITISCH  | 2         |
+| C1 (NoSQL)   | HOCH          | NIEDRIG            | KRITISCH  | 3         |
+| C2 (Auth‑Bypass) | MITTEL    | NIEDRIG            | HOCH      | 4         |
+| Backup‑Missbrauch | MITTEL   | NIEDRIG            | KRITISCH  | 5         |
 
----
+Hinweis: Diese DB‑zentrierte Darstellung ersetzt den bisherigen System‑Worst‑Case und richtet alle Maßnahmen auf die Verhinderung einer Datenbank‑Kompromittierung aus.
 
 
