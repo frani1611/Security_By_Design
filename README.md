@@ -149,6 +149,7 @@ cosign verify --keyless ghcr.io/<owner>/social-media-dashboard:<tag>
 - **kubectl**
 - **make**
 - `.env` Datei in `Code/social-media-dashboard/backend/` mit allen erforderlichen Secrets (siehe `.env.example`)
+- `.env.local` Datei in `Code/social-media-dashboard/frontend/` mit allen erforderlichen Secrets (siehe `.env.local.example`)
 
 ### Schnellstart mit Makefile
 
