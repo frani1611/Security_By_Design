@@ -1,0 +1,20 @@
+Pipeline Run Evidence Summary
+================================
+Run ID: 20190937739
+Run Number: 88
+Timestamp: 2025-12-13T10:47:28Z
+Commit SHA: 783df2c8308b3b90cd759ef79e39150931ebc9ec
+Branch/Tag: refs/heads/main
+Actor: AlymosGS
+
+Files Generated:
+evidence/secrets/gitleaks-report-20190937739.json
+evidence/sast/sast-metadata-20190937739.txt
+evidence/run/run-20190937739-summary.txt
+evidence/sca/trivy-fs-20190937739.json
+evidence/sca/sca-metadata-20190937739.txt
+evidence/sbom/sbom-20190937739.cyclonedx.json
+evidence/signing/signing-log-20190937739.txt
+evidence/signing/signing-metadata-20190937739.txt
+evidence/signing/verify-log-20190937739.txt
+evidence/signing/verify-metadata-20190937739.txt
