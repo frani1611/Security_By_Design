@@ -1,0 +1,22 @@
+Image signed successfully
+Image: ghcr.io/frani1611/social-media-dashboard:5161f650a58463672db982c7119a271bec1cbdb4
+Digest: sha256:df44defe898970be8af25bbc467c356ef88dc40702ccdbfeec87137b083b540f
+Run ID: 20190758132
+Timestamp: 2025-12-13T10:30:38Z
+Actor: frani1611
+  ______   ______        _______. __    _______ .__   __.
+ /      | /  __  \      /       ||  |  /  _____||  \ |  |
+|  ,----'|  |  |  |    |   (----`|  | |  |  __  |   \|  |
+|  |     |  |  |  |     \   \    |  | |  | |_ | |  . `  |
+|  `----.|  `--'  | .----)   |   |  | |  |__| | |  |\   |
+ \______| \______/  |_______/    |__|  \______| |__| \__|
+cosign: A tool for Container Signing, Verification and Storage in an OCI registry.
+
+GitVersion:    v2.5.2
+GitCommit:     af5a988bb15a03919ccaac7a2ddcad7a9d006f38
+GitTreeState:  clean
+BuildDate:     2025-06-17T20:03:14Z
+GoVersion:     go1.24.4
+Compiler:      gc
+Platform:      linux/amd64
+

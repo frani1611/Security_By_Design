@@ -1,0 +1,20 @@
+Pipeline Run Evidence Summary
+================================
+Run ID: 20190758132
+Run Number: 86
+Timestamp: 2025-12-13T10:30:55Z
+Commit SHA: 5161f650a58463672db982c7119a271bec1cbdb4
+Branch/Tag: refs/heads/main
+Actor: frani1611
+
+Files Generated:
+evidence/secrets/gitleaks-report-20190758132.json
+evidence/sast/sast-metadata-20190758132.txt
+evidence/run/run-20190758132-summary.txt
+evidence/sca/trivy-fs-20190758132.json
+evidence/sca/sca-metadata-20190758132.txt
+evidence/sbom/sbom-20190758132.cyclonedx.json
+evidence/signing/signing-log-20190758132.txt
+evidence/signing/verify-metadata-20190758132.txt
+evidence/signing/signing-metadata-20190758132.txt
+evidence/signing/verify-log-20190758132.txt
