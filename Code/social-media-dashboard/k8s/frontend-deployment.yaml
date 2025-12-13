@@ -38,6 +38,8 @@ spec:
               subPath: default.conf
             - name: nginx-run
               mountPath: /run
+            - name: runtime-config
+              mountPath: /app/runtime
           ports:
             - containerPort: 80
           env:
@@ -67,4 +69,6 @@ spec:
         - name: nginx-cache
           emptyDir: {}
         - name: nginx-run
+          emptyDir: {}
+        - name: runtime-config
           emptyDir: {}

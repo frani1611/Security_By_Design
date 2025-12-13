@@ -12,6 +12,12 @@ data:
       root /usr/share/nginx/html;
       index index.html;
 
+      # serve runtime config from writable volume
+      location = /config.js {
+        alias /app/runtime/config.js;
+        add_header Cache-Control "no-store, no-cache, must-revalidate";
+      }
+
       # serve static files directly, fallback to index.html for SPA routes
       location / {
         try_files $uri $uri/ /index.html;

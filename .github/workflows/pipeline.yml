@@ -475,17 +475,17 @@ jobs:
           fi
           
           # Create summary file
-          echo "Pipeline Run Evidence Summary" > evidence/run-${{ github.run_id }}-summary.txt
-          echo "================================" >> evidence/run-${{ github.run_id }}-summary.txt
-          echo "Run ID: ${{ github.run_id }}" >> evidence/run-${{ github.run_id }}-summary.txt
-          echo "Run Number: ${{ github.run_number }}" >> evidence/run-${{ github.run_id }}-summary.txt
-          echo "Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> evidence/run-${{ github.run_id }}-summary.txt
-          echo "Commit SHA: ${{ github.sha }}" >> evidence/run-${{ github.run_id }}-summary.txt
-          echo "Branch/Tag: ${{ github.ref }}" >> evidence/run-${{ github.run_id }}-summary.txt
-          echo "Actor: ${{ github.actor }}" >> evidence/run-${{ github.run_id }}-summary.txt
-          echo "" >> evidence/run-${{ github.run_id }}-summary.txt
-          echo "Files Generated:" >> evidence/run-${{ github.run_id }}-summary.txt
-          find evidence -type f -name "*${{ github.run_id }}*" >> evidence/run-${{ github.run_id }}-summary.txt
+          echo "Pipeline Run Evidence Summary" > evidence/run/run-${{ github.run_id }}-summary.txt
+          echo "================================" >> evidence/run/run-${{ github.run_id }}-summary.txt
+          echo "Run ID: ${{ github.run_id }}" >> evidence/run/run-${{ github.run_id }}-summary.txt
+          echo "Run Number: ${{ github.run_number }}" >> evidence/run/run-${{ github.run_id }}-summary.txt
+          echo "Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> evidence/run/run-${{ github.run_id }}-summary.txt
+          echo "Commit SHA: ${{ github.sha }}" >> evidence/run/run-${{ github.run_id }}-summary.txt
+          echo "Branch/Tag: ${{ github.ref }}" >> evidence/run/run-${{ github.run_id }}-summary.txt
+          echo "Actor: ${{ github.actor }}" >> evidence/run/run-${{ github.run_id }}-summary.txt
+          echo "" >> evidence/run/run-${{ github.run_id }}-summary.txt
+          echo "Files Generated:" >> evidence/run/run-${{ github.run_id }}-summary.txt
+          find evidence -type f -name "*${{ github.run_id }}*" >> evidence/run/run-${{ github.run_id }}-summary.txt
       
       - name: Configure Git
         run: |
