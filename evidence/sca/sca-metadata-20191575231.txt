@@ -1,0 +1,9 @@
+SCA Tool: Trivy
+Run ID: 20191575231
+Timestamp: 2025-12-13T11:45:25Z
+Version: 0.68.1
+Vulnerability DB:
+  Version: 2
+  UpdatedAt: 2025-12-13 06:29:15.966972999 +0000 UTC
+  NextUpdate: 2025-12-14 06:29:15.966972739 +0000 UTC
+  DownloadedAt: 2025-12-13 11:45:25.450937273 +0000 UTC
