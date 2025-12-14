@@ -260,10 +260,6 @@ jobs:
           fi
           echo "GHCR_TOKEN length: $(echo -n "${{ secrets.GHCR_TOKEN }}" | wc -c) characters"
       - name: Log in to GHCR
-        # Note: Use a fine-grained Personal Access Token (PAT) named `GHCR_TOKEN` with:
-        # - Repository access: Only select repositories -> choose this repo
-        # - Packages: Read & write
-        # If the repo is private also grant `Contents: Read`/`repo` as needed for classic tokens.
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -517,7 +513,3 @@ jobs:
             git push origin HEAD:${{ github.ref_name }}
           fi
 
-  # Note: Deployments are no longer performed in this pipeline. The pipeline
-  # now only builds and pushes images to GHCR. Deployment should be done via
-  # the repository Makefile (see `Code/social-media-dashboard/Makefile`) or
-  # via a self-hosted workflow that explicitly performs the deploy step.
