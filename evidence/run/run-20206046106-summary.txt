@@ -1,0 +1,20 @@
+Pipeline Run Evidence Summary
+================================
+Run ID: 20206046106
+Run Number: 91
+Timestamp: 2025-12-14T09:41:45Z
+Commit SHA: 97c07ec855067feda42b7d81fa7a42c26f903566
+Branch/Tag: refs/heads/main
+Actor: frani1611
+
+Files Generated:
+evidence/secrets/gitleaks-report-20206046106.json
+evidence/sast/sast-metadata-20206046106.txt
+evidence/run/run-20206046106-summary.txt
+evidence/sca/sca-metadata-20206046106.txt
+evidence/sca/trivy-fs-20206046106.json
+evidence/sbom/sbom-20206046106.cyclonedx.json
+evidence/signing/verify-metadata-20206046106.txt
+evidence/signing/signing-log-20206046106.txt
+evidence/signing/signing-metadata-20206046106.txt
+evidence/signing/verify-log-20206046106.txt

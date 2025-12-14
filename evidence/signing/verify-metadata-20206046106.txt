@@ -1,0 +1,5 @@
+Image signature verified successfully
+Image: ghcr.io/frani1611/social-media-dashboard:97c07ec855067feda42b7d81fa7a42c26f903566
+Run ID: 20206046106
+Timestamp: 2025-12-14T09:41:32Z
+Actor: frani1611
