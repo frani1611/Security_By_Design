@@ -1,0 +1,5 @@
+Image signature verified successfully
+Image: ghcr.io/frani1611/social-media-dashboard:71476a6cacbe09861552d5fcfe7b49c223c58d42
+Run ID: 21223478278
+Timestamp: 2026-01-21T19:51:33Z
+Actor: luxario1

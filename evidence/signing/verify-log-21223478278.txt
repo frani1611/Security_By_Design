@@ -1,0 +1,274 @@
+2026/01/21 19:51:32 --> GET https://ghcr.io/v2/
+2026/01/21 19:51:32 GET /v2/ HTTP/1.1
+Host: ghcr.io
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Accept-Encoding: gzip
+
+
+2026/01/21 19:51:32 <-- 401 https://ghcr.io/v2/ (135.063135ms)
+2026/01/21 19:51:32 HTTP/2.0 401 Unauthorized
+Content-Length: 73
+Content-Type: application/json
+Date: Wed, 21 Jan 2026 19:51:32 GMT
+Docker-Distribution-Api-Version: registry/2.0
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+Www-Authenticate: Bearer realm="https://ghcr.io/token",service="ghcr.io",scope="repository:user/image:pull"
+X-Github-Request-Id: D003:35B6D7:B7FCA8:C61E84:69712E44
+
+{"errors":[{"code":"UNAUTHORIZED","message":"authentication required"}]}
+
+2026/01/21 19:51:32 --> GET https://ghcr.io/token?scope=repository%3Afrani1611%2Fsocial-media-dashboard%3Apull&service=ghcr.io [body redacted: basic token response contains credentials]
+2026/01/21 19:51:32 GET /token?scope=repository%3Afrani1611%2Fsocial-media-dashboard%3Apull&service=ghcr.io HTTP/1.1
+Host: ghcr.io
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Authorization: <redacted>
+Accept-Encoding: gzip
+
+
+2026/01/21 19:51:32 <-- 200 https://ghcr.io/token?scope=repository%3Afrani1611%2Fsocial-media-dashboard%3Apull&service=ghcr.io (121.844056ms) [body redacted: basic token response contains credentials]
+2026/01/21 19:51:32 HTTP/2.0 200 OK
+Content-Length: 69
+Content-Type: application/json
+Date: Wed, 21 Jan 2026 19:51:32 GMT
+Docker-Distribution-Api-Version: registry/2.0
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Github-Request-Id: D003:35B6D7:B7FCBD:C61EA4:69712E44
+
+
+2026/01/21 19:51:32 --> GET https://ghcr.io/v2/frani1611/social-media-dashboard/manifests/71476a6cacbe09861552d5fcfe7b49c223c58d42
+2026/01/21 19:51:32 GET /v2/frani1611/social-media-dashboard/manifests/71476a6cacbe09861552d5fcfe7b49c223c58d42 HTTP/1.1
+Host: ghcr.io
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Accept: application/vnd.docker.distribution.manifest.v1+json,application/vnd.docker.distribution.manifest.v1+prettyjws,application/vnd.docker.distribution.manifest.v2+json,application/vnd.oci.image.manifest.v1+json,application/vnd.docker.distribution.manifest.list.v2+json,application/vnd.oci.image.index.v1+json
+Authorization: <redacted>
+Accept-Encoding: gzip
+
+
+2026/01/21 19:51:32 <-- 200 https://ghcr.io/v2/frani1611/social-media-dashboard/manifests/71476a6cacbe09861552d5fcfe7b49c223c58d42 (114.081556ms)
+2026/01/21 19:51:32 HTTP/2.0 200 OK
+Content-Length: 3048
+Content-Type: application/vnd.docker.distribution.manifest.v2+json
+Date: Wed, 21 Jan 2026 19:51:32 GMT
+Docker-Content-Digest: sha256:3d9c3c5a260aab66944c568051694b3f08af1cc14b4126809dd6820c2e5ee12a
+Docker-Distribution-Api-Version: registry/2.0
+Etag: "sha256:3d9c3c5a260aab66944c568051694b3f08af1cc14b4126809dd6820c2e5ee12a"
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Github-Request-Id: D003:35B6D7:B7FCEC:C61EE4:69712E44
+
+{
+   "schemaVersion": 2,
+   "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+   "config": {
+      "mediaType": "application/vnd.docker.container.image.v1+json",
+      "size": 8123,
+      "digest": "sha256:e189ef3f13862fd324265dfb631dad5a4604f916ba59bfd213ba612185202e2e"
+   },
+   "layers": [
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 49566528,
+         "digest": "sha256:4fe438ca4bc0162fba19a456ca07cc462ba7bcbe8d3212cc520a37aac9352b88"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 24036867,
+         "digest": "sha256:64538a062a61add8dc8b290fa69475e8902eb839c497a5f5dcd5a950422e493c"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 64395833,
+         "digest": "sha256:fd1872fa12cc6b1145803f1a0679ca26cc65fa1b4e0ee389bfb30267594736b6"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 211485124,
+         "digest": "sha256:4925cf9d8be888d2b942e0479d921815942727632813c006bad6a067e6363663"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 3323,
+         "digest": "sha256:a4e7ff66fb574f30ee8396a76fe2d073f19558b76601bac43211b489900fba64"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 48410303,
+         "digest": "sha256:a3a70fd5f6e74460bae18e0d40d0acd78ba6ed6d3317d4ae2ef70632d0471aad"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 1250675,
+         "digest": "sha256:40d284f66487da627a7f122088036a9e975f84240096887ef7cd28cb59f8a40a"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 447,
+         "digest": "sha256:5caff02cd241c050110d17efc57f33f3ea8ee1d1a5778e34359fdfed357e85da"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 92,
+         "digest": "sha256:a4b99666508bfdb866ee1539ebff57f5fff2a297b02e4f02daecf24cd2fa878a"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 32810,
+         "digest": "sha256:e430b1638a57416ec7e6507f068a5be983721ab2fab31d62e53751293967717b"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 16827806,
+         "digest": "sha256:a1cacb593a8f4e5c46d2675603187a58614bca4ca21fc7e490e3ba67662ab4f8"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 46059,
+         "digest": "sha256:d8cbcc9aee12e3d13c9223c4aeac61d3f44e4d4919464bb6fa86792ba0873f82"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 2356,
+         "digest": "sha256:854b8f20751418a5ac5f56fccfd5df7ae7328e06ee32588bb79f17782f32ab08"
+      }
+   ]
+}
+2026/01/21 19:51:32 --> GET https://ghcr.io/v2/frani1611/social-media-dashboard/manifests/sha256-3d9c3c5a260aab66944c568051694b3f08af1cc14b4126809dd6820c2e5ee12a.sig
+2026/01/21 19:51:32 GET /v2/frani1611/social-media-dashboard/manifests/sha256-3d9c3c5a260aab66944c568051694b3f08af1cc14b4126809dd6820c2e5ee12a.sig HTTP/1.1
+Host: ghcr.io
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Accept: application/vnd.docker.distribution.manifest.v1+json,application/vnd.docker.distribution.manifest.v1+prettyjws,application/vnd.docker.distribution.manifest.v2+json,application/vnd.oci.image.manifest.v1+json,application/vnd.docker.distribution.manifest.list.v2+json,application/vnd.oci.image.index.v1+json
+Authorization: <redacted>
+Accept-Encoding: gzip
+
+
+2026/01/21 19:51:33 <-- 200 https://ghcr.io/v2/frani1611/social-media-dashboard/manifests/sha256-3d9c3c5a260aab66944c568051694b3f08af1cc14b4126809dd6820c2e5ee12a.sig (132.885285ms)
+2026/01/21 19:51:33 HTTP/2.0 200 OK
+Content-Length: 19487
+Content-Type: application/vnd.oci.image.manifest.v1+json
+Date: Wed, 21 Jan 2026 19:51:33 GMT
+Docker-Content-Digest: sha256:a487c7b16ee2365036f3734ffff52b007c7f99561214951be6c7526caf89a231
+Docker-Distribution-Api-Version: registry/2.0
+Etag: "sha256:a487c7b16ee2365036f3734ffff52b007c7f99561214951be6c7526caf89a231"
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Github-Request-Id: D003:35B6D7:B7FD27:C61F1E:69712E44
+
+{"schemaVersion":2,"mediaType":"application/vnd.oci.image.manifest.v1+json","config":{"mediaType":"application/vnd.oci.image.config.v1+json","size":342,"digest":"sha256:220863d9447f4bbe147eb1bd40704be8ab5cbf1b353281afe57df490f98604c1"},"layers":[{"mediaType":"application/vnd.dev.cosign.simplesigning.v1+json","size":256,"digest":"sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f","annotations":{"dev.cosignproject.cosign/signature":"MEUCIQDtuBXoSeKQfOLZB5+5WT8AXtfPtr98fTfCCN1NdlVNzAIgWfasd21j5HrVyJjfArjoMZDLQ1YUK6t71EMdWSAat+M=","dev.sigstore.cosign/bundle":"{\"SignedEntryTimestamp\":\"MEQCIHYJaMGPFJ0qIO9lgQO5p5trXKawlgibaYhywkjcbgj6AiBR/th3qTrgpHyq+cgAP1XU7m1u+4nZT1SysLpnSsudfg==\",\"Payload\":{\"body\":\"eyJhcGlWZXJzaW9uIjoiMC4wLjEiLCJraW5kIjoiaGFzaGVkcmVrb3JkIiwic3BlYyI6eyJkYXRhIjp7Imhhc2giOnsiYWxnb3JpdGhtIjoic2hhMjU2IiwidmFsdWUiOiJmOTdiZGI4NzFjYmQ2OWQ2NzlkZDA3MTljOThjMzI0NjljMDUwMTM5NGM1NzhiZGJmZmFlZWViMzhmYzMyZTVmIn19LCJzaWduYXR1cmUiOnsiY29udGVudCI6Ik1FVUNJUUR0dUJYb1NlS1FmT0xaQjUrNVdUOEFYdGZQdHI5OGZUZkNDTjFOZGxWTnpBSWdXZmFzZDIxajVIclZ5SmpmQXJqb01aRExRMVlVSzZ0NzFFTWRXU0FhdCtNPSIsInB1YmxpY0tleSI6eyJjb250ZW50IjoiTFMwdExTMUNSVWRKVGlCRFJWSlVTVVpKUTBGVVJTMHRMUzB0Q2sxSlNVYzNla05EUW01aFowRjNTVUpCWjBsVlExSk5ZMDR4TlZWNFFXMXNXR2RZU2t0dFZFVlZUSHBDZW5vNGQwTm5XVWxMYjFwSmVtb3dSVUYzVFhjS1RucEZWazFDVFVkQk1WVkZRMmhOVFdNeWJHNWpNMUoyWTIxVmRWcEhWakpOVWpSM1NFRlpSRlpSVVVSRmVGWjZZVmRrZW1SSE9YbGFVekZ3WW01U2JBcGpiVEZzV2tkc2FHUkhWWGRJYUdOT1RXcFpkMDFVU1hoTlZHc3hUVlJGTVZkb1kwNU5hbGwzVFZSSmVFMXFRWGROVkVVeFYycEJRVTFHYTNkRmQxbElDa3R2V2tsNmFqQkRRVkZaU1V0dldrbDZhakJFUVZGalJGRm5RVVYzWjAwMVoweGxUVTVJWVZoaGExQjFNbkJYUlZGRk5uQXZZWFJETVdVdldVVjFUVFVLT1ZwYWJqZEtObUZwTVhaaVkwbHpUVGQ0WXpFeEswWmtjbEZ0TlZaMFZXeFZia1U0WkdKYVJXOXhaVGROUzFsQ1VEWlBRMEphVlhkbloxZFNUVUUwUndwQk1WVmtSSGRGUWk5M1VVVkJkMGxJWjBSQlZFSm5UbFpJVTFWRlJFUkJTMEpuWjNKQ1owVkdRbEZqUkVGNlFXUkNaMDVXU0ZFMFJVWm5VVlZzY2tobENuRlphMDlrWmpKYVRtNTVkM2hSYTJKUWRGQnBVVlV3ZDBoM1dVUldVakJxUWtKbmQwWnZRVlV6T1ZCd2VqRlphMFZhWWpWeFRtcHdTMFpYYVhocE5Ga0tXa1E0ZDJKQldVUldVakJTUVZGSUwwSkhTWGRaU1ZwbFlVaFNNR05JVFRaTWVUbHVZVmhTYjJSWFNYVlpNamwwVERKYWVWbFhOWEJOVkZsNFRWTTVWQXBhVjA0eFkyMXNNR1ZXT1VObFZqbEZXbGhPY0ZveU5IWk1iV1J3WkVkb01WbHBPVE5pTTBweVdtMTRkbVF6VFhaalIyeDNXbGQ0Y0dKdFZYVmxWekZ6Q2xGSVNteGFiazEyWVVkV2FGcElUWFppVjBad1ltcEJOVUpuYjNKQ1owVkZRVmxQTDAxQlJVSkNRM1J2WkVoU2QyTjZiM1pNTTFKMllUSldkVXh0Um1vS1pFZHNkbUp1VFhWYU1td3dZVWhXYVdSWVRteGpiVTUyWW01U2JHSnVVWFZaTWpsMFRVSkpSME5wYzBkQlVWRkNaemM0ZDBGUlNVVkNTRUl4WXpKbmR3cE9aMWxMUzNkWlFrSkJSMFIyZWtGQ1FYZFJiMDU2UlRCT2VscG9UbTFPYUZreVNteE5SR3MwVG1wRk1VNVVTbXRPVjFwcVdtMVZNMWxxVVRWWmVrbDVDazB5VFRGUFIxRXdUV3BCV2tKbmIzSkNaMFZGUVZsUEwwMUJSVVZDUVhSRVUxTkNVV0ZZUW14aVIyeDFXbFJCY1VKbmIzSkNaMFZGUVZsUEwwMUJSVVlLUWtKNGJXTnRSblZoVkVVeVRWUkZkbFV5Vm1wa1dFcHdaRWhzWmxGdWJHWlNSMVo2WVZka2RVMUNNRWREYVhOSFFWRlJRbWMzT0hkQlVWbEZSRE5LYkFwYWJrMTJZVWRXYUZwSVRYWmlWMFp3WW1wQk4wSm5iM0pDWjBWRlFWbFBMMDFCUlVsQ1F6Qk5TekpvTUdSSVFucFBhVGgyWkVjNWNscFhOSFZaVjA0d0NtRlhPWFZqZVRWdVlWaFNiMlJYU2pGak1sWjVXVEk1ZFdSSFZuVmtRelZxWWpJd2QySm5XVXRMZDFsQ1FrRkhSSFo2UVVKRFVWSm5SRVkxYjJSSVVuY0tZM3B2ZGt3eVpIQmtSMmd4V1drMWFtSXlNSFphYmtwb1ltMXJlRTVxUlhoTU1VNXNXVE5XZVdGWVVqVllNRW8xV0RCU2JHTXliRzVpYVRoMVdqSnNNQXBoU0ZacFRETmtkbU50ZEcxaVJ6a3pZM2s1ZDJGWVFteGlSMngxV2xNMU5XSlhlRUZqYlZadFkzazViMXBYUm10amVUbDBXVmRzZFUxRVowZERhWE5IQ2tGUlVVSm5OemgzUVZGdlJVdG5kMjlPZWtVd1RucGFhRTV0VG1oWk1rcHNUVVJyTkU1cVJURk9WRXByVGxkYWFscHRWVE5aYWxFMVdYcEplVTB5VFRFS1QwZFJNRTFxUVdSQ1oyOXlRbWRGUlVGWlR5OU5RVVZNUWtFNFRVUlhaSEJrUjJneFdXa3hiMkl6VGpCYVYxRjNVSGRaUzB0M1dVSkNRVWRFZG5wQlFncEVRVkY0UkVNNWIyUklVbmRqZW05MlRESmtjR1JIYURGWmFUVnFZakl3ZGxwdVNtaGliV3Q0VG1wRmVFd3hUbXhaTTFaNVlWaFNOVmd3U2pWWU1GSnNDbU15Ykc1aWFrRTBRbWR2Y2tKblJVVkJXVTh2VFVGRlRrSkRiMDFMUkdONFRrUmpNbGxVV21wWlYwNXBXbFJCTlU5RVdYaE9WRlY1V2tSV2JWa3lXbXdLVGpKSk1FOVhUWGxOYWs1cVRsUm9hMDVFU1hkSWQxbExTM2RaUWtKQlIwUjJla0ZDUkdkUlVrUkJPWGxhVjFwNlRESm9iRmxYVW5wTU1qRm9ZVmMwZHdwSFoxbExTM2RaUWtKQlIwUjJla0ZDUkhkUlRVUkJiM2hOVkVFMFRtcEJNRTFVVFhoTlEzZEhRMmx6UjBGUlVVSm5OemgzUVZKQlJVaG5kMk5oU0ZJd0NtTklUVFpNZVRsdVlWaFNiMlJYU1hWWk1qbDBUREphZVZsWE5YQk5WRmw0VFZSQldrSm5iM0pDWjBWRlFWbFBMMDFCUlZKQ1FYTk5RMVJGTVU1NlRUTUtUa1JuZDAxcVFuVkNaMjl5UW1kRlJVRlpUeTlOUVVWVFFrZEJUVmh0YURCa1NFSjZUMms0ZGxveWJEQmhTRlpwVEcxT2RtSlRPVzFqYlVaMVlWUkZNZ3BOVkVWMlZUSldhbVJZU25Ca1NHeG1VVzVzWmxKSFZucGhWMlIxVEhrMWJtRllVbTlrVjBsMlpESTVlV0V5V25OaU0yUjZURE5DY0dOSFZuTmhWelZzQ2t4dWJIUmlSVUo1V2xkYWVrd3lhR3haVjFKNlRESXhhR0ZYTkhkUFFWbExTM2RaUWtKQlIwUjJla0ZDUlhkUmNVUkRaek5OVkZFelRtMUZNbGt5Um1vS1dXMVZkMDlVWnpKTlZGVXhUVzFSTVZwdFRtMWFWR1JwVGtSc2FrMXFTWHBaZWxVMFdrUlJlVTFDVVVkRGFYTkhRVkZSUW1jM09IZEJVbEZGUW1kM1JRcGpTRlo2WVVSQ2FrSm5iM0pDWjBWRlFWbFBMMDFCUlZaQ1JsVk5WVEpvTUdSSVFucFBhVGgyV2pKc01HRklWbWxNYlU1MllsTTViV050Um5WaFZFVXlDazFVUlhaVk1sWnFaRmhLY0dSSWJHWlJibXhtVWtkV2VtRlhaSFZNTWtacVpFZHNkbUp1VFhaamJsWjFZM2s0ZVUxVVNYbE5lbEV6VDBSSk0wOURPV2dLWkVoU2JHSllRakJqZVRoNFRVSlpSME5wYzBkQlVWRkNaemM0ZDBGU1dVVkRRWGRIWTBoV2FXSkhiR3BOU1VkTFFtZHZja0puUlVWQlpGbzFRV2RSUXdwQ1NIZEZaV2RDTkVGSVdVRXpWREIzWVhOaVNFVlVTbXBIVWpSamJWZGpNMEZ4U2t0WWNtcGxVRXN6TDJnMGNIbG5Remh3TjI4MFFVRkJSMkkwYUhnMENrMW5RVUZDUVUxQlVucENSa0ZwUlVGMmJtbGxOMWxaWkZSVlIxWktUamR0Ynk5Q1QzVkNPVGcwUzFGM1RVVnZPVWR6Y1c1QmFqQm1WRlJKUTBsRVFWQUtiRk42TVhKeFUwWnZSVXBOZEhoaFdXOHhkemh6WVRadmJtOW9MekpMTWxwUmFFWkpiM1JXWWsxQmIwZERRM0ZIVTAwME9VSkJUVVJCTW1OQlRVZFJRd3BOUWpONloyOXJURkV6U1VjNFp6bFROMlJGU1ZOSGRGcElRVVpQVld0TFpFOVhUM0ptY1ZGR2JGQjNVMDkwUkZOSFJFb3dhVlJRWlhaTFF6SkdRVkJIQ21wblNYZFhhMU5hTjJ4UFdUVllVMVZrSzJkMFkyOU1Wa3BzYVRKMlRreHVjamx6U0RCRGNGWmhhVVJJY0V4T1ZDczBSWGN5ZW0xWlEzSkhTbE5IVEZZS0swTXhTd290TFMwdExVVk9SQ0JEUlZKVVNVWkpRMEZVUlMwdExTMHRDZz09In19fX0=\",\"integratedTime\":1769025076,\"logIndex\":843847354,\"logID\":\"c0d23d6ad406973f9559f3ba2d1ca01f84147d8ffc5b8445c224f98b9591801d\"}}","dev.sigstore.cosign/certificate":"-----BEGIN CERTIFICATE-----\nMIIG7zCCBnagAwIBAgIUCRMcN15UxAmlXgXJKmTEULzBzz8wCgYIKoZIzj0EAwMw\nNzEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MR4wHAYDVQQDExVzaWdzdG9yZS1pbnRl\ncm1lZGlhdGUwHhcNMjYwMTIxMTk1MTE1WhcNMjYwMTIxMjAwMTE1WjAAMFkwEwYH\nKoZIzj0CAQYIKoZIzj0DAQcDQgAEwgM5gLeMNHaXakPu2pWEQE6p/atC1e/YEuM5\n9ZZn7J6ai1vbcIsM7xc11+FdrQm5VtUlUnE8dbZEoqe7MKYBP6OCBZUwggWRMA4G\nA1UdDwEB/wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcDAzAdBgNVHQ4EFgQUlrHe\nqYkOdf2ZNnywxQkbPtPiQU0wHwYDVR0jBBgwFoAU39Ppz1YkEZb5qNjpKFWixi4Y\nZD8wbAYDVR0RAQH/BGIwYIZeaHR0cHM6Ly9naXRodWIuY29tL2ZyYW5pMTYxMS9T\nZWN1cml0eV9CeV9EZXNpZ24vLmdpdGh1Yi93b3JrZmxvd3MvcGlwZWxpbmUueW1s\nQHJlZnMvaGVhZHMvbWFpbjA5BgorBgEEAYO/MAEBBCtodHRwczovL3Rva2VuLmFj\ndGlvbnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tMBIGCisGAQQBg78wAQIEBHB1c2gw\nNgYKKwYBBAGDvzABAwQoNzE0NzZhNmNhY2JlMDk4NjE1NTJkNWZjZmU3YjQ5YzIy\nM2M1OGQ0MjAZBgorBgEEAYO/MAEEBAtDSSBQaXBlbGluZTAqBgorBgEEAYO/MAEF\nBBxmcmFuaTE2MTEvU2VjdXJpdHlfQnlfRGVzaWduMB0GCisGAQQBg78wAQYED3Jl\nZnMvaGVhZHMvbWFpbjA7BgorBgEEAYO/MAEIBC0MK2h0dHBzOi8vdG9rZW4uYWN0\naW9ucy5naXRodWJ1c2VyY29udGVudC5jb20wbgYKKwYBBAGDvzABCQRgDF5odHRw\nczovL2dpdGh1Yi5jb20vZnJhbmkxNjExL1NlY3VyaXR5X0J5X0Rlc2lnbi8uZ2l0\naHViL3dvcmtmbG93cy9waXBlbGluZS55bWxAcmVmcy9oZWFkcy9tYWluMDgGCisG\nAQQBg78wAQoEKgwoNzE0NzZhNmNhY2JlMDk4NjE1NTJkNWZjZmU3YjQ5YzIyM2M1\nOGQ0MjAdBgorBgEEAYO/MAELBA8MDWdpdGh1Yi1ob3N0ZWQwPwYKKwYBBAGDvzAB\nDAQxDC9odHRwczovL2dpdGh1Yi5jb20vZnJhbmkxNjExL1NlY3VyaXR5X0J5X0Rl\nc2lnbjA4BgorBgEEAYO/MAENBCoMKDcxNDc2YTZjYWNiZTA5ODYxNTUyZDVmY2Zl\nN2I0OWMyMjNjNThkNDIwHwYKKwYBBAGDvzABDgQRDA9yZWZzL2hlYWRzL21haW4w\nGgYKKwYBBAGDvzABDwQMDAoxMTA4NjA0MTMxMCwGCisGAQQBg78wARAEHgwcaHR0\ncHM6Ly9naXRodWIuY29tL2ZyYW5pMTYxMTAZBgorBgEEAYO/MAERBAsMCTE1NzM3\nNDgwMjBuBgorBgEEAYO/MAESBGAMXmh0dHBzOi8vZ2l0aHViLmNvbS9mcmFuaTE2\nMTEvU2VjdXJpdHlfQnlfRGVzaWduLy5naXRodWIvd29ya2Zsb3dzL3BpcGVsaW5l\nLnltbEByZWZzL2hlYWRzL21haW4wOAYKKwYBBAGDvzABEwQqDCg3MTQ3NmE2Y2Fj\nYmUwOTg2MTU1MmQ1ZmNmZTdiNDljMjIzYzU4ZDQyMBQGCisGAQQBg78wARQEBgwE\ncHVzaDBjBgorBgEEAYO/MAEVBFUMU2h0dHBzOi8vZ2l0aHViLmNvbS9mcmFuaTE2\nMTEvU2VjdXJpdHlfQnlfRGVzaWduL2FjdGlvbnMvcnVucy8yMTIyMzQ3ODI3OC9h\ndHRlbXB0cy8xMBYGCisGAQQBg78wARYECAwGcHVibGljMIGKBgorBgEEAdZ5AgQC\nBHwEegB4AHYA3T0wasbHETJjGR4cmWc3AqJKXrjePK3/h4pygC8p7o4AAAGb4hx4\nMgAABAMARzBFAiEAvnie7YYdTUGVJN7mo/BOuB984KQwMEo9GsqnAj0fTTICIDAP\nlSz1rqSFoEJMtxaYo1w8sa6onoh/2K2ZQhFIotVbMAoGCCqGSM49BAMDA2cAMGQC\nMB3zgokLQ3IG8g9S7dEISGtZHAFOUkKdOWOrfqQFlPwSOtDSGDJ0iTPevKC2FAPG\njgIwWkSZ7lOY5XSUd+gtcoLVJli2vNLnr9sH0CpVaiDHpLNT+4Ew2zmYCrGJSGLV\n+C1K\n-----END CERTIFICATE-----\n","dev.sigstore.cosign/chain":"-----BEGIN CERTIFICATE-----\nMIICGjCCAaGgAwIBAgIUALnViVfnU0brJasmRkHrn/UnfaQwCgYIKoZIzj0EAwMw\nKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0y\nMjA0MTMyMDA2MTVaFw0zMTEwMDUxMzU2NThaMDcxFTATBgNVBAoTDHNpZ3N0b3Jl\nLmRldjEeMBwGA1UEAxMVc2lnc3RvcmUtaW50ZXJtZWRpYXRlMHYwEAYHKoZIzj0C\nAQYFK4EEACIDYgAE8RVS/ysH+NOvuDZyPIZtilgUF9NlarYpAd9HP1vBBH1U5CV7\n7LSS7s0ZiH4nE7Hv7ptS6LvvR/STk798LVgMzLlJ4HeIfF3tHSaexLcYpSASr1kS\n0N/RgBJz/9jWCiXno3sweTAOBgNVHQ8BAf8EBAMCAQYwEwYDVR0lBAwwCgYIKwYB\nBQUHAwMwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU39Ppz1YkEZb5qNjp\nKFWixi4YZD8wHwYDVR0jBBgwFoAUWMAeX5FFpWapesyQoZMi0CrFxfowCgYIKoZI\nzj0EAwMDZwAwZAIwPCsQK4DYiZYDPIaDi5HFKnfxXx6ASSVmERfsynYBiX2X6SJR\nnZU84/9DZdnFvvxmAjBOt6QpBlc4J/0DxvkTCqpclvziL6BCCPnjdlIB3Pu3BxsP\nmygUY7Ii2zbdCdliiow=\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIB9zCCAXygAwIBAgIUALZNAPFdxHPwjeDloDwyYChAO/4wCgYIKoZIzj0EAwMw\nKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0y\nMTEwMDcxMzU2NTlaFw0zMTEwMDUxMzU2NThaMCoxFTATBgNVBAoTDHNpZ3N0b3Jl\nLmRldjERMA8GA1UEAxMIc2lnc3RvcmUwdjAQBgcqhkjOPQIBBgUrgQQAIgNiAAT7\nXeFT4rb3PQGwS4IajtLk3/OlnpgangaBclYpsYBr5i+4ynB07ceb3LP0OIOZdxex\nX69c5iVuyJRQ+Hz05yi+UF3uBWAlHpiS5sh0+H2GHE7SXrk1EC5m1Tr19L9gg92j\nYzBhMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRY\nwB5fkUWlZql6zJChkyLQKsXF+jAfBgNVHSMEGDAWgBRYwB5fkUWlZql6zJChkyLQ\nKsXF+jAKBggqhkjOPQQDAwNpADBmAjEAj1nHeXZp+13NWBNa+EDsDP8G1WWg1tCM\nWP/WHPqpaVo0jhsweNFZgSs0eE7wYI4qAjEA2WB9ot98sIkoF3vZYdd3/VtWB5b9\nTNMea7Ix/stJ5TfcLLeABLE4BNJOsQ4vnBHJ\n-----END CERTIFICATE-----"}},{"mediaType":"application/vnd.dev.cosign.simplesigning.v1+json","size":256,"digest":"sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f","annotations":{"dev.cosignproject.cosign/signature":"MEUCICgEMp8XmZVDSJ2hLOEU5ufZ3zUAUyHrHE2DqdUwYZDKAiEAh+eNvaf4YIYrgni+Rp1DTocVLK5+qjnkLtC1M9K0+8g=","dev.sigstore.cosign/bundle":"{\"SignedEntryTimestamp\":\"MEQCIFuJKCu/AhpRfiF0UYu8Dz2I5cWMZfQdvPdt+8BsVMfgAiB/XNYcVsr/FBqjWQl4/o7hYrn1KNPo/2Mh9DCerztyiA==\",\"Payload\":{\"body\":\"eyJhcGlWZXJzaW9uIjoiMC4wLjEiLCJraW5kIjoiaGFzaGVkcmVrb3JkIiwic3BlYyI6eyJkYXRhIjp7Imhhc2giOnsiYWxnb3JpdGhtIjoic2hhMjU2IiwidmFsdWUiOiJmOTdiZGI4NzFjYmQ2OWQ2NzlkZDA3MTljOThjMzI0NjljMDUwMTM5NGM1NzhiZGJmZmFlZWViMzhmYzMyZTVmIn19LCJzaWduYXR1cmUiOnsiY29udGVudCI6Ik1FVUNJQ2dFTXA4WG1aVkRTSjJoTE9FVTV1ZlozelVBVXlIckhFMkRxZFV3WVpES0FpRUFoK2VOdmFmNFlJWXJnbmkrUnAxRFRvY1ZMSzUrcWpua0x0QzFNOUswKzhnPSIsInB1YmxpY0tleSI6eyJjb250ZW50IjoiTFMwdExTMUNSVWRKVGlCRFJWSlVTVVpKUTBGVVJTMHRMUzB0Q2sxSlNVaERla05EUW5CSFowRjNTVUpCWjBsVlFUUXpaV0ZRTmxaS01FNVhjV3gxYjFKWE5VOXFjazlKTTNKWmQwTm5XVWxMYjFwSmVtb3dSVUYzVFhjS1RucEZWazFDVFVkQk1WVkZRMmhOVFdNeWJHNWpNMUoyWTIxVmRWcEhWakpOVWpSM1NFRlpSRlpSVVVSRmVGWjZZVmRrZW1SSE9YbGFVekZ3WW01U2JBcGpiVEZzV2tkc2FHUkhWWGRJYUdOT1RXcFpkMDFVU1hoTlZHc3hUVlJKZDFkb1kwNU5hbGwzVFZSSmVFMXFRWGROVkVsM1YycEJRVTFHYTNkRmQxbElDa3R2V2tsNmFqQkRRVkZaU1V0dldrbDZhakJFUVZGalJGRm5RVVZNTnpObFEzSXdhRFZqTjA5c2MzQjNUSG8wTkVNeVRVOXFhMGR1Y1hoclZYQjRNeXNLVWxScGVHNUZWbmRYY0VGVU1HRTBWVFpzV1dvdlJXWkpOMjVUYUVWdmVUWnRUVlIxYUc1WlNGcFdRV3BpYzNGWmJFdFBRMEppUVhkbloxZHpUVUUwUndwQk1WVmtSSGRGUWk5M1VVVkJkMGxJWjBSQlZFSm5UbFpJVTFWRlJFUkJTMEpuWjNKQ1owVkdRbEZqUkVGNlFXUkNaMDVXU0ZFMFJVWm5VVlZqTDNWbkNuWlpVbEUxWWpSNEswNTRaemRVWmpRM2NpOXBaVTFuZDBoM1dVUldVakJxUWtKbmQwWnZRVlV6T1ZCd2VqRlphMFZhWWpWeFRtcHdTMFpYYVhocE5Ga0tXa1E0ZDJKQldVUldVakJTUVZGSUwwSkhTWGRaU1ZwbFlVaFNNR05JVFRaTWVUbHVZVmhTYjJSWFNYVlpNamwwVERKYWVWbFhOWEJOVkZsNFRWTTVWQXBhVjA0eFkyMXNNR1ZXT1VObFZqbEZXbGhPY0ZveU5IWk1iV1J3WkVkb01WbHBPVE5pTTBweVdtMTRkbVF6VFhaalIyeDNXbGQ0Y0dKdFZYVmxWekZ6Q2xGSVNteGFiazEyWVVkV2FGcElUWFppVjBad1ltcEJOVUpuYjNKQ1owVkZRVmxQTDAxQlJVSkNRM1J2WkVoU2QyTjZiM1pNTTFKMllUSldkVXh0Um1vS1pFZHNkbUp1VFhWYU1td3dZVWhXYVdSWVRteGpiVTUyWW01U2JHSnVVWFZaTWpsMFRVSTRSME5wYzBkQlVWRkNaemM0ZDBGUlNVVkZXR1IyWTIxMGJRcGlSemt6V0RKU2NHTXpRbWhrUjA1dlRVUlpSME5wYzBkQlVWRkNaemM0ZDBGUlRVVkxSR040VGtSak1sbFVXbXBaVjA1cFdsUkJOVTlFV1hoT1ZGVjVDbHBFVm0xWk1scHNUakpKTUU5WFRYbE5hazVxVGxSb2EwNUVTWGRIVVZsTFMzZFpRa0pCUjBSMmVrRkNRa0ZSVEZFd2EyZFZSMngzV2xkNGNHSnRWWGNLUzJkWlMwdDNXVUpDUVVkRWRucEJRa0pSVVdOYWJrcG9ZbTFyZUU1cVJYaE1NVTVzV1ROV2VXRllValZZTUVvMVdEQlNiR015Ykc1aWFrRmtRbWR2Y2dwQ1owVkZRVmxQTDAxQlJVZENRVGw1V2xkYWVrd3lhR3haVjFKNlRESXhhR0ZYTkhkUGQxbExTM2RaUWtKQlIwUjJla0ZDUTBGUmRFUkRkRzlrU0ZKM0NtTjZiM1pNTTFKMllUSldkVXh0Um1wa1IyeDJZbTVOZFZveWJEQmhTRlpwWkZoT2JHTnRUblppYmxKc1ltNVJkVmt5T1hSTlJ6UkhRMmx6UjBGUlVVSUtaemM0ZDBGUmEwVlpRWGhsWVVoU01HTklUVFpNZVRsdVlWaFNiMlJYU1hWWk1qbDBUREphZVZsWE5YQk5WRmw0VFZNNVZGcFhUakZqYld3d1pWWTVRd3BsVmpsRldsaE9jRm95TkhaTWJXUndaRWRvTVZscE9UTmlNMHB5V20xNGRtUXpUWFpqUjJ4M1dsZDRjR0p0VlhWbFZ6RnpVVWhLYkZwdVRYWmhSMVpvQ2xwSVRYWmlWMFp3WW1wQk5FSm5iM0pDWjBWRlFWbFBMMDFCUlV0Q1EyOU5TMFJqZUU1RVl6SlpWRnBxV1ZkT2FWcFVRVFZQUkZsNFRsUlZlVnBFVm0wS1dUSmFiRTR5U1RCUFYwMTVUV3BPYWs1VWFHdE9SRWwzU0ZGWlMwdDNXVUpDUVVkRWRucEJRa04zVVZCRVFURnVZVmhTYjJSWFNYUmhSemw2WkVkV2F3cE5SRGhIUTJselIwRlJVVUpuTnpoM1FWRjNSVTFSZDNaaFNGSXdZMGhOTmt4NU9XNWhXRkp2WkZkSmRWa3lPWFJNTWxwNVdWYzFjRTFVV1hoTlV6bFVDbHBYVGpGamJXd3daVlk1UTJWV09VVmFXRTV3V2pJMGQwOUJXVXRMZDFsQ1FrRkhSSFo2UVVKRVVWRnhSRU5uTTAxVVVUTk9iVVV5V1RKR2FsbHRWWGNLVDFSbk1rMVVWVEZOYlZFeFdtMU9iVnBVWkdsT1JHeHFUV3BKZWxsNlZUUmFSRkY1VFVJNFIwTnBjMGRCVVZGQ1p6YzRkMEZSTkVWRlVYZFFZMjFXYlFwamVUbHZXbGRHYTJONU9YUlpWMngxVFVKdlIwTnBjMGRCVVZGQ1p6YzRkMEZST0VWRVFYZExUVlJGZDA5RVdYZE9SRVY2VFZSQmMwSm5iM0pDWjBWRkNrRlpUeTlOUVVWUlFrSTBUVWhIYURCa1NFSjZUMms0ZGxveWJEQmhTRlpwVEcxT2RtSlRPVzFqYlVaMVlWUkZNazFVUlhkSFVWbExTM2RaUWtKQlIwUUtkbnBCUWtWUlVVeEVRV3Q0VGxSamVrNTZVVFJOUkVsM1ltZFpTMHQzV1VKQ1FVZEVkbnBCUWtWblVtZEVSalZ2WkVoU2QyTjZiM1pNTW1Sd1pFZG9NUXBaYVRWcVlqSXdkbHB1U21oaWJXdDRUbXBGZUV3eFRteFpNMVo1WVZoU05WZ3dTalZZTUZKc1l6SnNibUpwT0hWYU1td3dZVWhXYVV3elpIWmpiWFJ0Q21KSE9UTmplVGwzWVZoQ2JHSkhiSFZhVXpVMVlsZDRRV050Vm0xamVUbHZXbGRHYTJONU9YUlpWMngxVFVSblIwTnBjMGRCVVZGQ1p6YzRkMEZTVFVVS1MyZDNiMDU2UlRCT2VscG9UbTFPYUZreVNteE5SR3MwVG1wRk1VNVVTbXRPVjFwcVdtMVZNMWxxVVRWWmVrbDVUVEpOTVU5SFVUQk5ha0ZvUW1kdmNncENaMFZGUVZsUEwwMUJSVlZDUWsxTlJWaGtkbU50ZEcxaVJ6a3pXREpTY0dNelFtaGtSMDV2VFVkTlIwTnBjMGRCVVZGQ1p6YzRkMEZTVlVWV1VYaFVDbUZJVWpCalNFMDJUSGs1Ym1GWVVtOWtWMGwxV1RJNWRFd3lXbmxaVnpWd1RWUlplRTFUT1ZSYVYwNHhZMjFzTUdWV09VTmxWamxGV2xoT2NGb3lOSFlLV1ZkT01HRlhPWFZqZVRsNVpGYzFla3g2U1hoTmFrbDZUa1JqTWs1cVRUUk1Na1l3WkVkV2RHTklVbnBNZWtWM1JtZFpTMHQzV1VKQ1FVZEVkbnBCUWdwR1oxRkpSRUZhZDJSWFNuTmhWMDEzWjFselIwTnBjMGRCVVZGQ01XNXJRMEpCU1VWbVVWSTNRVWhyUVdSM1JHUlFWRUp4ZUhOalVrMXRUVnBJYUhsYUNscDZZME52YTNCbGRVNDBPSEptSzBocGJrdEJUSGx1ZFdwblFVRkJXblpwU0VrMlNrRkJRVVZCZDBKSlRVVlpRMGxSUTNaWVNVWmlWVWxYVjJwT09FSUtlbTlDTlZac1V6RmhNMWxLT0hsUFUxSm1jRkp0V214TFdtRk9ZM0YzU1doQlN6SmFkSGhtYld4VFUybFhNalJwWldwNVZ6VkNkREpyVldSMWRVaHZiUW81VjFWSVZtZHBlV2R2YkVOTlFXOUhRME54UjFOTk5EbENRVTFFUVRKblFVMUhWVU5OUTBobVQxWlFWVXMzWTFKb05sY3dhMFZJVEhneU5tOXBlbFI0Q2tad1pUQmpNVkZGTDNwemRGazFhSFJKTlZsdlR6ZFpORTlsYW1KUFZWSmhTRWgwWjJSQlNYaEJTakJrUlRKdVFqQmtNMGhwTDNkQlQwTjBjemhzZW1RS1FWZFlWMDg0ZVd4WE5ITlZkR05oV1dOVGNFeExiVXd3ZFVaS05uRmhlbTh6Vm1KdGRUWnlSRmRCUFQwS0xTMHRMUzFGVGtRZ1EwVlNWRWxHU1VOQlZFVXRMUzB0TFFvPSJ9fX19\",\"integratedTime\":1769025081,\"logIndex\":843847436,\"logID\":\"c0d23d6ad406973f9559f3ba2d1ca01f84147d8ffc5b8445c224f98b9591801d\"}}","dev.sigstore.cosign/certificate":"-----BEGIN CERTIFICATE-----\nMIIHCzCCBpGgAwIBAgIUA43eaP6VJ0NWqluoRW5OjrOI3rYwCgYIKoZIzj0EAwMw\nNzEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MR4wHAYDVQQDExVzaWdzdG9yZS1pbnRl\ncm1lZGlhdGUwHhcNMjYwMTIxMTk1MTIwWhcNMjYwMTIxMjAwMTIwWjAAMFkwEwYH\nKoZIzj0CAQYIKoZIzj0DAQcDQgAEL73eCr0h5c7OlspwLz44C2MOjkGnqxkUpx3+\nRTixnEVwWpAT0a4U6lYj/EfI7nShEoy6mMTuhnYHZVAjbsqYlKOCBbAwggWsMA4G\nA1UdDwEB/wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcDAzAdBgNVHQ4EFgQUc/ug\nvYRQ5b4x+Nxg7Tf47r/ieMgwHwYDVR0jBBgwFoAU39Ppz1YkEZb5qNjpKFWixi4Y\nZD8wbAYDVR0RAQH/BGIwYIZeaHR0cHM6Ly9naXRodWIuY29tL2ZyYW5pMTYxMS9T\nZWN1cml0eV9CeV9EZXNpZ24vLmdpdGh1Yi93b3JrZmxvd3MvcGlwZWxpbmUueW1s\nQHJlZnMvaGVhZHMvbWFpbjA5BgorBgEEAYO/MAEBBCtodHRwczovL3Rva2VuLmFj\ndGlvbnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tMB8GCisGAQQBg78wAQIEEXdvcmtm\nbG93X2Rpc3BhdGNoMDYGCisGAQQBg78wAQMEKDcxNDc2YTZjYWNiZTA5ODYxNTUy\nZDVmY2ZlN2I0OWMyMjNjNThkNDIwGQYKKwYBBAGDvzABBAQLQ0kgUGlwZWxpbmUw\nKgYKKwYBBAGDvzABBQQcZnJhbmkxNjExL1NlY3VyaXR5X0J5X0Rlc2lnbjAdBgor\nBgEEAYO/MAEGBA9yZWZzL2hlYWRzL21haW4wOwYKKwYBBAGDvzABCAQtDCtodHRw\nczovL3Rva2VuLmFjdGlvbnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tMG4GCisGAQQB\ng78wAQkEYAxeaHR0cHM6Ly9naXRodWIuY29tL2ZyYW5pMTYxMS9TZWN1cml0eV9C\neV9EZXNpZ24vLmdpdGh1Yi93b3JrZmxvd3MvcGlwZWxpbmUueW1sQHJlZnMvaGVh\nZHMvbWFpbjA4BgorBgEEAYO/MAEKBCoMKDcxNDc2YTZjYWNiZTA5ODYxNTUyZDVm\nY2ZlN2I0OWMyMjNjNThkNDIwHQYKKwYBBAGDvzABCwQPDA1naXRodWItaG9zdGVk\nMD8GCisGAQQBg78wAQwEMQwvaHR0cHM6Ly9naXRodWIuY29tL2ZyYW5pMTYxMS9T\nZWN1cml0eV9CeV9EZXNpZ24wOAYKKwYBBAGDvzABDQQqDCg3MTQ3NmE2Y2FjYmUw\nOTg2MTU1MmQ1ZmNmZTdiNDljMjIzYzU4ZDQyMB8GCisGAQQBg78wAQ4EEQwPcmVm\ncy9oZWFkcy9tYWluMBoGCisGAQQBg78wAQ8EDAwKMTEwODYwNDEzMTAsBgorBgEE\nAYO/MAEQBB4MHGh0dHBzOi8vZ2l0aHViLmNvbS9mcmFuaTE2MTEwGQYKKwYBBAGD\nvzABEQQLDAkxNTczNzQ4MDIwbgYKKwYBBAGDvzABEgRgDF5odHRwczovL2dpdGh1\nYi5jb20vZnJhbmkxNjExL1NlY3VyaXR5X0J5X0Rlc2lnbi8uZ2l0aHViL3dvcmtm\nbG93cy9waXBlbGluZS55bWxAcmVmcy9oZWFkcy9tYWluMDgGCisGAQQBg78wARME\nKgwoNzE0NzZhNmNhY2JlMDk4NjE1NTJkNWZjZmU3YjQ5YzIyM2M1OGQ0MjAhBgor\nBgEEAYO/MAEUBBMMEXdvcmtmbG93X2Rpc3BhdGNoMGMGCisGAQQBg78wARUEVQxT\naHR0cHM6Ly9naXRodWIuY29tL2ZyYW5pMTYxMS9TZWN1cml0eV9CeV9EZXNpZ24v\nYWN0aW9ucy9ydW5zLzIxMjIzNDc2NjM4L2F0dGVtcHRzLzEwFgYKKwYBBAGDvzAB\nFgQIDAZwdWJsaWMwgYsGCisGAQQB1nkCBAIEfQR7AHkAdwDdPTBqxscRMmMZHhyZ\nZzcCokpeuN48rf+HinKALynujgAAAZviHI6JAAAEAwBIMEYCIQCvXIFbUIWWjN8B\nzoB5VlS1a3YJ8yOSRfpRmZlKZaNcqwIhAK2ZtxfmlSSiW24iejyW5Bt2kUduuHom\n9WUHVgiygolCMAoGCCqGSM49BAMDA2gAMGUCMCHfOVPUK7cRh6W0kEHLx26oizTx\nFpe0c1QE/zstY5htI5YoO7Y4OejbOURaHHtgdAIxAJ0dE2nB0d3Hi/wAOCts8lzd\nAWXWO8ylW4sUtcaYcSpLKmL0uFJ6qazo3Vbmu6rDWA==\n-----END CERTIFICATE-----\n","dev.sigstore.cosign/chain":"-----BEGIN CERTIFICATE-----\nMIICGjCCAaGgAwIBAgIUALnViVfnU0brJasmRkHrn/UnfaQwCgYIKoZIzj0EAwMw\nKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0y\nMjA0MTMyMDA2MTVaFw0zMTEwMDUxMzU2NThaMDcxFTATBgNVBAoTDHNpZ3N0b3Jl\nLmRldjEeMBwGA1UEAxMVc2lnc3RvcmUtaW50ZXJtZWRpYXRlMHYwEAYHKoZIzj0C\nAQYFK4EEACIDYgAE8RVS/ysH+NOvuDZyPIZtilgUF9NlarYpAd9HP1vBBH1U5CV7\n7LSS7s0ZiH4nE7Hv7ptS6LvvR/STk798LVgMzLlJ4HeIfF3tHSaexLcYpSASr1kS\n0N/RgBJz/9jWCiXno3sweTAOBgNVHQ8BAf8EBAMCAQYwEwYDVR0lBAwwCgYIKwYB\nBQUHAwMwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU39Ppz1YkEZb5qNjp\nKFWixi4YZD8wHwYDVR0jBBgwFoAUWMAeX5FFpWapesyQoZMi0CrFxfowCgYIKoZI\nzj0EAwMDZwAwZAIwPCsQK4DYiZYDPIaDi5HFKnfxXx6ASSVmERfsynYBiX2X6SJR\nnZU84/9DZdnFvvxmAjBOt6QpBlc4J/0DxvkTCqpclvziL6BCCPnjdlIB3Pu3BxsP\nmygUY7Ii2zbdCdliiow=\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIB9zCCAXygAwIBAgIUALZNAPFdxHPwjeDloDwyYChAO/4wCgYIKoZIzj0EAwMw\nKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0y\nMTEwMDcxMzU2NTlaFw0zMTEwMDUxMzU2NThaMCoxFTATBgNVBAoTDHNpZ3N0b3Jl\nLmRldjERMA8GA1UEAxMIc2lnc3RvcmUwdjAQBgcqhkjOPQIBBgUrgQQAIgNiAAT7\nXeFT4rb3PQGwS4IajtLk3/OlnpgangaBclYpsYBr5i+4ynB07ceb3LP0OIOZdxex\nX69c5iVuyJRQ+Hz05yi+UF3uBWAlHpiS5sh0+H2GHE7SXrk1EC5m1Tr19L9gg92j\nYzBhMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRY\nwB5fkUWlZql6zJChkyLQKsXF+jAfBgNVHSMEGDAWgBRYwB5fkUWlZql6zJChkyLQ\nKsXF+jAKBggqhkjOPQQDAwNpADBmAjEAj1nHeXZp+13NWBNa+EDsDP8G1WWg1tCM\nWP/WHPqpaVo0jhsweNFZgSs0eE7wYI4qAjEA2WB9ot98sIkoF3vZYdd3/VtWB5b9\nTNMea7Ix/stJ5TfcLLeABLE4BNJOsQ4vnBHJ\n-----END CERTIFICATE-----"}}]}
+2026/01/21 19:51:33 --> GET https://ghcr.io/v2/frani1611/social-media-dashboard/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f [body redacted: omitting binary blobs from logs]
+2026/01/21 19:51:33 GET /v2/frani1611/social-media-dashboard/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f HTTP/1.1
+Host: ghcr.io
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Authorization: <redacted>
+Accept-Encoding: gzip
+
+
+2026/01/21 19:51:33 --> GET https://ghcr.io/v2/frani1611/social-media-dashboard/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f [body redacted: omitting binary blobs from logs]
+2026/01/21 19:51:33 GET /v2/frani1611/social-media-dashboard/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f HTTP/1.1
+Host: ghcr.io
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Authorization: <redacted>
+Accept-Encoding: gzip
+
+
+2026/01/21 19:51:33 <-- 307 https://ghcr.io/v2/frani1611/social-media-dashboard/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f (96.470114ms) [body redacted: omitting binary blobs from logs]
+2026/01/21 19:51:33 HTTP/2.0 307 Temporary Redirect
+Content-Type: application/vnd.dev.cosign.simplesigning.v1+json
+Date: Wed, 21 Jan 2026 19:51:33 GMT
+Docker-Distribution-Api-Version: registry/2.0
+Location: https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f?se=2026-01-21T20%3A00%3A00Z&sig=L%2BNdm63pxUkhIzD%2Fp1MQNpkjks7b76yutW1xU8ljE7A%3D&ske=2026-01-22T15%3A29%3A13Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-01-21T15%3A29%3A13Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=a8ac40be69e04f3d3abc19eb549c190708bd9c9ec582d2e49417ff22fa249a8d
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Github-Request-Id: D003:35B6D7:B7FD7A:C61F6F:69712E45
+Content-Length: 0
+
+
+2026/01/21 19:51:33 --> GET https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f?se=2026-01-21T20%3A00%3A00Z&sig=L%2BNdm63pxUkhIzD%2Fp1MQNpkjks7b76yutW1xU8ljE7A%3D&ske=2026-01-22T15%3A29%3A13Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-01-21T15%3A29%3A13Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=a8ac40be69e04f3d3abc19eb549c190708bd9c9ec582d2e49417ff22fa249a8d [body redacted: omitting binary blobs from logs]
+2026/01/21 19:51:33 GET /ghcr1/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f?se=2026-01-21T20%3A00%3A00Z&sig=L%2BNdm63pxUkhIzD%2Fp1MQNpkjks7b76yutW1xU8ljE7A%3D&ske=2026-01-22T15%3A29%3A13Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-01-21T15%3A29%3A13Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=a8ac40be69e04f3d3abc19eb549c190708bd9c9ec582d2e49417ff22fa249a8d HTTP/1.1
+Host: pkg-containers.githubusercontent.com
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Referer: https://ghcr.io/v2/frani1611/social-media-dashboard/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f
+Accept-Encoding: gzip
+
+
+2026/01/21 19:51:33 <-- 307 https://ghcr.io/v2/frani1611/social-media-dashboard/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f (109.424816ms) [body redacted: omitting binary blobs from logs]
+2026/01/21 19:51:33 HTTP/2.0 307 Temporary Redirect
+Content-Type: application/vnd.dev.cosign.simplesigning.v1+json
+Date: Wed, 21 Jan 2026 19:51:33 GMT
+Docker-Distribution-Api-Version: registry/2.0
+Location: https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f?se=2026-01-21T20%3A00%3A00Z&sig=JZXlKaJ4YDm6T0zRyvS%2FEBABMJmhVxxfaGJymQFp6f0%3D&ske=2026-01-22T14%3A00%3A40Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-01-21T14%3A00%3A40Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=a8ac40be69e04f3d3abc19eb549c190708bd9c9ec582d2e49417ff22fa249a8d
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Github-Request-Id: D003:35B6D7:B7FD7A:C61F70:69712E45
+Content-Length: 0
+
+
+2026/01/21 19:51:33 --> GET https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f?se=2026-01-21T20%3A00%3A00Z&sig=JZXlKaJ4YDm6T0zRyvS%2FEBABMJmhVxxfaGJymQFp6f0%3D&ske=2026-01-22T14%3A00%3A40Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-01-21T14%3A00%3A40Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=a8ac40be69e04f3d3abc19eb549c190708bd9c9ec582d2e49417ff22fa249a8d [body redacted: omitting binary blobs from logs]
+2026/01/21 19:51:33 GET /ghcr1/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f?se=2026-01-21T20%3A00%3A00Z&sig=JZXlKaJ4YDm6T0zRyvS%2FEBABMJmhVxxfaGJymQFp6f0%3D&ske=2026-01-22T14%3A00%3A40Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-01-21T14%3A00%3A40Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=a8ac40be69e04f3d3abc19eb549c190708bd9c9ec582d2e49417ff22fa249a8d HTTP/1.1
+Host: pkg-containers.githubusercontent.com
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Referer: https://ghcr.io/v2/frani1611/social-media-dashboard/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f
+Accept-Encoding: gzip
+
+
+2026/01/21 19:51:33 <-- 200 https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f?se=2026-01-21T20%3A00%3A00Z&sig=L%2BNdm63pxUkhIzD%2Fp1MQNpkjks7b76yutW1xU8ljE7A%3D&ske=2026-01-22T15%3A29%3A13Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-01-21T15%3A29%3A13Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=a8ac40be69e04f3d3abc19eb549c190708bd9c9ec582d2e49417ff22fa249a8d (84.965902ms) [body redacted: omitting binary blobs from logs]
+2026/01/21 19:51:33 HTTP/2.0 200 OK
+Content-Length: 256
+Accept-Ranges: bytes
+Age: 0
+Content-Disposition: 
+Content-Type: application/octet-stream
+Date: Wed, 21 Jan 2026 19:51:33 GMT
+Etag: "0x8DE5926714E6CD7"
+Last-Modified: Wed, 21 Jan 2026 19:51:17 GMT
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+Strict-Transport-Security: max-age=31536000
+Via: 1.1 varnish, 1.1 varnish
+X-Cache: MISS, MISS
+X-Cache-Hits: 0, 0
+X-Fastly-Request-Id: da40a84b245a45bc93fa0df0b826c1aa0813fdf9
+X-Ms-Blob-Type: BlockBlob
+X-Ms-Copy-Completion-Time: Wed, 21 Jan 2026 19:51:17 GMT
+X-Ms-Copy-Id: 2d632f99-d2ea-4c3c-ba6d-8039377ca5a5
+X-Ms-Copy-Progress: 256/256
+X-Ms-Copy-Status: success
+X-Ms-Creation-Time: Wed, 21 Jan 2026 19:51:17 GMT
+X-Ms-Last-Access-Time: Wed, 21 Jan 2026 19:51:17 GMT
+X-Ms-Lease-State: available
+X-Ms-Lease-Status: unlocked
+X-Ms-Request-Id: 64ab7472-201e-00cd-790f-8b8b27000000
+X-Ms-Server-Encrypted: true
+X-Ms-Version: 2025-01-05
+X-Served-By: cache-iad-kjyo7100099-IAD, cache-pao-kpao1770067-PAO
+
+
+2026/01/21 19:51:33 <-- 200 https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:f97bdb871cbd69d679dd0719c98c32469c0501394c578bdbffaeeeb38fc32e5f?se=2026-01-21T20%3A00%3A00Z&sig=JZXlKaJ4YDm6T0zRyvS%2FEBABMJmhVxxfaGJymQFp6f0%3D&ske=2026-01-22T14%3A00%3A40Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-01-21T14%3A00%3A40Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=a8ac40be69e04f3d3abc19eb549c190708bd9c9ec582d2e49417ff22fa249a8d (74.447188ms) [body redacted: omitting binary blobs from logs]
+2026/01/21 19:51:33 HTTP/2.0 200 OK
+Content-Length: 256
+Accept-Ranges: bytes
+Age: 0
+Content-Disposition: 
+Content-Type: application/octet-stream
+Date: Wed, 21 Jan 2026 19:51:33 GMT
+Etag: "0x8DE5926714E6CD7"
+Last-Modified: Wed, 21 Jan 2026 19:51:17 GMT
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+Strict-Transport-Security: max-age=31536000
+Via: 1.1 varnish, 1.1 varnish
+X-Cache: MISS, HIT
+X-Cache-Hits: 0, 1
+X-Fastly-Request-Id: 6751f9ae5339a4bf7331c26eefc1cc89bdcf275f
+X-Ms-Blob-Type: BlockBlob
+X-Ms-Copy-Completion-Time: Wed, 21 Jan 2026 19:51:17 GMT
+X-Ms-Copy-Id: 2d632f99-d2ea-4c3c-ba6d-8039377ca5a5
+X-Ms-Copy-Progress: 256/256
+X-Ms-Copy-Status: success
+X-Ms-Creation-Time: Wed, 21 Jan 2026 19:51:17 GMT
+X-Ms-Last-Access-Time: Wed, 21 Jan 2026 19:51:17 GMT
+X-Ms-Lease-State: available
+X-Ms-Lease-Status: unlocked
+X-Ms-Request-Id: 64ab7472-201e-00cd-790f-8b8b27000000
+X-Ms-Server-Encrypted: true
+X-Ms-Version: 2025-01-05
+X-Served-By: cache-iad-kjyo7100099-IAD, cache-pao-kpao1770067-PAO
+
+
+Error: no matching signatures: none of the expected identities matched what was in the certificate, got subjects [https://github.com/frani1611/Security_By_Design/.github/workflows/pipeline.yml@refs/heads/main] with issuer https://token.actions.githubusercontent.com
+ none of the expected identities matched what was in the certificate, got subjects [https://github.com/frani1611/Security_By_Design/.github/workflows/pipeline.yml@refs/heads/main] with issuer https://token.actions.githubusercontent.com
+error during command execution: no matching signatures: none of the expected identities matched what was in the certificate, got subjects [https://github.com/frani1611/Security_By_Design/.github/workflows/pipeline.yml@refs/heads/main] with issuer https://token.actions.githubusercontent.com
+ none of the expected identities matched what was in the certificate, got subjects [https://github.com/frani1611/Security_By_Design/.github/workflows/pipeline.yml@refs/heads/main] with issuer https://token.actions.githubusercontent.com
