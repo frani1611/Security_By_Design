@@ -1,0 +1,18 @@
+Pipeline Run Evidence Summary
+================================
+Run ID: 21222727961
+Run Number: 92
+Timestamp: 2026-01-21T19:26:01Z
+Commit SHA: fc973eb0ef468c1d24884dd303d720d8218d17e5
+Branch/Tag: refs/heads/main
+Actor: luxario1
+
+Files Generated:
+evidence/secrets/gitleaks-report-21222727961.json
+evidence/sast/sast-metadata-21222727961.txt
+evidence/run/run-21222727961-summary.txt
+evidence/sca/trivy-fs-21222727961.json
+evidence/sca/sca-metadata-21222727961.txt
+evidence/sbom/sbom-21222727961.cyclonedx.json
+evidence/signing/signing-log-21222727961.txt
+evidence/signing/signing-metadata-21222727961.txt
