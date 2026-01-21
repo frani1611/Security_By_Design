@@ -39,11 +39,11 @@ def main(path):
             hit = False
             if cvss is not None:
                 try:
-                    if float(cvss) >= 7.0:
+                    if float(cvss) >= 9.0:
                         hit = True
                 except Exception:
                     pass
-            if sev in ('HIGH', 'CRITICAL'):
+            if sev in ('CRITICAL'):
                 hit = True
 
             if hit:
