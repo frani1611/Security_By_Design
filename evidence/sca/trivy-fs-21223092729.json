@@ -1,0 +1,5430 @@
+{
+  "SchemaVersion": 2,
+  "ReportID": "019be20f-2626-7b09-b6e0-b95086aaaecc",
+  "CreatedAt": "2026-01-21T19:36:42.278724477Z",
+  "ArtifactID": "sha256:cfd93d78ef2c8260c0a3e8cdc9c28929bc67c605e56c612dbe44cab679411986",
+  "ArtifactName": ".",
+  "ArtifactType": "repository",
+  "Metadata": {
+    "RepoURL": "https://github.com/frani1611/Security_By_Design",
+    "Branch": "main",
+    "Commit": "0ae422e0781cdd641ddd3a94f69678d90154d63b",
+    "CommitMsg": "Update quality_gate.py",
+    "Author": "Lucas \u003c102356694+luxario1@users.noreply.github.com\u003e",
+    "Committer": "GitHub \u003cnoreply@github.com\u003e"
+  },
+  "Results": [
+    {
+      "Target": "Code/social-media-dashboard/backend/package-lock.json",
+      "Class": "lang-pkgs",
+      "Type": "npm",
+      "Packages": [
+        {
+          "ID": "bcrypt@6.0.0",
+          "Name": "bcrypt",
+          "Identifier": {
+            "PURL": "pkg:npm/bcrypt@6.0.0",
+            "UID": "2addfd7201ab4928"
+          },
+          "Version": "6.0.0",
+          "Relationship": "direct",
+          "DependsOn": [
+            "node-addon-api@8.5.0",
+            "node-gyp-build@4.8.4"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1538,
+              "EndLine": 1551
+            }
+          ]
+        },
+        {
+          "ID": "bcryptjs@2.4.3",
+          "Name": "bcryptjs",
+          "Identifier": {
+            "PURL": "pkg:npm/bcryptjs@2.4.3",
+            "UID": "fc4cb62100d536a0"
+          },
+          "Version": "2.4.3",
+          "Relationship": "direct",
+          "Locations": [
+            {
+              "StartLine": 1552,
+              "EndLine": 1557
+            }
+          ]
+        },
+        {
+          "ID": "cloudinary@2.8.0",
+          "Name": "cloudinary",
+          "Identifier": {
+            "PURL": "pkg:npm/cloudinary@2.8.0",
+            "UID": "a72017253ef37c1a"
+          },
+          "Version": "2.8.0",
+          "Relationship": "direct",
+          "DependsOn": [
+            "lodash@4.17.21",
+            "q@1.5.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1757,
+              "EndLine": 1769
+            }
+          ]
+        },
+        {
+          "ID": "cors@2.8.5",
+          "Name": "cors",
+          "Identifier": {
+            "PURL": "pkg:npm/cors@2.8.5",
+            "UID": "b330c2ebe4ccbca2"
+          },
+          "Version": "2.8.5",
+          "Relationship": "direct",
+          "DependsOn": [
+            "object-assign@4.1.1",
+            "vary@1.1.2"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1874,
+              "EndLine": 1886
+            }
+          ]
+        },
+        {
+          "ID": "dotenv@8.6.0",
+          "Name": "dotenv",
+          "Identifier": {
+            "PURL": "pkg:npm/dotenv@8.6.0",
+            "UID": "5db5a827c0d26f9"
+          },
+          "Version": "8.6.0",
+          "Relationship": "direct",
+          "Locations": [
+            {
+              "StartLine": 1915,
+              "EndLine": 1923
+            }
+          ]
+        },
+        {
+          "ID": "express@4.21.2",
+          "Name": "express",
+          "Identifier": {
+            "PURL": "pkg:npm/express@4.21.2",
+            "UID": "17bc3421f3ad22d7"
+          },
+          "Version": "4.21.2",
+          "Relationship": "direct",
+          "DependsOn": [
+            "accepts@1.3.8",
+            "array-flatten@1.1.1",
+            "body-parser@1.20.3",
+            "content-disposition@0.5.4",
+            "content-type@1.0.5",
+            "cookie-signature@1.0.6",
+            "cookie@0.7.1",
+            "debug@2.6.9",
+            "depd@2.0.0",
+            "encodeurl@2.0.0",
+            "escape-html@1.0.3",
+            "etag@1.8.1",
+            "finalhandler@1.3.1",
+            "fresh@0.5.2",
+            "http-errors@2.0.0",
+            "merge-descriptors@1.0.3",
+            "methods@1.1.2",
+            "on-finished@2.4.1",
+            "parseurl@1.3.3",
+            "path-to-regexp@0.1.12",
+            "proxy-addr@2.0.7",
+            "qs@6.13.0",
+            "range-parser@1.2.1",
+            "safe-buffer@5.2.1",
+            "send@0.19.0",
+            "serve-static@1.16.2",
+            "setprototypeof@1.2.0",
+            "statuses@2.0.1",
+            "type-is@1.6.18",
+            "utils-merge@1.0.1",
+            "vary@1.1.2"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2013,
+              "EndLine": 2058
+            }
+          ]
+        },
+        {
+          "ID": "google-auth-library@9.15.1",
+          "Name": "google-auth-library",
+          "Identifier": {
+            "PURL": "pkg:npm/google-auth-library@9.15.1",
+            "UID": "9127af0c5669d51"
+          },
+          "Version": "9.15.1",
+          "Relationship": "direct",
+          "DependsOn": [
+            "base64-js@1.5.1",
+            "ecdsa-sig-formatter@1.0.11",
+            "gaxios@6.7.1",
+            "gcp-metadata@6.1.1",
+            "gtoken@7.1.0",
+            "jws@4.0.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2235,
+              "EndLine": 2251
+            }
+          ]
+        },
+        {
+          "ID": "jsonwebtoken@9.0.2",
+          "Name": "jsonwebtoken",
+          "Identifier": {
+            "PURL": "pkg:npm/jsonwebtoken@9.0.2",
+            "UID": "2c91effa115d4d95"
+          },
+          "Version": "9.0.2",
+          "Relationship": "direct",
+          "DependsOn": [
+            "jws@3.2.3",
+            "lodash.includes@4.3.0",
+            "lodash.isboolean@3.0.3",
+            "lodash.isinteger@4.0.4",
+            "lodash.isnumber@3.0.3",
+            "lodash.isplainobject@4.0.6",
+            "lodash.isstring@4.0.1",
+            "lodash.once@4.1.1",
+            "ms@2.1.3",
+            "semver@7.7.3"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2558,
+              "EndLine": 2579
+            }
+          ]
+        },
+        {
+          "ID": "mongodb@7.0.0",
+          "Name": "mongodb",
+          "Identifier": {
+            "PURL": "pkg:npm/mongodb@7.0.0",
+            "UID": "2e9f03c900ac106f"
+          },
+          "Version": "7.0.0",
+          "Relationship": "direct",
+          "DependsOn": [
+            "@aws-sdk/credential-providers@3.943.0",
+            "@mongodb-js/saslprep@1.3.2",
+            "bson@7.0.0",
+            "mongodb-connection-string-url@7.0.0",
+            "socks@2.8.7"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2827,
+              "EndLine": 2872
+            }
+          ]
+        },
+        {
+          "ID": "mongoose@6.13.8",
+          "Name": "mongoose",
+          "Identifier": {
+            "PURL": "pkg:npm/mongoose@6.13.8",
+            "UID": "daf772c68a971a00"
+          },
+          "Version": "6.13.8",
+          "Relationship": "direct",
+          "DependsOn": [
+            "bson@4.7.2",
+            "kareem@2.5.1",
+            "mongodb@4.17.2",
+            "mpath@0.9.0",
+            "mquery@4.0.3",
+            "ms@2.1.3",
+            "sift@16.0.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2895,
+              "EndLine": 2916
+            }
+          ]
+        },
+        {
+          "ID": "multer@2.0.2",
+          "Name": "multer",
+          "Identifier": {
+            "PURL": "pkg:npm/multer@2.0.2",
+            "UID": "8f62bb587524d58c"
+          },
+          "Version": "2.0.2",
+          "Relationship": "direct",
+          "DependsOn": [
+            "append-field@1.0.0",
+            "busboy@1.6.0",
+            "concat-stream@2.0.0",
+            "mkdirp@0.5.6",
+            "object-assign@4.1.1",
+            "type-is@1.6.18",
+            "xtend@4.0.2"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3036,
+              "EndLine": 3053
+            }
+          ]
+        },
+        {
+          "ID": "winston@3.18.3",
+          "Name": "winston",
+          "Identifier": {
+            "PURL": "pkg:npm/winston@3.18.3",
+            "UID": "9e1cc77f2a4102d7"
+          },
+          "Version": "3.18.3",
+          "Relationship": "direct",
+          "DependsOn": [
+            "@colors/colors@1.6.0",
+            "@dabh/diagnostics@2.0.8",
+            "async@3.2.6",
+            "is-stream@2.0.1",
+            "logform@2.7.0",
+            "one-time@1.0.0",
+            "readable-stream@3.6.2",
+            "safe-stable-stringify@2.5.0",
+            "stack-trace@0.0.10",
+            "triple-beam@1.4.1",
+            "winston-transport@4.9.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3819,
+              "EndLine": 3840
+            }
+          ]
+        },
+        {
+          "ID": "@aws-crypto/sha256-browser@5.2.0",
+          "Name": "@aws-crypto/sha256-browser",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-crypto/sha256-browser@5.2.0",
+            "UID": "22f5d36462ce98b9"
+          },
+          "Version": "5.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-crypto/sha256-js@5.2.0",
+            "@aws-crypto/supports-web-crypto@5.2.0",
+            "@aws-crypto/util@5.2.0",
+            "@aws-sdk/types@3.936.0",
+            "@aws-sdk/util-locate-window@3.893.0",
+            "@smithy/util-utf8@2.3.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 32,
+              "EndLine": 47
+            }
+          ]
+        },
+        {
+          "ID": "@aws-crypto/sha256-js@5.2.0",
+          "Name": "@aws-crypto/sha256-js",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-crypto/sha256-js@5.2.0",
+            "UID": "ab2470c43eb48108"
+          },
+          "Version": "5.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-crypto/util@5.2.0",
+            "@aws-sdk/types@3.936.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 89,
+              "EndLine": 103
+            }
+          ]
+        },
+        {
+          "ID": "@aws-crypto/supports-web-crypto@5.2.0",
+          "Name": "@aws-crypto/supports-web-crypto",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-crypto/supports-web-crypto@5.2.0",
+            "UID": "2a3c2eded0b86d88"
+          },
+          "Version": "5.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 104,
+              "EndLine": 113
+            }
+          ]
+        },
+        {
+          "ID": "@aws-crypto/util@5.2.0",
+          "Name": "@aws-crypto/util",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-crypto/util@5.2.0",
+            "UID": "bcf2ff525a40d7a7"
+          },
+          "Version": "5.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/types@3.936.0",
+            "@smithy/util-utf8@2.3.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 114,
+              "EndLine": 125
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/client-cognito-identity@3.943.0",
+          "Name": "@aws-sdk/client-cognito-identity",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/client-cognito-identity@3.943.0",
+            "UID": "234acb12f008753"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-crypto/sha256-browser@5.2.0",
+            "@aws-crypto/sha256-js@5.2.0",
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/credential-provider-node@3.943.0",
+            "@aws-sdk/middleware-host-header@3.936.0",
+            "@aws-sdk/middleware-logger@3.936.0",
+            "@aws-sdk/middleware-recursion-detection@3.936.0",
+            "@aws-sdk/middleware-user-agent@3.943.0",
+            "@aws-sdk/region-config-resolver@3.936.0",
+            "@aws-sdk/types@3.936.0",
+            "@aws-sdk/util-endpoints@3.936.0",
+            "@aws-sdk/util-user-agent-browser@3.936.0",
+            "@aws-sdk/util-user-agent-node@3.943.0",
+            "@smithy/config-resolver@4.4.3",
+            "@smithy/core@3.18.6",
+            "@smithy/fetch-http-handler@5.3.6",
+            "@smithy/hash-node@4.2.5",
+            "@smithy/invalid-dependency@4.2.5",
+            "@smithy/middleware-content-length@4.2.5",
+            "@smithy/middleware-endpoint@4.3.13",
+            "@smithy/middleware-retry@4.4.13",
+            "@smithy/middleware-serde@4.2.6",
+            "@smithy/middleware-stack@4.2.5",
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/node-http-handler@4.4.5",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/smithy-client@4.9.9",
+            "@smithy/types@4.9.0",
+            "@smithy/url-parser@4.2.5",
+            "@smithy/util-base64@4.3.0",
+            "@smithy/util-body-length-browser@4.2.0",
+            "@smithy/util-body-length-node@4.2.1",
+            "@smithy/util-defaults-mode-browser@4.3.12",
+            "@smithy/util-defaults-mode-node@4.2.15",
+            "@smithy/util-endpoints@3.2.5",
+            "@smithy/util-middleware@4.2.5",
+            "@smithy/util-retry@4.2.5",
+            "@smithy/util-utf8@4.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 167,
+              "EndLine": 217
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/client-sso@3.943.0",
+          "Name": "@aws-sdk/client-sso",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/client-sso@3.943.0",
+            "UID": "9908357014c0c0da"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-crypto/sha256-browser@5.2.0",
+            "@aws-crypto/sha256-js@5.2.0",
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/middleware-host-header@3.936.0",
+            "@aws-sdk/middleware-logger@3.936.0",
+            "@aws-sdk/middleware-recursion-detection@3.936.0",
+            "@aws-sdk/middleware-user-agent@3.943.0",
+            "@aws-sdk/region-config-resolver@3.936.0",
+            "@aws-sdk/types@3.936.0",
+            "@aws-sdk/util-endpoints@3.936.0",
+            "@aws-sdk/util-user-agent-browser@3.936.0",
+            "@aws-sdk/util-user-agent-node@3.943.0",
+            "@smithy/config-resolver@4.4.3",
+            "@smithy/core@3.18.6",
+            "@smithy/fetch-http-handler@5.3.6",
+            "@smithy/hash-node@4.2.5",
+            "@smithy/invalid-dependency@4.2.5",
+            "@smithy/middleware-content-length@4.2.5",
+            "@smithy/middleware-endpoint@4.3.13",
+            "@smithy/middleware-retry@4.4.13",
+            "@smithy/middleware-serde@4.2.6",
+            "@smithy/middleware-stack@4.2.5",
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/node-http-handler@4.4.5",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/smithy-client@4.9.9",
+            "@smithy/types@4.9.0",
+            "@smithy/url-parser@4.2.5",
+            "@smithy/util-base64@4.3.0",
+            "@smithy/util-body-length-browser@4.2.0",
+            "@smithy/util-body-length-node@4.2.1",
+            "@smithy/util-defaults-mode-browser@4.3.12",
+            "@smithy/util-defaults-mode-node@4.2.15",
+            "@smithy/util-endpoints@3.2.5",
+            "@smithy/util-middleware@4.2.5",
+            "@smithy/util-retry@4.2.5",
+            "@smithy/util-utf8@4.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 218,
+              "EndLine": 267
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/core@3.943.0",
+          "Name": "@aws-sdk/core",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/core@3.943.0",
+            "UID": "82e4428e648677f0"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/types@3.936.0",
+            "@aws-sdk/xml-builder@3.930.0",
+            "@smithy/core@3.18.6",
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/signature-v4@5.3.5",
+            "@smithy/smithy-client@4.9.9",
+            "@smithy/types@4.9.0",
+            "@smithy/util-base64@4.3.0",
+            "@smithy/util-middleware@4.2.5",
+            "@smithy/util-utf8@4.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 268,
+              "EndLine": 292
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/credential-provider-cognito-identity@3.943.0",
+          "Name": "@aws-sdk/credential-provider-cognito-identity",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/credential-provider-cognito-identity@3.943.0",
+            "UID": "a0261196b91521c"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/client-cognito-identity@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 293,
+              "EndLine": 309
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/credential-provider-env@3.943.0",
+          "Name": "@aws-sdk/credential-provider-env",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/credential-provider-env@3.943.0",
+            "UID": "6e44004fdc54754d"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 310,
+              "EndLine": 326
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/credential-provider-http@3.943.0",
+          "Name": "@aws-sdk/credential-provider-http",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/credential-provider-http@3.943.0",
+            "UID": "8dc347c181552d77"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/fetch-http-handler@5.3.6",
+            "@smithy/node-http-handler@4.4.5",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/smithy-client@4.9.9",
+            "@smithy/types@4.9.0",
+            "@smithy/util-stream@4.5.6",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 327,
+              "EndLine": 348
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/credential-provider-ini@3.943.0",
+          "Name": "@aws-sdk/credential-provider-ini",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/credential-provider-ini@3.943.0",
+            "UID": "6faaef9bd3323249"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/credential-provider-env@3.943.0",
+            "@aws-sdk/credential-provider-http@3.943.0",
+            "@aws-sdk/credential-provider-login@3.943.0",
+            "@aws-sdk/credential-provider-process@3.943.0",
+            "@aws-sdk/credential-provider-sso@3.943.0",
+            "@aws-sdk/credential-provider-web-identity@3.943.0",
+            "@aws-sdk/nested-clients@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/credential-provider-imds@4.2.5",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/shared-ini-file-loader@4.4.0",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 349,
+              "EndLine": 374
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/credential-provider-login@3.943.0",
+          "Name": "@aws-sdk/credential-provider-login",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/credential-provider-login@3.943.0",
+            "UID": "e867d49d1478ec2c"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/nested-clients@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/shared-ini-file-loader@4.4.0",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 375,
+              "EndLine": 394
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/credential-provider-node@3.943.0",
+          "Name": "@aws-sdk/credential-provider-node",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/credential-provider-node@3.943.0",
+            "UID": "a4b00840e13d2fb9"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/credential-provider-env@3.943.0",
+            "@aws-sdk/credential-provider-http@3.943.0",
+            "@aws-sdk/credential-provider-ini@3.943.0",
+            "@aws-sdk/credential-provider-process@3.943.0",
+            "@aws-sdk/credential-provider-sso@3.943.0",
+            "@aws-sdk/credential-provider-web-identity@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/credential-provider-imds@4.2.5",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/shared-ini-file-loader@4.4.0",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 395,
+              "EndLine": 418
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/credential-provider-process@3.943.0",
+          "Name": "@aws-sdk/credential-provider-process",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/credential-provider-process@3.943.0",
+            "UID": "7da1aafbfac4fecd"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/shared-ini-file-loader@4.4.0",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 419,
+              "EndLine": 436
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/credential-provider-sso@3.943.0",
+          "Name": "@aws-sdk/credential-provider-sso",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/credential-provider-sso@3.943.0",
+            "UID": "ce5fc7616204482c"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/client-sso@3.943.0",
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/token-providers@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/shared-ini-file-loader@4.4.0",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 437,
+              "EndLine": 456
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/credential-provider-web-identity@3.943.0",
+          "Name": "@aws-sdk/credential-provider-web-identity",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/credential-provider-web-identity@3.943.0",
+            "UID": "cd20a6857c6a081"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/nested-clients@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/shared-ini-file-loader@4.4.0",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 457,
+              "EndLine": 475
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/credential-providers@3.943.0",
+          "Name": "@aws-sdk/credential-providers",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/credential-providers@3.943.0",
+            "UID": "d884641e9f603183"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/client-cognito-identity@3.943.0",
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/credential-provider-cognito-identity@3.943.0",
+            "@aws-sdk/credential-provider-env@3.943.0",
+            "@aws-sdk/credential-provider-http@3.943.0",
+            "@aws-sdk/credential-provider-ini@3.943.0",
+            "@aws-sdk/credential-provider-login@3.943.0",
+            "@aws-sdk/credential-provider-node@3.943.0",
+            "@aws-sdk/credential-provider-process@3.943.0",
+            "@aws-sdk/credential-provider-sso@3.943.0",
+            "@aws-sdk/credential-provider-web-identity@3.943.0",
+            "@aws-sdk/nested-clients@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/config-resolver@4.4.3",
+            "@smithy/core@3.18.6",
+            "@smithy/credential-provider-imds@4.2.5",
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 476,
+              "EndLine": 507
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/middleware-host-header@3.936.0",
+          "Name": "@aws-sdk/middleware-host-header",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/middleware-host-header@3.936.0",
+            "UID": "12424b116f5a68e1"
+          },
+          "Version": "3.936.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/types@3.936.0",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 508,
+              "EndLine": 523
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/middleware-logger@3.936.0",
+          "Name": "@aws-sdk/middleware-logger",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/middleware-logger@3.936.0",
+            "UID": "a84b831158c8a8f6"
+          },
+          "Version": "3.936.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/types@3.936.0",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 524,
+              "EndLine": 538
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/middleware-recursion-detection@3.936.0",
+          "Name": "@aws-sdk/middleware-recursion-detection",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/middleware-recursion-detection@3.936.0",
+            "UID": "fbb37a4a362b4dbf"
+          },
+          "Version": "3.936.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/types@3.936.0",
+            "@aws/lambda-invoke-store@0.2.1",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 539,
+              "EndLine": 555
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/middleware-user-agent@3.943.0",
+          "Name": "@aws-sdk/middleware-user-agent",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/middleware-user-agent@3.943.0",
+            "UID": "ac3c9c107efb3c0d"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@aws-sdk/util-endpoints@3.936.0",
+            "@smithy/core@3.18.6",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 556,
+              "EndLine": 574
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/nested-clients@3.943.0",
+          "Name": "@aws-sdk/nested-clients",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/nested-clients@3.943.0",
+            "UID": "171804519344f52b"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-crypto/sha256-browser@5.2.0",
+            "@aws-crypto/sha256-js@5.2.0",
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/middleware-host-header@3.936.0",
+            "@aws-sdk/middleware-logger@3.936.0",
+            "@aws-sdk/middleware-recursion-detection@3.936.0",
+            "@aws-sdk/middleware-user-agent@3.943.0",
+            "@aws-sdk/region-config-resolver@3.936.0",
+            "@aws-sdk/types@3.936.0",
+            "@aws-sdk/util-endpoints@3.936.0",
+            "@aws-sdk/util-user-agent-browser@3.936.0",
+            "@aws-sdk/util-user-agent-node@3.943.0",
+            "@smithy/config-resolver@4.4.3",
+            "@smithy/core@3.18.6",
+            "@smithy/fetch-http-handler@5.3.6",
+            "@smithy/hash-node@4.2.5",
+            "@smithy/invalid-dependency@4.2.5",
+            "@smithy/middleware-content-length@4.2.5",
+            "@smithy/middleware-endpoint@4.3.13",
+            "@smithy/middleware-retry@4.4.13",
+            "@smithy/middleware-serde@4.2.6",
+            "@smithy/middleware-stack@4.2.5",
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/node-http-handler@4.4.5",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/smithy-client@4.9.9",
+            "@smithy/types@4.9.0",
+            "@smithy/url-parser@4.2.5",
+            "@smithy/util-base64@4.3.0",
+            "@smithy/util-body-length-browser@4.2.0",
+            "@smithy/util-body-length-node@4.2.1",
+            "@smithy/util-defaults-mode-browser@4.3.12",
+            "@smithy/util-defaults-mode-node@4.2.15",
+            "@smithy/util-endpoints@3.2.5",
+            "@smithy/util-middleware@4.2.5",
+            "@smithy/util-retry@4.2.5",
+            "@smithy/util-utf8@4.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 575,
+              "EndLine": 624
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/region-config-resolver@3.936.0",
+          "Name": "@aws-sdk/region-config-resolver",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/region-config-resolver@3.936.0",
+            "UID": "faa4bb88a78ce4a1"
+          },
+          "Version": "3.936.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/types@3.936.0",
+            "@smithy/config-resolver@4.4.3",
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 625,
+              "EndLine": 641
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/token-providers@3.943.0",
+          "Name": "@aws-sdk/token-providers",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/token-providers@3.943.0",
+            "UID": "b590b0092727cd5e"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/core@3.943.0",
+            "@aws-sdk/nested-clients@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/shared-ini-file-loader@4.4.0",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 642,
+              "EndLine": 660
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/types@3.936.0",
+          "Name": "@aws-sdk/types",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/types@3.936.0",
+            "UID": "e384a2d8c18e8442"
+          },
+          "Version": "3.936.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 661,
+              "EndLine": 674
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/util-endpoints@3.936.0",
+          "Name": "@aws-sdk/util-endpoints",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/util-endpoints@3.936.0",
+            "UID": "4228d70309b71035"
+          },
+          "Version": "3.936.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/types@3.936.0",
+            "@smithy/types@4.9.0",
+            "@smithy/url-parser@4.2.5",
+            "@smithy/util-endpoints@3.2.5",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 675,
+              "EndLine": 691
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/util-locate-window@3.893.0",
+          "Name": "@aws-sdk/util-locate-window",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/util-locate-window@3.893.0",
+            "UID": "66c2854ba5ebaf14"
+          },
+          "Version": "3.893.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 692,
+              "EndLine": 704
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/util-user-agent-browser@3.936.0",
+          "Name": "@aws-sdk/util-user-agent-browser",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/util-user-agent-browser@3.936.0",
+            "UID": "6aad98dbf0e8ccbb"
+          },
+          "Version": "3.936.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/types@3.936.0",
+            "@smithy/types@4.9.0",
+            "bowser@2.13.1",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 705,
+              "EndLine": 717
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/util-user-agent-node@3.943.0",
+          "Name": "@aws-sdk/util-user-agent-node",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/util-user-agent-node@3.943.0",
+            "UID": "1b9d61285d335b55"
+          },
+          "Version": "3.943.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/middleware-user-agent@3.943.0",
+            "@aws-sdk/types@3.936.0",
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 718,
+              "EndLine": 742
+            }
+          ]
+        },
+        {
+          "ID": "@aws-sdk/xml-builder@3.930.0",
+          "Name": "@aws-sdk/xml-builder",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws-sdk/xml-builder@3.930.0",
+            "UID": "537e20ef4734bd11"
+          },
+          "Version": "3.930.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "fast-xml-parser@5.2.5",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 743,
+              "EndLine": 757
+            }
+          ]
+        },
+        {
+          "ID": "@aws/lambda-invoke-store@0.2.1",
+          "Name": "@aws/lambda-invoke-store",
+          "Identifier": {
+            "PURL": "pkg:npm/%40aws/lambda-invoke-store@0.2.1",
+            "UID": "36dd10292e21efa1"
+          },
+          "Version": "0.2.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 758,
+              "EndLine": 767
+            }
+          ]
+        },
+        {
+          "ID": "@colors/colors@1.6.0",
+          "Name": "@colors/colors",
+          "Identifier": {
+            "PURL": "pkg:npm/%40colors/colors@1.6.0",
+            "UID": "1875542105e9f91b"
+          },
+          "Version": "1.6.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 768,
+              "EndLine": 776
+            }
+          ]
+        },
+        {
+          "ID": "@dabh/diagnostics@2.0.8",
+          "Name": "@dabh/diagnostics",
+          "Identifier": {
+            "PURL": "pkg:npm/%40dabh/diagnostics@2.0.8",
+            "UID": "b902f519982de229"
+          },
+          "Version": "2.0.8",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@so-ric/colorspace@1.1.6",
+            "enabled@2.0.0",
+            "kuler@2.0.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 777,
+              "EndLine": 787
+            }
+          ]
+        },
+        {
+          "ID": "@mongodb-js/saslprep@1.3.2",
+          "Name": "@mongodb-js/saslprep",
+          "Identifier": {
+            "PURL": "pkg:npm/%40mongodb-js/saslprep@1.3.2",
+            "UID": "21e1179d18fe64db"
+          },
+          "Version": "1.3.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "sparse-bitfield@3.0.3"
+          ],
+          "Locations": [
+            {
+              "StartLine": 788,
+              "EndLine": 796
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/abort-controller@4.2.5",
+          "Name": "@smithy/abort-controller",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/abort-controller@4.2.5",
+            "UID": "92f3986eca3f9228"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 797,
+              "EndLine": 810
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/config-resolver@4.4.3",
+          "Name": "@smithy/config-resolver",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/config-resolver@4.4.3",
+            "UID": "a39e56942b6b496e"
+          },
+          "Version": "4.4.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/types@4.9.0",
+            "@smithy/util-config-provider@4.2.0",
+            "@smithy/util-endpoints@3.2.5",
+            "@smithy/util-middleware@4.2.5",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 811,
+              "EndLine": 828
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/core@3.18.6",
+          "Name": "@smithy/core",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/core@3.18.6",
+            "UID": "32f40f5bc5e1d4ce"
+          },
+          "Version": "3.18.6",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/middleware-serde@4.2.6",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/types@4.9.0",
+            "@smithy/util-base64@4.3.0",
+            "@smithy/util-body-length-browser@4.2.0",
+            "@smithy/util-middleware@4.2.5",
+            "@smithy/util-stream@4.5.6",
+            "@smithy/util-utf8@4.2.0",
+            "@smithy/uuid@1.1.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 829,
+              "EndLine": 850
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/credential-provider-imds@4.2.5",
+          "Name": "@smithy/credential-provider-imds",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/credential-provider-imds@4.2.5",
+            "UID": "7f88100d6dd6eb87"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/types@4.9.0",
+            "@smithy/url-parser@4.2.5",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 851,
+              "EndLine": 867
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/fetch-http-handler@5.3.6",
+          "Name": "@smithy/fetch-http-handler",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/fetch-http-handler@5.3.6",
+            "UID": "e936eee9b930e690"
+          },
+          "Version": "5.3.6",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/querystring-builder@4.2.5",
+            "@smithy/types@4.9.0",
+            "@smithy/util-base64@4.3.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 868,
+              "EndLine": 884
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/hash-node@4.2.5",
+          "Name": "@smithy/hash-node",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/hash-node@4.2.5",
+            "UID": "9882925c91bf5876"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "@smithy/util-buffer-from@4.2.0",
+            "@smithy/util-utf8@4.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 885,
+              "EndLine": 900
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/invalid-dependency@4.2.5",
+          "Name": "@smithy/invalid-dependency",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/invalid-dependency@4.2.5",
+            "UID": "d474e58ad491c4e0"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 901,
+              "EndLine": 914
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/is-array-buffer@2.2.0",
+          "Name": "@smithy/is-array-buffer",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/is-array-buffer@2.2.0",
+            "UID": "6ae557d2bf631290"
+          },
+          "Version": "2.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 48,
+              "EndLine": 60
+            },
+            {
+              "StartLine": 126,
+              "EndLine": 138
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/is-array-buffer@4.2.0",
+          "Name": "@smithy/is-array-buffer",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/is-array-buffer@4.2.0",
+            "UID": "8d0609b2a223668b"
+          },
+          "Version": "4.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 915,
+              "EndLine": 927
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/middleware-content-length@4.2.5",
+          "Name": "@smithy/middleware-content-length",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/middleware-content-length@4.2.5",
+            "UID": "6301a1636f2d9f90"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 928,
+              "EndLine": 942
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/middleware-endpoint@4.3.13",
+          "Name": "@smithy/middleware-endpoint",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/middleware-endpoint@4.3.13",
+            "UID": "d0a2383e0a4cc41e"
+          },
+          "Version": "4.3.13",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/core@3.18.6",
+            "@smithy/middleware-serde@4.2.6",
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/shared-ini-file-loader@4.4.0",
+            "@smithy/types@4.9.0",
+            "@smithy/url-parser@4.2.5",
+            "@smithy/util-middleware@4.2.5",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 943,
+              "EndLine": 962
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/middleware-retry@4.4.13",
+          "Name": "@smithy/middleware-retry",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/middleware-retry@4.4.13",
+            "UID": "e6a94eeb12d7dfe1"
+          },
+          "Version": "4.4.13",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/service-error-classification@4.2.5",
+            "@smithy/smithy-client@4.9.9",
+            "@smithy/types@4.9.0",
+            "@smithy/util-middleware@4.2.5",
+            "@smithy/util-retry@4.2.5",
+            "@smithy/uuid@1.1.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 963,
+              "EndLine": 983
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/middleware-serde@4.2.6",
+          "Name": "@smithy/middleware-serde",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/middleware-serde@4.2.6",
+            "UID": "10cdf464ba9d2aee"
+          },
+          "Version": "4.2.6",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 984,
+              "EndLine": 998
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/middleware-stack@4.2.5",
+          "Name": "@smithy/middleware-stack",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/middleware-stack@4.2.5",
+            "UID": "cd7fc5252807edf1"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 999,
+              "EndLine": 1012
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/node-config-provider@4.3.5",
+          "Name": "@smithy/node-config-provider",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/node-config-provider@4.3.5",
+            "UID": "b32183b59d8c5936"
+          },
+          "Version": "4.3.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/property-provider@4.2.5",
+            "@smithy/shared-ini-file-loader@4.4.0",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1013,
+              "EndLine": 1028
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/node-http-handler@4.4.5",
+          "Name": "@smithy/node-http-handler",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/node-http-handler@4.4.5",
+            "UID": "e21a84131f5ff5da"
+          },
+          "Version": "4.4.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/abort-controller@4.2.5",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/querystring-builder@4.2.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1029,
+              "EndLine": 1045
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/property-provider@4.2.5",
+          "Name": "@smithy/property-provider",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/property-provider@4.2.5",
+            "UID": "ec9a6ebe4e16737c"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1046,
+              "EndLine": 1059
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/protocol-http@5.3.5",
+          "Name": "@smithy/protocol-http",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/protocol-http@5.3.5",
+            "UID": "77927c0fcef7f8b4"
+          },
+          "Version": "5.3.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1060,
+              "EndLine": 1073
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/querystring-builder@4.2.5",
+          "Name": "@smithy/querystring-builder",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/querystring-builder@4.2.5",
+            "UID": "36a16d88c142d401"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "@smithy/util-uri-escape@4.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1074,
+              "EndLine": 1088
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/querystring-parser@4.2.5",
+          "Name": "@smithy/querystring-parser",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/querystring-parser@4.2.5",
+            "UID": "1ec781ec6e4ac335"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1089,
+              "EndLine": 1102
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/service-error-classification@4.2.5",
+          "Name": "@smithy/service-error-classification",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/service-error-classification@4.2.5",
+            "UID": "ae6127ff250dddf4"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1103,
+              "EndLine": 1115
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/shared-ini-file-loader@4.4.0",
+          "Name": "@smithy/shared-ini-file-loader",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/shared-ini-file-loader@4.4.0",
+            "UID": "5dd0ec930df0813"
+          },
+          "Version": "4.4.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1116,
+              "EndLine": 1129
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/signature-v4@5.3.5",
+          "Name": "@smithy/signature-v4",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/signature-v4@5.3.5",
+            "UID": "c82894006eac8951"
+          },
+          "Version": "5.3.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/is-array-buffer@4.2.0",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/types@4.9.0",
+            "@smithy/util-hex-encoding@4.2.0",
+            "@smithy/util-middleware@4.2.5",
+            "@smithy/util-uri-escape@4.2.0",
+            "@smithy/util-utf8@4.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1130,
+              "EndLine": 1149
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/smithy-client@4.9.9",
+          "Name": "@smithy/smithy-client",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/smithy-client@4.9.9",
+            "UID": "508245398e305b57"
+          },
+          "Version": "4.9.9",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/core@3.18.6",
+            "@smithy/middleware-endpoint@4.3.13",
+            "@smithy/middleware-stack@4.2.5",
+            "@smithy/protocol-http@5.3.5",
+            "@smithy/types@4.9.0",
+            "@smithy/util-stream@4.5.6",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1150,
+              "EndLine": 1168
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/types@4.9.0",
+          "Name": "@smithy/types",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/types@4.9.0",
+            "UID": "7f45b0916b4bf61f"
+          },
+          "Version": "4.9.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1169,
+              "EndLine": 1181
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/url-parser@4.2.5",
+          "Name": "@smithy/url-parser",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/url-parser@4.2.5",
+            "UID": "d3e1a31bdc91214c"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/querystring-parser@4.2.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1182,
+              "EndLine": 1196
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-base64@4.3.0",
+          "Name": "@smithy/util-base64",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-base64@4.3.0",
+            "UID": "68b4e318c2c2e425"
+          },
+          "Version": "4.3.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/util-buffer-from@4.2.0",
+            "@smithy/util-utf8@4.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1197,
+              "EndLine": 1211
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-body-length-browser@4.2.0",
+          "Name": "@smithy/util-body-length-browser",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-body-length-browser@4.2.0",
+            "UID": "1ae395ac6a3eab0b"
+          },
+          "Version": "4.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1212,
+              "EndLine": 1224
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-body-length-node@4.2.1",
+          "Name": "@smithy/util-body-length-node",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-body-length-node@4.2.1",
+            "UID": "9ad7b23024d06413"
+          },
+          "Version": "4.2.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1225,
+              "EndLine": 1237
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-buffer-from@2.2.0",
+          "Name": "@smithy/util-buffer-from",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-buffer-from@2.2.0",
+            "UID": "e13749a6b2672ee3"
+          },
+          "Version": "2.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/is-array-buffer@2.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 61,
+              "EndLine": 74
+            },
+            {
+              "StartLine": 139,
+              "EndLine": 152
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-buffer-from@4.2.0",
+          "Name": "@smithy/util-buffer-from",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-buffer-from@4.2.0",
+            "UID": "fc4120d33d625f21"
+          },
+          "Version": "4.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/is-array-buffer@4.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1238,
+              "EndLine": 1251
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-config-provider@4.2.0",
+          "Name": "@smithy/util-config-provider",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-config-provider@4.2.0",
+            "UID": "689a1a5b527e47d9"
+          },
+          "Version": "4.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1252,
+              "EndLine": 1264
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-defaults-mode-browser@4.3.12",
+          "Name": "@smithy/util-defaults-mode-browser",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-defaults-mode-browser@4.3.12",
+            "UID": "8d7c054b8482af76"
+          },
+          "Version": "4.3.12",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/property-provider@4.2.5",
+            "@smithy/smithy-client@4.9.9",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1265,
+              "EndLine": 1280
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-defaults-mode-node@4.2.15",
+          "Name": "@smithy/util-defaults-mode-node",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-defaults-mode-node@4.2.15",
+            "UID": "c6cf5a83c77bf3bc"
+          },
+          "Version": "4.2.15",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/config-resolver@4.4.3",
+            "@smithy/credential-provider-imds@4.2.5",
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/property-provider@4.2.5",
+            "@smithy/smithy-client@4.9.9",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1281,
+              "EndLine": 1299
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-endpoints@3.2.5",
+          "Name": "@smithy/util-endpoints",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-endpoints@3.2.5",
+            "UID": "2e0698293703dc5a"
+          },
+          "Version": "3.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/node-config-provider@4.3.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1300,
+              "EndLine": 1314
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-hex-encoding@4.2.0",
+          "Name": "@smithy/util-hex-encoding",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-hex-encoding@4.2.0",
+            "UID": "d3dbde63aaf9c63a"
+          },
+          "Version": "4.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1315,
+              "EndLine": 1327
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-middleware@4.2.5",
+          "Name": "@smithy/util-middleware",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-middleware@4.2.5",
+            "UID": "d53557bd9a795eee"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1328,
+              "EndLine": 1341
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-retry@4.2.5",
+          "Name": "@smithy/util-retry",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-retry@4.2.5",
+            "UID": "7fb22a7642ae01c2"
+          },
+          "Version": "4.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/service-error-classification@4.2.5",
+            "@smithy/types@4.9.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1342,
+              "EndLine": 1356
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-stream@4.5.6",
+          "Name": "@smithy/util-stream",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-stream@4.5.6",
+            "UID": "41b38a7f34769e6d"
+          },
+          "Version": "4.5.6",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/fetch-http-handler@5.3.6",
+            "@smithy/node-http-handler@4.4.5",
+            "@smithy/types@4.9.0",
+            "@smithy/util-base64@4.3.0",
+            "@smithy/util-buffer-from@4.2.0",
+            "@smithy/util-hex-encoding@4.2.0",
+            "@smithy/util-utf8@4.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1357,
+              "EndLine": 1376
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-uri-escape@4.2.0",
+          "Name": "@smithy/util-uri-escape",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-uri-escape@4.2.0",
+            "UID": "1c836598d6782455"
+          },
+          "Version": "4.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1377,
+              "EndLine": 1389
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-utf8@2.3.0",
+          "Name": "@smithy/util-utf8",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-utf8@2.3.0",
+            "UID": "a103f5635311553b"
+          },
+          "Version": "2.3.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/util-buffer-from@2.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 75,
+              "EndLine": 88
+            },
+            {
+              "StartLine": 153,
+              "EndLine": 166
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/util-utf8@4.2.0",
+          "Name": "@smithy/util-utf8",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/util-utf8@4.2.0",
+            "UID": "1e43bb882034e801"
+          },
+          "Version": "4.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@smithy/util-buffer-from@4.2.0",
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1390,
+              "EndLine": 1403
+            }
+          ]
+        },
+        {
+          "ID": "@smithy/uuid@1.1.0",
+          "Name": "@smithy/uuid",
+          "Identifier": {
+            "PURL": "pkg:npm/%40smithy/uuid@1.1.0",
+            "UID": "285c981d5a70da4"
+          },
+          "Version": "1.1.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tslib@2.8.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1404,
+              "EndLine": 1416
+            }
+          ]
+        },
+        {
+          "ID": "@so-ric/colorspace@1.1.6",
+          "Name": "@so-ric/colorspace",
+          "Identifier": {
+            "PURL": "pkg:npm/%40so-ric/colorspace@1.1.6",
+            "UID": "943256215e5244ce"
+          },
+          "Version": "1.1.6",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "color@5.0.3",
+            "text-hex@1.0.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1417,
+              "EndLine": 1426
+            }
+          ]
+        },
+        {
+          "ID": "@types/node@24.10.1",
+          "Name": "@types/node",
+          "Identifier": {
+            "PURL": "pkg:npm/%40types/node@24.10.1",
+            "UID": "a144a8bb3fc0d85"
+          },
+          "Version": "24.10.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "undici-types@7.16.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1427,
+              "EndLine": 1435
+            }
+          ]
+        },
+        {
+          "ID": "@types/triple-beam@1.3.5",
+          "Name": "@types/triple-beam",
+          "Identifier": {
+            "PURL": "pkg:npm/%40types/triple-beam@1.3.5",
+            "UID": "d2e91c95100b3c96"
+          },
+          "Version": "1.3.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1436,
+              "EndLine": 1441
+            }
+          ]
+        },
+        {
+          "ID": "@types/webidl-conversions@7.0.3",
+          "Name": "@types/webidl-conversions",
+          "Identifier": {
+            "PURL": "pkg:npm/%40types/webidl-conversions@7.0.3",
+            "UID": "d4ddfa26cc4aad00"
+          },
+          "Version": "7.0.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1442,
+              "EndLine": 1447
+            }
+          ]
+        },
+        {
+          "ID": "@types/whatwg-url@13.0.0",
+          "Name": "@types/whatwg-url",
+          "Identifier": {
+            "PURL": "pkg:npm/%40types/whatwg-url@13.0.0",
+            "UID": "7d931e1c08ec9942"
+          },
+          "Version": "13.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@types/webidl-conversions@7.0.3"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1448,
+              "EndLine": 1456
+            }
+          ]
+        },
+        {
+          "ID": "@types/whatwg-url@8.2.2",
+          "Name": "@types/whatwg-url",
+          "Identifier": {
+            "PURL": "pkg:npm/%40types/whatwg-url@8.2.2",
+            "UID": "7afbc5cc4d04202d"
+          },
+          "Version": "8.2.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@types/node@24.10.1",
+            "@types/webidl-conversions@7.0.3"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2917,
+              "EndLine": 2926
+            }
+          ]
+        },
+        {
+          "ID": "accepts@1.3.8",
+          "Name": "accepts",
+          "Identifier": {
+            "PURL": "pkg:npm/accepts@1.3.8",
+            "UID": "96db1130e16b561d"
+          },
+          "Version": "1.3.8",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "mime-types@2.1.35",
+            "negotiator@0.6.3"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1457,
+              "EndLine": 1469
+            }
+          ]
+        },
+        {
+          "ID": "agent-base@7.1.4",
+          "Name": "agent-base",
+          "Identifier": {
+            "PURL": "pkg:npm/agent-base@7.1.4",
+            "UID": "f8e5f861c7af4d0b"
+          },
+          "Version": "7.1.4",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1470,
+              "EndLine": 1478
+            }
+          ]
+        },
+        {
+          "ID": "append-field@1.0.0",
+          "Name": "append-field",
+          "Identifier": {
+            "PURL": "pkg:npm/append-field@1.0.0",
+            "UID": "2d9ef9c4828763b9"
+          },
+          "Version": "1.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1493,
+              "EndLine": 1498
+            }
+          ]
+        },
+        {
+          "ID": "array-flatten@1.1.1",
+          "Name": "array-flatten",
+          "Identifier": {
+            "PURL": "pkg:npm/array-flatten@1.1.1",
+            "UID": "dc659b03bc1abfe4"
+          },
+          "Version": "1.1.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1499,
+              "EndLine": 1504
+            }
+          ]
+        },
+        {
+          "ID": "async@3.2.6",
+          "Name": "async",
+          "Identifier": {
+            "PURL": "pkg:npm/async@3.2.6",
+            "UID": "40e88b71683f9cb6"
+          },
+          "Version": "3.2.6",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1505,
+              "EndLine": 1510
+            }
+          ]
+        },
+        {
+          "ID": "base64-js@1.5.1",
+          "Name": "base64-js",
+          "Identifier": {
+            "PURL": "pkg:npm/base64-js@1.5.1",
+            "UID": "855a189e67ad2bdd"
+          },
+          "Version": "1.5.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1518,
+              "EndLine": 1537
+            }
+          ]
+        },
+        {
+          "ID": "bignumber.js@9.3.1",
+          "Name": "bignumber.js",
+          "Identifier": {
+            "PURL": "pkg:npm/bignumber.js@9.3.1",
+            "UID": "f13d862fbf1a9caf"
+          },
+          "Version": "9.3.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1558,
+              "EndLine": 1566
+            }
+          ]
+        },
+        {
+          "ID": "body-parser@1.20.3",
+          "Name": "body-parser",
+          "Identifier": {
+            "PURL": "pkg:npm/body-parser@1.20.3",
+            "UID": "506e9b5ba26eb679"
+          },
+          "Version": "1.20.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "bytes@3.1.2",
+            "content-type@1.0.5",
+            "debug@2.6.9",
+            "depd@2.0.0",
+            "destroy@1.2.0",
+            "http-errors@2.0.0",
+            "iconv-lite@0.4.24",
+            "on-finished@2.4.1",
+            "qs@6.13.0",
+            "raw-body@2.5.2",
+            "type-is@1.6.18",
+            "unpipe@1.0.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1580,
+              "EndLine": 1603
+            }
+          ]
+        },
+        {
+          "ID": "bowser@2.13.1",
+          "Name": "bowser",
+          "Identifier": {
+            "PURL": "pkg:npm/bowser@2.13.1",
+            "UID": "69632109964a7375"
+          },
+          "Version": "2.13.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1604,
+              "EndLine": 1610
+            }
+          ]
+        },
+        {
+          "ID": "bson@4.7.2",
+          "Name": "bson",
+          "Identifier": {
+            "PURL": "pkg:npm/bson@4.7.2",
+            "UID": "2acc4f66f60ccd95"
+          },
+          "Version": "4.7.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "buffer@5.7.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1635,
+              "EndLine": 1646
+            }
+          ]
+        },
+        {
+          "ID": "bson@7.0.0",
+          "Name": "bson",
+          "Identifier": {
+            "PURL": "pkg:npm/bson@7.0.0",
+            "UID": "f6b6ca3fe9959abe"
+          },
+          "Version": "7.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2886,
+              "EndLine": 2894
+            }
+          ]
+        },
+        {
+          "ID": "buffer@5.7.1",
+          "Name": "buffer",
+          "Identifier": {
+            "PURL": "pkg:npm/buffer@5.7.1",
+            "UID": "8d4392df03219813"
+          },
+          "Version": "5.7.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "base64-js@1.5.1",
+            "ieee754@1.2.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1647,
+              "EndLine": 1670
+            }
+          ]
+        },
+        {
+          "ID": "buffer-equal-constant-time@1.0.1",
+          "Name": "buffer-equal-constant-time",
+          "Identifier": {
+            "PURL": "pkg:npm/buffer-equal-constant-time@1.0.1",
+            "UID": "8fe2380550683206"
+          },
+          "Version": "1.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1671,
+              "EndLine": 1676
+            }
+          ]
+        },
+        {
+          "ID": "buffer-from@1.1.2",
+          "Name": "buffer-from",
+          "Identifier": {
+            "PURL": "pkg:npm/buffer-from@1.1.2",
+            "UID": "a774a180d49f735f"
+          },
+          "Version": "1.1.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1677,
+              "EndLine": 1682
+            }
+          ]
+        },
+        {
+          "ID": "busboy@1.6.0",
+          "Name": "busboy",
+          "Identifier": {
+            "PURL": "pkg:npm/busboy@1.6.0",
+            "UID": "80a0670fa4e1703"
+          },
+          "Version": "1.6.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "streamsearch@1.1.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1683,
+              "EndLine": 1693
+            }
+          ]
+        },
+        {
+          "ID": "bytes@3.1.2",
+          "Name": "bytes",
+          "Identifier": {
+            "PURL": "pkg:npm/bytes@3.1.2",
+            "UID": "6569b2170793b4b2"
+          },
+          "Version": "3.1.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1694,
+              "EndLine": 1702
+            }
+          ]
+        },
+        {
+          "ID": "call-bind-apply-helpers@1.0.2",
+          "Name": "call-bind-apply-helpers",
+          "Identifier": {
+            "PURL": "pkg:npm/call-bind-apply-helpers@1.0.2",
+            "UID": "263ebb77a25b55a"
+          },
+          "Version": "1.0.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "es-errors@1.3.0",
+            "function-bind@1.1.2"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1703,
+              "EndLine": 1715
+            }
+          ]
+        },
+        {
+          "ID": "call-bound@1.0.4",
+          "Name": "call-bound",
+          "Identifier": {
+            "PURL": "pkg:npm/call-bound@1.0.4",
+            "UID": "d4e7c94d5a3d5997"
+          },
+          "Version": "1.0.4",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "call-bind-apply-helpers@1.0.2",
+            "get-intrinsic@1.3.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1716,
+              "EndLine": 1731
+            }
+          ]
+        },
+        {
+          "ID": "color@5.0.3",
+          "Name": "color",
+          "Identifier": {
+            "PURL": "pkg:npm/color@5.0.3",
+            "UID": "b2ed539582f9a0b9"
+          },
+          "Version": "5.0.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "color-convert@3.1.3",
+            "color-string@2.1.4"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1770,
+              "EndLine": 1782
+            }
+          ]
+        },
+        {
+          "ID": "color-convert@3.1.3",
+          "Name": "color-convert",
+          "Identifier": {
+            "PURL": "pkg:npm/color-convert@3.1.3",
+            "UID": "c1c349c3fd972bf1"
+          },
+          "Version": "3.1.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "color-name@2.1.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1783,
+              "EndLine": 1794
+            }
+          ]
+        },
+        {
+          "ID": "color-name@2.1.0",
+          "Name": "color-name",
+          "Identifier": {
+            "PURL": "pkg:npm/color-name@2.1.0",
+            "UID": "a7ada666c782cad9"
+          },
+          "Version": "2.1.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1795,
+              "EndLine": 1803
+            }
+          ]
+        },
+        {
+          "ID": "color-string@2.1.4",
+          "Name": "color-string",
+          "Identifier": {
+            "PURL": "pkg:npm/color-string@2.1.4",
+            "UID": "d8f5fca0e7bac432"
+          },
+          "Version": "2.1.4",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "color-name@2.1.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1804,
+              "EndLine": 1815
+            }
+          ]
+        },
+        {
+          "ID": "concat-stream@2.0.0",
+          "Name": "concat-stream",
+          "Identifier": {
+            "PURL": "pkg:npm/concat-stream@2.0.0",
+            "UID": "6456ecd96c7c2ce1"
+          },
+          "Version": "2.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "buffer-from@1.1.2",
+            "inherits@2.0.4",
+            "readable-stream@3.6.2",
+            "typedarray@0.0.6"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1823,
+              "EndLine": 1837
+            }
+          ]
+        },
+        {
+          "ID": "content-disposition@0.5.4",
+          "Name": "content-disposition",
+          "Identifier": {
+            "PURL": "pkg:npm/content-disposition@0.5.4",
+            "UID": "946dfd598410116b"
+          },
+          "Version": "0.5.4",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "safe-buffer@5.2.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1838,
+              "EndLine": 1849
+            }
+          ]
+        },
+        {
+          "ID": "content-type@1.0.5",
+          "Name": "content-type",
+          "Identifier": {
+            "PURL": "pkg:npm/content-type@1.0.5",
+            "UID": "ffe1f642e02b5178"
+          },
+          "Version": "1.0.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1850,
+              "EndLine": 1858
+            }
+          ]
+        },
+        {
+          "ID": "cookie@0.7.1",
+          "Name": "cookie",
+          "Identifier": {
+            "PURL": "pkg:npm/cookie@0.7.1",
+            "UID": "1af3e185da21abea"
+          },
+          "Version": "0.7.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1859,
+              "EndLine": 1867
+            }
+          ]
+        },
+        {
+          "ID": "cookie-signature@1.0.6",
+          "Name": "cookie-signature",
+          "Identifier": {
+            "PURL": "pkg:npm/cookie-signature@1.0.6",
+            "UID": "24027ee0364a75aa"
+          },
+          "Version": "1.0.6",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1868,
+              "EndLine": 1873
+            }
+          ]
+        },
+        {
+          "ID": "debug@2.6.9",
+          "Name": "debug",
+          "Identifier": {
+            "PURL": "pkg:npm/debug@2.6.9",
+            "UID": "e48e4a04a6f24ed1"
+          },
+          "Version": "2.6.9",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "ms@2.0.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1887,
+              "EndLine": 1895
+            }
+          ]
+        },
+        {
+          "ID": "debug@4.4.3",
+          "Name": "debug",
+          "Identifier": {
+            "PURL": "pkg:npm/debug@4.4.3",
+            "UID": "ee260b493e60f34c"
+          },
+          "Version": "4.4.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "ms@2.1.3"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2405,
+              "EndLine": 2421
+            },
+            {
+              "StartLine": 3007,
+              "EndLine": 3023
+            }
+          ]
+        },
+        {
+          "ID": "depd@2.0.0",
+          "Name": "depd",
+          "Identifier": {
+            "PURL": "pkg:npm/depd@2.0.0",
+            "UID": "1c4a431065caab4d"
+          },
+          "Version": "2.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1896,
+              "EndLine": 1904
+            }
+          ]
+        },
+        {
+          "ID": "destroy@1.2.0",
+          "Name": "destroy",
+          "Identifier": {
+            "PURL": "pkg:npm/destroy@1.2.0",
+            "UID": "88b0eb690652d5c"
+          },
+          "Version": "1.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1905,
+              "EndLine": 1914
+            }
+          ]
+        },
+        {
+          "ID": "dunder-proto@1.0.1",
+          "Name": "dunder-proto",
+          "Identifier": {
+            "PURL": "pkg:npm/dunder-proto@1.0.1",
+            "UID": "d4fcc6397cfdaf45"
+          },
+          "Version": "1.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "call-bind-apply-helpers@1.0.2",
+            "es-errors@1.3.0",
+            "gopd@1.2.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1924,
+              "EndLine": 1937
+            }
+          ]
+        },
+        {
+          "ID": "ecdsa-sig-formatter@1.0.11",
+          "Name": "ecdsa-sig-formatter",
+          "Identifier": {
+            "PURL": "pkg:npm/ecdsa-sig-formatter@1.0.11",
+            "UID": "9cd88e6f9e13f466"
+          },
+          "Version": "1.0.11",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "safe-buffer@5.2.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1938,
+              "EndLine": 1946
+            }
+          ]
+        },
+        {
+          "ID": "ee-first@1.1.1",
+          "Name": "ee-first",
+          "Identifier": {
+            "PURL": "pkg:npm/ee-first@1.1.1",
+            "UID": "6b2dbbe380dfbd8a"
+          },
+          "Version": "1.1.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1947,
+              "EndLine": 1952
+            }
+          ]
+        },
+        {
+          "ID": "enabled@2.0.0",
+          "Name": "enabled",
+          "Identifier": {
+            "PURL": "pkg:npm/enabled@2.0.0",
+            "UID": "d2f8b9e322d2fca7"
+          },
+          "Version": "2.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1953,
+              "EndLine": 1958
+            }
+          ]
+        },
+        {
+          "ID": "encodeurl@1.0.2",
+          "Name": "encodeurl",
+          "Identifier": {
+            "PURL": "pkg:npm/encodeurl@1.0.2",
+            "UID": "33f3294047008f8e"
+          },
+          "Version": "1.0.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3432,
+              "EndLine": 3440
+            }
+          ]
+        },
+        {
+          "ID": "encodeurl@2.0.0",
+          "Name": "encodeurl",
+          "Identifier": {
+            "PURL": "pkg:npm/encodeurl@2.0.0",
+            "UID": "ace6287cf61a2799"
+          },
+          "Version": "2.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1959,
+              "EndLine": 1967
+            }
+          ]
+        },
+        {
+          "ID": "es-define-property@1.0.1",
+          "Name": "es-define-property",
+          "Identifier": {
+            "PURL": "pkg:npm/es-define-property@1.0.1",
+            "UID": "d4388b57ddb71261"
+          },
+          "Version": "1.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1968,
+              "EndLine": 1976
+            }
+          ]
+        },
+        {
+          "ID": "es-errors@1.3.0",
+          "Name": "es-errors",
+          "Identifier": {
+            "PURL": "pkg:npm/es-errors@1.3.0",
+            "UID": "8af5264fcf6dbe70"
+          },
+          "Version": "1.3.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1977,
+              "EndLine": 1985
+            }
+          ]
+        },
+        {
+          "ID": "es-object-atoms@1.1.1",
+          "Name": "es-object-atoms",
+          "Identifier": {
+            "PURL": "pkg:npm/es-object-atoms@1.1.1",
+            "UID": "a355ddbf65010254"
+          },
+          "Version": "1.1.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "es-errors@1.3.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 1986,
+              "EndLine": 1997
+            }
+          ]
+        },
+        {
+          "ID": "escape-html@1.0.3",
+          "Name": "escape-html",
+          "Identifier": {
+            "PURL": "pkg:npm/escape-html@1.0.3",
+            "UID": "5a5d499366d7c6e8"
+          },
+          "Version": "1.0.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 1998,
+              "EndLine": 2003
+            }
+          ]
+        },
+        {
+          "ID": "etag@1.8.1",
+          "Name": "etag",
+          "Identifier": {
+            "PURL": "pkg:npm/etag@1.8.1",
+            "UID": "dd87f14b8998e0c0"
+          },
+          "Version": "1.8.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2004,
+              "EndLine": 2012
+            }
+          ]
+        },
+        {
+          "ID": "extend@3.0.2",
+          "Name": "extend",
+          "Identifier": {
+            "PURL": "pkg:npm/extend@3.0.2",
+            "UID": "8bb49f8895575dfe"
+          },
+          "Version": "3.0.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2059,
+              "EndLine": 2064
+            }
+          ]
+        },
+        {
+          "ID": "fast-xml-parser@5.2.5",
+          "Name": "fast-xml-parser",
+          "Identifier": {
+            "PURL": "pkg:npm/fast-xml-parser@5.2.5",
+            "UID": "19a6fd34e4d05c69"
+          },
+          "Version": "5.2.5",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "strnum@2.1.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2065,
+              "EndLine": 2083
+            }
+          ]
+        },
+        {
+          "ID": "fecha@4.2.3",
+          "Name": "fecha",
+          "Identifier": {
+            "PURL": "pkg:npm/fecha@4.2.3",
+            "UID": "f79221d7e378ac64"
+          },
+          "Version": "4.2.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2084,
+              "EndLine": 2089
+            }
+          ]
+        },
+        {
+          "ID": "finalhandler@1.3.1",
+          "Name": "finalhandler",
+          "Identifier": {
+            "PURL": "pkg:npm/finalhandler@1.3.1",
+            "UID": "3cabd843f4ac9375"
+          },
+          "Version": "1.3.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "debug@2.6.9",
+            "encodeurl@2.0.0",
+            "escape-html@1.0.3",
+            "on-finished@2.4.1",
+            "parseurl@1.3.3",
+            "statuses@2.0.1",
+            "unpipe@1.0.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2103,
+              "EndLine": 2120
+            }
+          ]
+        },
+        {
+          "ID": "fn.name@1.1.0",
+          "Name": "fn.name",
+          "Identifier": {
+            "PURL": "pkg:npm/fn.name@1.1.0",
+            "UID": "60e11284ec587184"
+          },
+          "Version": "1.1.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2121,
+              "EndLine": 2126
+            }
+          ]
+        },
+        {
+          "ID": "forwarded@0.2.0",
+          "Name": "forwarded",
+          "Identifier": {
+            "PURL": "pkg:npm/forwarded@0.2.0",
+            "UID": "1d21364124e5b7b6"
+          },
+          "Version": "0.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2127,
+              "EndLine": 2135
+            }
+          ]
+        },
+        {
+          "ID": "fresh@0.5.2",
+          "Name": "fresh",
+          "Identifier": {
+            "PURL": "pkg:npm/fresh@0.5.2",
+            "UID": "898df998d8dcc882"
+          },
+          "Version": "0.5.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2136,
+              "EndLine": 2144
+            }
+          ]
+        },
+        {
+          "ID": "function-bind@1.1.2",
+          "Name": "function-bind",
+          "Identifier": {
+            "PURL": "pkg:npm/function-bind@1.1.2",
+            "UID": "5e8f3b89ddd63da9"
+          },
+          "Version": "1.1.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2160,
+              "EndLine": 2168
+            }
+          ]
+        },
+        {
+          "ID": "gaxios@6.7.1",
+          "Name": "gaxios",
+          "Identifier": {
+            "PURL": "pkg:npm/gaxios@6.7.1",
+            "UID": "5bd0f9e6ddc8c139"
+          },
+          "Version": "6.7.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "extend@3.0.2",
+            "https-proxy-agent@7.0.6",
+            "is-stream@2.0.1",
+            "node-fetch@2.7.0",
+            "uuid@9.0.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2169,
+              "EndLine": 2184
+            }
+          ]
+        },
+        {
+          "ID": "gcp-metadata@6.1.1",
+          "Name": "gcp-metadata",
+          "Identifier": {
+            "PURL": "pkg:npm/gcp-metadata@6.1.1",
+            "UID": "67659db61dc31ce7"
+          },
+          "Version": "6.1.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "gaxios@6.7.1",
+            "google-logging-utils@0.0.2",
+            "json-bigint@1.0.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2252,
+              "EndLine": 2265
+            }
+          ]
+        },
+        {
+          "ID": "get-intrinsic@1.3.0",
+          "Name": "get-intrinsic",
+          "Identifier": {
+            "PURL": "pkg:npm/get-intrinsic@1.3.0",
+            "UID": "b60a62afc84e1d87"
+          },
+          "Version": "1.3.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "call-bind-apply-helpers@1.0.2",
+            "es-define-property@1.0.1",
+            "es-errors@1.3.0",
+            "es-object-atoms@1.1.1",
+            "function-bind@1.1.2",
+            "get-proto@1.0.1",
+            "gopd@1.2.0",
+            "has-symbols@1.1.0",
+            "hasown@2.0.2",
+            "math-intrinsics@1.1.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2185,
+              "EndLine": 2208
+            }
+          ]
+        },
+        {
+          "ID": "get-proto@1.0.1",
+          "Name": "get-proto",
+          "Identifier": {
+            "PURL": "pkg:npm/get-proto@1.0.1",
+            "UID": "51e4a0ae1fde2dc"
+          },
+          "Version": "1.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "dunder-proto@1.0.1",
+            "es-object-atoms@1.1.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2209,
+              "EndLine": 2221
+            }
+          ]
+        },
+        {
+          "ID": "google-logging-utils@0.0.2",
+          "Name": "google-logging-utils",
+          "Identifier": {
+            "PURL": "pkg:npm/google-logging-utils@0.0.2",
+            "UID": "9ae6ca10c3d0ef8d"
+          },
+          "Version": "0.0.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2266,
+              "EndLine": 2274
+            }
+          ]
+        },
+        {
+          "ID": "gopd@1.2.0",
+          "Name": "gopd",
+          "Identifier": {
+            "PURL": "pkg:npm/gopd@1.2.0",
+            "UID": "1538003fedba181b"
+          },
+          "Version": "1.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2296,
+              "EndLine": 2307
+            }
+          ]
+        },
+        {
+          "ID": "gtoken@7.1.0",
+          "Name": "gtoken",
+          "Identifier": {
+            "PURL": "pkg:npm/gtoken@7.1.0",
+            "UID": "43e7f84cf1ba387a"
+          },
+          "Version": "7.1.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "gaxios@6.7.1",
+            "jws@4.0.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2308,
+              "EndLine": 2320
+            }
+          ]
+        },
+        {
+          "ID": "has-symbols@1.1.0",
+          "Name": "has-symbols",
+          "Identifier": {
+            "PURL": "pkg:npm/has-symbols@1.1.0",
+            "UID": "1e9c9a95530696f7"
+          },
+          "Version": "1.1.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2352,
+              "EndLine": 2363
+            }
+          ]
+        },
+        {
+          "ID": "hasown@2.0.2",
+          "Name": "hasown",
+          "Identifier": {
+            "PURL": "pkg:npm/hasown@2.0.2",
+            "UID": "bf7bd2d51b009742"
+          },
+          "Version": "2.0.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "function-bind@1.1.2"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2364,
+              "EndLine": 2375
+            }
+          ]
+        },
+        {
+          "ID": "http-errors@2.0.0",
+          "Name": "http-errors",
+          "Identifier": {
+            "PURL": "pkg:npm/http-errors@2.0.0",
+            "UID": "97a1a9c47cfc734e"
+          },
+          "Version": "2.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "depd@2.0.0",
+            "inherits@2.0.4",
+            "setprototypeof@1.2.0",
+            "statuses@2.0.1",
+            "toidentifier@1.0.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2376,
+              "EndLine": 2391
+            }
+          ]
+        },
+        {
+          "ID": "https-proxy-agent@7.0.6",
+          "Name": "https-proxy-agent",
+          "Identifier": {
+            "PURL": "pkg:npm/https-proxy-agent@7.0.6",
+            "UID": "3c8d96b8794edc3c"
+          },
+          "Version": "7.0.6",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "agent-base@7.1.4",
+            "debug@4.4.3"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2392,
+              "EndLine": 2404
+            }
+          ]
+        },
+        {
+          "ID": "iconv-lite@0.4.24",
+          "Name": "iconv-lite",
+          "Identifier": {
+            "PURL": "pkg:npm/iconv-lite@0.4.24",
+            "UID": "917bc153f750d307"
+          },
+          "Version": "0.4.24",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "safer-buffer@2.1.2"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2428,
+              "EndLine": 2439
+            }
+          ]
+        },
+        {
+          "ID": "ieee754@1.2.1",
+          "Name": "ieee754",
+          "Identifier": {
+            "PURL": "pkg:npm/ieee754@1.2.1",
+            "UID": "dfa7e99c356891de"
+          },
+          "Version": "1.2.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2440,
+              "EndLine": 2459
+            }
+          ]
+        },
+        {
+          "ID": "inherits@2.0.4",
+          "Name": "inherits",
+          "Identifier": {
+            "PURL": "pkg:npm/inherits@2.0.4",
+            "UID": "d9eb1de22fa1198f"
+          },
+          "Version": "2.0.4",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2467,
+              "EndLine": 2472
+            }
+          ]
+        },
+        {
+          "ID": "ip-address@10.1.0",
+          "Name": "ip-address",
+          "Identifier": {
+            "PURL": "pkg:npm/ip-address@10.1.0",
+            "UID": "e06bd2022e01f32e"
+          },
+          "Version": "10.1.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2473,
+              "EndLine": 2481
+            }
+          ]
+        },
+        {
+          "ID": "ipaddr.js@1.9.1",
+          "Name": "ipaddr.js",
+          "Identifier": {
+            "PURL": "pkg:npm/ipaddr.js@1.9.1",
+            "UID": "72130aa6b9ab962c"
+          },
+          "Version": "1.9.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2482,
+              "EndLine": 2490
+            }
+          ]
+        },
+        {
+          "ID": "is-stream@2.0.1",
+          "Name": "is-stream",
+          "Identifier": {
+            "PURL": "pkg:npm/is-stream@2.0.1",
+            "UID": "e57809e1217cb5ea"
+          },
+          "Version": "2.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2537,
+              "EndLine": 2548
+            }
+          ]
+        },
+        {
+          "ID": "json-bigint@1.0.0",
+          "Name": "json-bigint",
+          "Identifier": {
+            "PURL": "pkg:npm/json-bigint@1.0.0",
+            "UID": "8304fa4735219a25"
+          },
+          "Version": "1.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "bignumber.js@9.3.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2549,
+              "EndLine": 2557
+            }
+          ]
+        },
+        {
+          "ID": "jwa@1.4.2",
+          "Name": "jwa",
+          "Identifier": {
+            "PURL": "pkg:npm/jwa@1.4.2",
+            "UID": "9d588d42bf6452e9"
+          },
+          "Version": "1.4.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "buffer-equal-constant-time@1.0.1",
+            "ecdsa-sig-formatter@1.0.11",
+            "safe-buffer@5.2.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2598,
+              "EndLine": 2608
+            }
+          ]
+        },
+        {
+          "ID": "jwa@2.0.1",
+          "Name": "jwa",
+          "Identifier": {
+            "PURL": "pkg:npm/jwa@2.0.1",
+            "UID": "5c94fbcd7bcdbbdc"
+          },
+          "Version": "2.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "buffer-equal-constant-time@1.0.1",
+            "ecdsa-sig-formatter@1.0.11",
+            "safe-buffer@5.2.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2275,
+              "EndLine": 2285
+            },
+            {
+              "StartLine": 2321,
+              "EndLine": 2331
+            }
+          ]
+        },
+        {
+          "ID": "jws@3.2.3",
+          "Name": "jws",
+          "Identifier": {
+            "PURL": "pkg:npm/jws@3.2.3",
+            "UID": "69552d29d4290942"
+          },
+          "Version": "3.2.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "jwa@1.4.2",
+            "safe-buffer@5.2.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2609,
+              "EndLine": 2618
+            }
+          ]
+        },
+        {
+          "ID": "jws@4.0.1",
+          "Name": "jws",
+          "Identifier": {
+            "PURL": "pkg:npm/jws@4.0.1",
+            "UID": "ab6a99edbc05913a"
+          },
+          "Version": "4.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "jwa@2.0.1",
+            "safe-buffer@5.2.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2286,
+              "EndLine": 2295
+            },
+            {
+              "StartLine": 2332,
+              "EndLine": 2341
+            }
+          ]
+        },
+        {
+          "ID": "kareem@2.5.1",
+          "Name": "kareem",
+          "Identifier": {
+            "PURL": "pkg:npm/kareem@2.5.1",
+            "UID": "3be82af1adfb131d"
+          },
+          "Version": "2.5.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2619,
+              "EndLine": 2627
+            }
+          ]
+        },
+        {
+          "ID": "kuler@2.0.0",
+          "Name": "kuler",
+          "Identifier": {
+            "PURL": "pkg:npm/kuler@2.0.0",
+            "UID": "fc813c201b1910c4"
+          },
+          "Version": "2.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2628,
+              "EndLine": 2633
+            }
+          ]
+        },
+        {
+          "ID": "lodash@4.17.21",
+          "Name": "lodash",
+          "Identifier": {
+            "PURL": "pkg:npm/lodash@4.17.21",
+            "UID": "84179b9b1938182f"
+          },
+          "Version": "4.17.21",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2634,
+              "EndLine": 2639
+            }
+          ]
+        },
+        {
+          "ID": "lodash.includes@4.3.0",
+          "Name": "lodash.includes",
+          "Identifier": {
+            "PURL": "pkg:npm/lodash.includes@4.3.0",
+            "UID": "8c490559dde7d35b"
+          },
+          "Version": "4.3.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2640,
+              "EndLine": 2645
+            }
+          ]
+        },
+        {
+          "ID": "lodash.isboolean@3.0.3",
+          "Name": "lodash.isboolean",
+          "Identifier": {
+            "PURL": "pkg:npm/lodash.isboolean@3.0.3",
+            "UID": "d9787374f33013f7"
+          },
+          "Version": "3.0.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2646,
+              "EndLine": 2651
+            }
+          ]
+        },
+        {
+          "ID": "lodash.isinteger@4.0.4",
+          "Name": "lodash.isinteger",
+          "Identifier": {
+            "PURL": "pkg:npm/lodash.isinteger@4.0.4",
+            "UID": "225efc239d40da5e"
+          },
+          "Version": "4.0.4",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2652,
+              "EndLine": 2657
+            }
+          ]
+        },
+        {
+          "ID": "lodash.isnumber@3.0.3",
+          "Name": "lodash.isnumber",
+          "Identifier": {
+            "PURL": "pkg:npm/lodash.isnumber@3.0.3",
+            "UID": "af2af38d771a3411"
+          },
+          "Version": "3.0.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2658,
+              "EndLine": 2663
+            }
+          ]
+        },
+        {
+          "ID": "lodash.isplainobject@4.0.6",
+          "Name": "lodash.isplainobject",
+          "Identifier": {
+            "PURL": "pkg:npm/lodash.isplainobject@4.0.6",
+            "UID": "54c4150264dd942b"
+          },
+          "Version": "4.0.6",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2664,
+              "EndLine": 2669
+            }
+          ]
+        },
+        {
+          "ID": "lodash.isstring@4.0.1",
+          "Name": "lodash.isstring",
+          "Identifier": {
+            "PURL": "pkg:npm/lodash.isstring@4.0.1",
+            "UID": "b6861ff62f30172d"
+          },
+          "Version": "4.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2670,
+              "EndLine": 2675
+            }
+          ]
+        },
+        {
+          "ID": "lodash.once@4.1.1",
+          "Name": "lodash.once",
+          "Identifier": {
+            "PURL": "pkg:npm/lodash.once@4.1.1",
+            "UID": "68f898fda85e1e4c"
+          },
+          "Version": "4.1.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2676,
+              "EndLine": 2681
+            }
+          ]
+        },
+        {
+          "ID": "logform@2.7.0",
+          "Name": "logform",
+          "Identifier": {
+            "PURL": "pkg:npm/logform@2.7.0",
+            "UID": "316f485e40e76123"
+          },
+          "Version": "2.7.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@colors/colors@1.6.0",
+            "@types/triple-beam@1.3.5",
+            "fecha@4.2.3",
+            "ms@2.1.3",
+            "safe-stable-stringify@2.5.0",
+            "triple-beam@1.4.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2682,
+              "EndLine": 2698
+            }
+          ]
+        },
+        {
+          "ID": "math-intrinsics@1.1.0",
+          "Name": "math-intrinsics",
+          "Identifier": {
+            "PURL": "pkg:npm/math-intrinsics@1.1.0",
+            "UID": "6384e2ed929285d1"
+          },
+          "Version": "1.1.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2718,
+              "EndLine": 2726
+            }
+          ]
+        },
+        {
+          "ID": "media-typer@0.3.0",
+          "Name": "media-typer",
+          "Identifier": {
+            "PURL": "pkg:npm/media-typer@0.3.0",
+            "UID": "1fe57e4b350b48d1"
+          },
+          "Version": "0.3.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2727,
+              "EndLine": 2735
+            }
+          ]
+        },
+        {
+          "ID": "memory-pager@1.5.0",
+          "Name": "memory-pager",
+          "Identifier": {
+            "PURL": "pkg:npm/memory-pager@1.5.0",
+            "UID": "56d5dadc00b0fe73"
+          },
+          "Version": "1.5.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2736,
+              "EndLine": 2741
+            }
+          ]
+        },
+        {
+          "ID": "merge-descriptors@1.0.3",
+          "Name": "merge-descriptors",
+          "Identifier": {
+            "PURL": "pkg:npm/merge-descriptors@1.0.3",
+            "UID": "452e4055e76008e5"
+          },
+          "Version": "1.0.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2742,
+              "EndLine": 2750
+            }
+          ]
+        },
+        {
+          "ID": "methods@1.1.2",
+          "Name": "methods",
+          "Identifier": {
+            "PURL": "pkg:npm/methods@1.1.2",
+            "UID": "3bf1aedde98cda11"
+          },
+          "Version": "1.1.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2751,
+              "EndLine": 2759
+            }
+          ]
+        },
+        {
+          "ID": "mime@1.6.0",
+          "Name": "mime",
+          "Identifier": {
+            "PURL": "pkg:npm/mime@1.6.0",
+            "UID": "de866914b9c16a16"
+          },
+          "Version": "1.6.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2760,
+              "EndLine": 2771
+            }
+          ]
+        },
+        {
+          "ID": "mime-db@1.52.0",
+          "Name": "mime-db",
+          "Identifier": {
+            "PURL": "pkg:npm/mime-db@1.52.0",
+            "UID": "e9c8d3a4eecab020"
+          },
+          "Version": "1.52.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2772,
+              "EndLine": 2780
+            }
+          ]
+        },
+        {
+          "ID": "mime-types@2.1.35",
+          "Name": "mime-types",
+          "Identifier": {
+            "PURL": "pkg:npm/mime-types@2.1.35",
+            "UID": "660455718704b346"
+          },
+          "Version": "2.1.35",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "mime-db@1.52.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2781,
+              "EndLine": 2792
+            }
+          ]
+        },
+        {
+          "ID": "minimist@1.2.8",
+          "Name": "minimist",
+          "Identifier": {
+            "PURL": "pkg:npm/minimist@1.2.8",
+            "UID": "646d5799a3caac28"
+          },
+          "Version": "1.2.8",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2806,
+              "EndLine": 2814
+            }
+          ]
+        },
+        {
+          "ID": "mkdirp@0.5.6",
+          "Name": "mkdirp",
+          "Identifier": {
+            "PURL": "pkg:npm/mkdirp@0.5.6",
+            "UID": "1cbe75c50c379d16"
+          },
+          "Version": "0.5.6",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "minimist@1.2.8"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2815,
+              "EndLine": 2826
+            }
+          ]
+        },
+        {
+          "ID": "mongodb@4.17.2",
+          "Name": "mongodb",
+          "Identifier": {
+            "PURL": "pkg:npm/mongodb@4.17.2",
+            "UID": "32a9dc7bade856a9"
+          },
+          "Version": "4.17.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@aws-sdk/credential-providers@3.943.0",
+            "@mongodb-js/saslprep@1.3.2",
+            "bson@4.7.2",
+            "mongodb-connection-string-url@2.6.0",
+            "socks@2.8.7"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2927,
+              "EndLine": 2944
+            }
+          ]
+        },
+        {
+          "ID": "mongodb-connection-string-url@2.6.0",
+          "Name": "mongodb-connection-string-url",
+          "Identifier": {
+            "PURL": "pkg:npm/mongodb-connection-string-url@2.6.0",
+            "UID": "ccbaaad2af471723"
+          },
+          "Version": "2.6.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@types/whatwg-url@8.2.2",
+            "whatwg-url@11.0.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2945,
+              "EndLine": 2954
+            }
+          ]
+        },
+        {
+          "ID": "mongodb-connection-string-url@7.0.0",
+          "Name": "mongodb-connection-string-url",
+          "Identifier": {
+            "PURL": "pkg:npm/mongodb-connection-string-url@7.0.0",
+            "UID": "da7213f730a383ce"
+          },
+          "Version": "7.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "@types/whatwg-url@13.0.0",
+            "whatwg-url@14.2.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2873,
+              "EndLine": 2885
+            }
+          ]
+        },
+        {
+          "ID": "mpath@0.9.0",
+          "Name": "mpath",
+          "Identifier": {
+            "PURL": "pkg:npm/mpath@0.9.0",
+            "UID": "e24bdf3f63faa1f3"
+          },
+          "Version": "0.9.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2986,
+              "EndLine": 2994
+            }
+          ]
+        },
+        {
+          "ID": "mquery@4.0.3",
+          "Name": "mquery",
+          "Identifier": {
+            "PURL": "pkg:npm/mquery@4.0.3",
+            "UID": "34809a3d03061024"
+          },
+          "Version": "4.0.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "debug@4.4.3"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2995,
+              "EndLine": 3006
+            }
+          ]
+        },
+        {
+          "ID": "ms@2.0.0",
+          "Name": "ms",
+          "Identifier": {
+            "PURL": "pkg:npm/ms@2.0.0",
+            "UID": "a5bf4dda1d0fdbd6"
+          },
+          "Version": "2.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3030,
+              "EndLine": 3035
+            }
+          ]
+        },
+        {
+          "ID": "ms@2.1.3",
+          "Name": "ms",
+          "Identifier": {
+            "PURL": "pkg:npm/ms@2.1.3",
+            "UID": "3dcae4b2da21e381"
+          },
+          "Version": "2.1.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2422,
+              "EndLine": 2427
+            },
+            {
+              "StartLine": 2580,
+              "EndLine": 2585
+            },
+            {
+              "StartLine": 2699,
+              "EndLine": 2704
+            },
+            {
+              "StartLine": 2955,
+              "EndLine": 2960
+            },
+            {
+              "StartLine": 3024,
+              "EndLine": 3029
+            },
+            {
+              "StartLine": 3164,
+              "EndLine": 3170
+            },
+            {
+              "StartLine": 3441,
+              "EndLine": 3446
+            }
+          ]
+        },
+        {
+          "ID": "negotiator@0.6.3",
+          "Name": "negotiator",
+          "Identifier": {
+            "PURL": "pkg:npm/negotiator@0.6.3",
+            "UID": "64dc3667d90bd524"
+          },
+          "Version": "0.6.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3054,
+              "EndLine": 3062
+            }
+          ]
+        },
+        {
+          "ID": "node-addon-api@8.5.0",
+          "Name": "node-addon-api",
+          "Identifier": {
+            "PURL": "pkg:npm/node-addon-api@8.5.0",
+            "UID": "70d9a27c0d77a6a6"
+          },
+          "Version": "8.5.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3063,
+              "EndLine": 3071
+            }
+          ]
+        },
+        {
+          "ID": "node-fetch@2.7.0",
+          "Name": "node-fetch",
+          "Identifier": {
+            "PURL": "pkg:npm/node-fetch@2.7.0",
+            "UID": "20eac6d91d2bfab4"
+          },
+          "Version": "2.7.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "whatwg-url@5.0.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3072,
+              "EndLine": 3091
+            }
+          ]
+        },
+        {
+          "ID": "node-gyp-build@4.8.4",
+          "Name": "node-gyp-build",
+          "Identifier": {
+            "PURL": "pkg:npm/node-gyp-build@4.8.4",
+            "UID": "a2c1841f5071bb21"
+          },
+          "Version": "4.8.4",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3114,
+              "EndLine": 3124
+            }
+          ]
+        },
+        {
+          "ID": "object-assign@4.1.1",
+          "Name": "object-assign",
+          "Identifier": {
+            "PURL": "pkg:npm/object-assign@4.1.1",
+            "UID": "69039bf72471281a"
+          },
+          "Version": "4.1.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3181,
+              "EndLine": 3189
+            }
+          ]
+        },
+        {
+          "ID": "object-inspect@1.13.4",
+          "Name": "object-inspect",
+          "Identifier": {
+            "PURL": "pkg:npm/object-inspect@1.13.4",
+            "UID": "5f98899cb48ed891"
+          },
+          "Version": "1.13.4",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3190,
+              "EndLine": 3201
+            }
+          ]
+        },
+        {
+          "ID": "on-finished@2.4.1",
+          "Name": "on-finished",
+          "Identifier": {
+            "PURL": "pkg:npm/on-finished@2.4.1",
+            "UID": "4207dcc759277820"
+          },
+          "Version": "2.4.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "ee-first@1.1.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3202,
+              "EndLine": 3213
+            }
+          ]
+        },
+        {
+          "ID": "one-time@1.0.0",
+          "Name": "one-time",
+          "Identifier": {
+            "PURL": "pkg:npm/one-time@1.0.0",
+            "UID": "536c90f1dd2c0cb"
+          },
+          "Version": "1.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "fn.name@1.1.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3214,
+              "EndLine": 3222
+            }
+          ]
+        },
+        {
+          "ID": "parseurl@1.3.3",
+          "Name": "parseurl",
+          "Identifier": {
+            "PURL": "pkg:npm/parseurl@1.3.3",
+            "UID": "8a78d9d9d5ee5c9e"
+          },
+          "Version": "1.3.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3223,
+              "EndLine": 3231
+            }
+          ]
+        },
+        {
+          "ID": "path-to-regexp@0.1.12",
+          "Name": "path-to-regexp",
+          "Identifier": {
+            "PURL": "pkg:npm/path-to-regexp@0.1.12",
+            "UID": "c36928402007ea65"
+          },
+          "Version": "0.1.12",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3232,
+              "EndLine": 3237
+            }
+          ]
+        },
+        {
+          "ID": "proxy-addr@2.0.7",
+          "Name": "proxy-addr",
+          "Identifier": {
+            "PURL": "pkg:npm/proxy-addr@2.0.7",
+            "UID": "d26013c5ed83fb26"
+          },
+          "Version": "2.0.7",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "forwarded@0.2.0",
+            "ipaddr.js@1.9.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3251,
+              "EndLine": 3263
+            }
+          ]
+        },
+        {
+          "ID": "punycode@2.3.1",
+          "Name": "punycode",
+          "Identifier": {
+            "PURL": "pkg:npm/punycode@2.3.1",
+            "UID": "f4134d0c3c395ef0"
+          },
+          "Version": "2.3.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3271,
+              "EndLine": 3279
+            }
+          ]
+        },
+        {
+          "ID": "q@1.5.1",
+          "Name": "q",
+          "Identifier": {
+            "PURL": "pkg:npm/q@1.5.1",
+            "UID": "f793f6726e0976f8"
+          },
+          "Version": "1.5.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3280,
+              "EndLine": 3290
+            }
+          ]
+        },
+        {
+          "ID": "qs@6.13.0",
+          "Name": "qs",
+          "Identifier": {
+            "PURL": "pkg:npm/qs@6.13.0",
+            "UID": "24b09aa168531848"
+          },
+          "Version": "6.13.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "side-channel@1.1.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3291,
+              "EndLine": 3305
+            }
+          ]
+        },
+        {
+          "ID": "range-parser@1.2.1",
+          "Name": "range-parser",
+          "Identifier": {
+            "PURL": "pkg:npm/range-parser@1.2.1",
+            "UID": "43b726fc080e003d"
+          },
+          "Version": "1.2.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3306,
+              "EndLine": 3314
+            }
+          ]
+        },
+        {
+          "ID": "raw-body@2.5.2",
+          "Name": "raw-body",
+          "Identifier": {
+            "PURL": "pkg:npm/raw-body@2.5.2",
+            "UID": "a48f763c6f20fad4"
+          },
+          "Version": "2.5.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "bytes@3.1.2",
+            "http-errors@2.0.0",
+            "iconv-lite@0.4.24",
+            "unpipe@1.0.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3315,
+              "EndLine": 3329
+            }
+          ]
+        },
+        {
+          "ID": "readable-stream@3.6.2",
+          "Name": "readable-stream",
+          "Identifier": {
+            "PURL": "pkg:npm/readable-stream@3.6.2",
+            "UID": "3bf397a431d1ec2c"
+          },
+          "Version": "3.6.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "inherits@2.0.4",
+            "string_decoder@1.3.0",
+            "util-deprecate@1.0.2"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3330,
+              "EndLine": 3343
+            }
+          ]
+        },
+        {
+          "ID": "safe-buffer@5.2.1",
+          "Name": "safe-buffer",
+          "Identifier": {
+            "PURL": "pkg:npm/safe-buffer@5.2.1",
+            "UID": "c9c1bd2e9a4d0f27"
+          },
+          "Version": "5.2.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3357,
+              "EndLine": 3376
+            }
+          ]
+        },
+        {
+          "ID": "safe-stable-stringify@2.5.0",
+          "Name": "safe-stable-stringify",
+          "Identifier": {
+            "PURL": "pkg:npm/safe-stable-stringify@2.5.0",
+            "UID": "43b16f393bde6dee"
+          },
+          "Version": "2.5.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3377,
+              "EndLine": 3385
+            }
+          ]
+        },
+        {
+          "ID": "safer-buffer@2.1.2",
+          "Name": "safer-buffer",
+          "Identifier": {
+            "PURL": "pkg:npm/safer-buffer@2.1.2",
+            "UID": "1905fd5826a1ecc"
+          },
+          "Version": "2.1.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3386,
+              "EndLine": 3391
+            }
+          ]
+        },
+        {
+          "ID": "semver@7.7.3",
+          "Name": "semver",
+          "Identifier": {
+            "PURL": "pkg:npm/semver@7.7.3",
+            "UID": "4f23f3eb873e194f"
+          },
+          "Version": "7.7.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 2586,
+              "EndLine": 2597
+            }
+          ]
+        },
+        {
+          "ID": "send@0.19.0",
+          "Name": "send",
+          "Identifier": {
+            "PURL": "pkg:npm/send@0.19.0",
+            "UID": "d169ffe5e34c6a21"
+          },
+          "Version": "0.19.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "debug@2.6.9",
+            "depd@2.0.0",
+            "destroy@1.2.0",
+            "encodeurl@1.0.2",
+            "escape-html@1.0.3",
+            "etag@1.8.1",
+            "fresh@0.5.2",
+            "http-errors@2.0.0",
+            "mime@1.6.0",
+            "ms@2.1.3",
+            "on-finished@2.4.1",
+            "range-parser@1.2.1",
+            "statuses@2.0.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3408,
+              "EndLine": 3431
+            }
+          ]
+        },
+        {
+          "ID": "serve-static@1.16.2",
+          "Name": "serve-static",
+          "Identifier": {
+            "PURL": "pkg:npm/serve-static@1.16.2",
+            "UID": "45f9d28e98f47bfa"
+          },
+          "Version": "1.16.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "encodeurl@2.0.0",
+            "escape-html@1.0.3",
+            "parseurl@1.3.3",
+            "send@0.19.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3447,
+              "EndLine": 3461
+            }
+          ]
+        },
+        {
+          "ID": "setprototypeof@1.2.0",
+          "Name": "setprototypeof",
+          "Identifier": {
+            "PURL": "pkg:npm/setprototypeof@1.2.0",
+            "UID": "2c164135720dc023"
+          },
+          "Version": "1.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3462,
+              "EndLine": 3467
+            }
+          ]
+        },
+        {
+          "ID": "side-channel@1.1.0",
+          "Name": "side-channel",
+          "Identifier": {
+            "PURL": "pkg:npm/side-channel@1.1.0",
+            "UID": "188ba1294f261a17"
+          },
+          "Version": "1.1.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "es-errors@1.3.0",
+            "object-inspect@1.13.4",
+            "side-channel-list@1.0.0",
+            "side-channel-map@1.0.1",
+            "side-channel-weakmap@1.0.2"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3468,
+              "EndLine": 3486
+            }
+          ]
+        },
+        {
+          "ID": "side-channel-list@1.0.0",
+          "Name": "side-channel-list",
+          "Identifier": {
+            "PURL": "pkg:npm/side-channel-list@1.0.0",
+            "UID": "b0396f01ec055c32"
+          },
+          "Version": "1.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "es-errors@1.3.0",
+            "object-inspect@1.13.4"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3487,
+              "EndLine": 3502
+            }
+          ]
+        },
+        {
+          "ID": "side-channel-map@1.0.1",
+          "Name": "side-channel-map",
+          "Identifier": {
+            "PURL": "pkg:npm/side-channel-map@1.0.1",
+            "UID": "b1bc3b2a3bc464e4"
+          },
+          "Version": "1.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "call-bound@1.0.4",
+            "es-errors@1.3.0",
+            "get-intrinsic@1.3.0",
+            "object-inspect@1.13.4"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3503,
+              "EndLine": 3520
+            }
+          ]
+        },
+        {
+          "ID": "side-channel-weakmap@1.0.2",
+          "Name": "side-channel-weakmap",
+          "Identifier": {
+            "PURL": "pkg:npm/side-channel-weakmap@1.0.2",
+            "UID": "5159132a9a780b64"
+          },
+          "Version": "1.0.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "call-bound@1.0.4",
+            "es-errors@1.3.0",
+            "get-intrinsic@1.3.0",
+            "object-inspect@1.13.4",
+            "side-channel-map@1.0.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3521,
+              "EndLine": 3539
+            }
+          ]
+        },
+        {
+          "ID": "sift@16.0.1",
+          "Name": "sift",
+          "Identifier": {
+            "PURL": "pkg:npm/sift@16.0.1",
+            "UID": "5b2df980de6d1eb9"
+          },
+          "Version": "16.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3540,
+              "EndLine": 3545
+            }
+          ]
+        },
+        {
+          "ID": "smart-buffer@4.2.0",
+          "Name": "smart-buffer",
+          "Identifier": {
+            "PURL": "pkg:npm/smart-buffer@4.2.0",
+            "UID": "5762509b87581a0"
+          },
+          "Version": "4.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3559,
+              "EndLine": 3568
+            }
+          ]
+        },
+        {
+          "ID": "socks@2.8.7",
+          "Name": "socks",
+          "Identifier": {
+            "PURL": "pkg:npm/socks@2.8.7",
+            "UID": "40e9c8910713b39c"
+          },
+          "Version": "2.8.7",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "ip-address@10.1.0",
+            "smart-buffer@4.2.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3569,
+              "EndLine": 3582
+            }
+          ]
+        },
+        {
+          "ID": "sparse-bitfield@3.0.3",
+          "Name": "sparse-bitfield",
+          "Identifier": {
+            "PURL": "pkg:npm/sparse-bitfield@3.0.3",
+            "UID": "9737e617189aec2f"
+          },
+          "Version": "3.0.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "memory-pager@1.5.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3583,
+              "EndLine": 3591
+            }
+          ]
+        },
+        {
+          "ID": "stack-trace@0.0.10",
+          "Name": "stack-trace",
+          "Identifier": {
+            "PURL": "pkg:npm/stack-trace@0.0.10",
+            "UID": "67e6030fa291b981"
+          },
+          "Version": "0.0.10",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3592,
+              "EndLine": 3600
+            }
+          ]
+        },
+        {
+          "ID": "statuses@2.0.1",
+          "Name": "statuses",
+          "Identifier": {
+            "PURL": "pkg:npm/statuses@2.0.1",
+            "UID": "f485e4c53483f2e0"
+          },
+          "Version": "2.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3601,
+              "EndLine": 3609
+            }
+          ]
+        },
+        {
+          "ID": "streamsearch@1.1.0",
+          "Name": "streamsearch",
+          "Identifier": {
+            "PURL": "pkg:npm/streamsearch@1.1.0",
+            "UID": "38f316df346780e5"
+          },
+          "Version": "1.1.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3610,
+              "EndLine": 3617
+            }
+          ]
+        },
+        {
+          "ID": "string_decoder@1.3.0",
+          "Name": "string_decoder",
+          "Identifier": {
+            "PURL": "pkg:npm/string_decoder@1.3.0",
+            "UID": "739fab257264cfbc"
+          },
+          "Version": "1.3.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "safe-buffer@5.2.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3618,
+              "EndLine": 3626
+            }
+          ]
+        },
+        {
+          "ID": "strnum@2.1.1",
+          "Name": "strnum",
+          "Identifier": {
+            "PURL": "pkg:npm/strnum@2.1.1",
+            "UID": "a38bcbdcc1c1bf81"
+          },
+          "Version": "2.1.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3627,
+              "EndLine": 3639
+            }
+          ]
+        },
+        {
+          "ID": "text-hex@1.0.0",
+          "Name": "text-hex",
+          "Identifier": {
+            "PURL": "pkg:npm/text-hex@1.0.0",
+            "UID": "e7daf04380b7f79c"
+          },
+          "Version": "1.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3653,
+              "EndLine": 3658
+            }
+          ]
+        },
+        {
+          "ID": "toidentifier@1.0.1",
+          "Name": "toidentifier",
+          "Identifier": {
+            "PURL": "pkg:npm/toidentifier@1.0.1",
+            "UID": "150a530249b87b82"
+          },
+          "Version": "1.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3672,
+              "EndLine": 3680
+            }
+          ]
+        },
+        {
+          "ID": "tr46@0.0.3",
+          "Name": "tr46",
+          "Identifier": {
+            "PURL": "pkg:npm/tr46@0.0.3",
+            "UID": "9b9352460d9e0aaf"
+          },
+          "Version": "0.0.3",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3092,
+              "EndLine": 3097
+            }
+          ]
+        },
+        {
+          "ID": "tr46@3.0.0",
+          "Name": "tr46",
+          "Identifier": {
+            "PURL": "pkg:npm/tr46@3.0.0",
+            "UID": "79a0a99987c0097c"
+          },
+          "Version": "3.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "punycode@2.3.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2961,
+              "EndLine": 2972
+            }
+          ]
+        },
+        {
+          "ID": "tr46@5.1.1",
+          "Name": "tr46",
+          "Identifier": {
+            "PURL": "pkg:npm/tr46@5.1.1",
+            "UID": "dfc30707f74fbf6f"
+          },
+          "Version": "5.1.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "punycode@2.3.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3691,
+              "EndLine": 3702
+            }
+          ]
+        },
+        {
+          "ID": "triple-beam@1.4.1",
+          "Name": "triple-beam",
+          "Identifier": {
+            "PURL": "pkg:npm/triple-beam@1.4.1",
+            "UID": "ee04016b6ec3eff0"
+          },
+          "Version": "1.4.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3703,
+              "EndLine": 3711
+            }
+          ]
+        },
+        {
+          "ID": "tslib@2.8.1",
+          "Name": "tslib",
+          "Identifier": {
+            "PURL": "pkg:npm/tslib@2.8.1",
+            "UID": "84878d650c047ccc"
+          },
+          "Version": "2.8.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3712,
+              "EndLine": 3718
+            }
+          ]
+        },
+        {
+          "ID": "type-is@1.6.18",
+          "Name": "type-is",
+          "Identifier": {
+            "PURL": "pkg:npm/type-is@1.6.18",
+            "UID": "f9f099f8835cdc0e"
+          },
+          "Version": "1.6.18",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "media-typer@0.3.0",
+            "mime-types@2.1.35"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3719,
+              "EndLine": 3731
+            }
+          ]
+        },
+        {
+          "ID": "typedarray@0.0.6",
+          "Name": "typedarray",
+          "Identifier": {
+            "PURL": "pkg:npm/typedarray@0.0.6",
+            "UID": "f0174adbbba8c3aa"
+          },
+          "Version": "0.0.6",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3732,
+              "EndLine": 3737
+            }
+          ]
+        },
+        {
+          "ID": "undici-types@7.16.0",
+          "Name": "undici-types",
+          "Identifier": {
+            "PURL": "pkg:npm/undici-types@7.16.0",
+            "UID": "f3f56753cd7ec3e8"
+          },
+          "Version": "7.16.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3745,
+              "EndLine": 3750
+            }
+          ]
+        },
+        {
+          "ID": "unpipe@1.0.0",
+          "Name": "unpipe",
+          "Identifier": {
+            "PURL": "pkg:npm/unpipe@1.0.0",
+            "UID": "acac8e9c1ff6eb66"
+          },
+          "Version": "1.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3751,
+              "EndLine": 3759
+            }
+          ]
+        },
+        {
+          "ID": "util-deprecate@1.0.2",
+          "Name": "util-deprecate",
+          "Identifier": {
+            "PURL": "pkg:npm/util-deprecate@1.0.2",
+            "UID": "f978723a1eea0f1e"
+          },
+          "Version": "1.0.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3760,
+              "EndLine": 3765
+            }
+          ]
+        },
+        {
+          "ID": "utils-merge@1.0.1",
+          "Name": "utils-merge",
+          "Identifier": {
+            "PURL": "pkg:npm/utils-merge@1.0.1",
+            "UID": "ab8b672bbc1788ea"
+          },
+          "Version": "1.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3766,
+              "EndLine": 3774
+            }
+          ]
+        },
+        {
+          "ID": "uuid@9.0.1",
+          "Name": "uuid",
+          "Identifier": {
+            "PURL": "pkg:npm/uuid@9.0.1",
+            "UID": "8e78c7fdfcd510bd"
+          },
+          "Version": "9.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3775,
+              "EndLine": 3787
+            }
+          ]
+        },
+        {
+          "ID": "vary@1.1.2",
+          "Name": "vary",
+          "Identifier": {
+            "PURL": "pkg:npm/vary@1.1.2",
+            "UID": "67ade1886370754"
+          },
+          "Version": "1.1.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3788,
+              "EndLine": 3796
+            }
+          ]
+        },
+        {
+          "ID": "webidl-conversions@3.0.1",
+          "Name": "webidl-conversions",
+          "Identifier": {
+            "PURL": "pkg:npm/webidl-conversions@3.0.1",
+            "UID": "45163269fd634757"
+          },
+          "Version": "3.0.1",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3098,
+              "EndLine": 3103
+            }
+          ]
+        },
+        {
+          "ID": "webidl-conversions@7.0.0",
+          "Name": "webidl-conversions",
+          "Identifier": {
+            "PURL": "pkg:npm/webidl-conversions@7.0.0",
+            "UID": "1f9f91ac2b01457"
+          },
+          "Version": "7.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3797,
+              "EndLine": 3805
+            }
+          ]
+        },
+        {
+          "ID": "whatwg-url@11.0.0",
+          "Name": "whatwg-url",
+          "Identifier": {
+            "PURL": "pkg:npm/whatwg-url@11.0.0",
+            "UID": "9cdf3254f61c6c0"
+          },
+          "Version": "11.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tr46@3.0.0",
+            "webidl-conversions@7.0.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 2973,
+              "EndLine": 2985
+            }
+          ]
+        },
+        {
+          "ID": "whatwg-url@14.2.0",
+          "Name": "whatwg-url",
+          "Identifier": {
+            "PURL": "pkg:npm/whatwg-url@14.2.0",
+            "UID": "324db93993971e04"
+          },
+          "Version": "14.2.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tr46@5.1.1",
+            "webidl-conversions@7.0.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3806,
+              "EndLine": 3818
+            }
+          ]
+        },
+        {
+          "ID": "whatwg-url@5.0.0",
+          "Name": "whatwg-url",
+          "Identifier": {
+            "PURL": "pkg:npm/whatwg-url@5.0.0",
+            "UID": "4b6142b10dbfcba"
+          },
+          "Version": "5.0.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "tr46@0.0.3",
+            "webidl-conversions@3.0.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3104,
+              "EndLine": 3113
+            }
+          ]
+        },
+        {
+          "ID": "winston-transport@4.9.0",
+          "Name": "winston-transport",
+          "Identifier": {
+            "PURL": "pkg:npm/winston-transport@4.9.0",
+            "UID": "fd5275b476afb38f"
+          },
+          "Version": "4.9.0",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "logform@2.7.0",
+            "readable-stream@3.6.2",
+            "triple-beam@1.4.1"
+          ],
+          "Locations": [
+            {
+              "StartLine": 3841,
+              "EndLine": 3854
+            }
+          ]
+        },
+        {
+          "ID": "xtend@4.0.2",
+          "Name": "xtend",
+          "Identifier": {
+            "PURL": "pkg:npm/xtend@4.0.2",
+            "UID": "eca9101440bc63d1"
+          },
+          "Version": "4.0.2",
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 3855,
+              "EndLine": 3863
+            }
+          ]
+        }
+      ],
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2025-15284",
+          "PkgID": "qs@6.13.0",
+          "PkgName": "qs",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/qs@6.13.0",
+            "UID": "24b09aa168531848"
+          },
+          "InstalledVersion": "6.13.0",
+          "FixedVersion": "6.14.1",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-15284",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Fingerprint": "sha256:eecb8a134da37750ee3e8464681e106903bf9e3abb5212d4452fe6692dd84a5b",
+          "Title": "qs: qs: Denial of Service via improper input validation in array parsing",
+          "Description": "Improper Input Validation vulnerability in qs (parse modules) allows HTTP DoS.This issue affects qs: \u003c 6.14.1.\n\n\nSummaryThe arrayLimit option in qs does not enforce limits for bracket notation (a[]=1\u0026a[]=2), allowing attackers to cause denial-of-service via memory exhaustion. Applications using arrayLimit for DoS protection are vulnerable.\n\nDetailsThe arrayLimit option only checks limits for indexed notation (a[0]=1\u0026a[1]=2) but completely bypasses it for bracket notation (a[]=1\u0026a[]=2).\n\nVulnerable code (lib/parse.js:159-162):\n\nif (root === '[]' \u0026\u0026 options.parseArrays) {\n    obj = utils.combine([], leaf);  // No arrayLimit check\n}\n\n\n\n\n\nWorking code (lib/parse.js:175):\n\nelse if (index \u003c= options.arrayLimit) {  // Limit checked here\n    obj = [];\n    obj[index] = leaf;\n}\n\n\n\n\n\nThe bracket notation handler at line 159 uses utils.combine([], leaf) without validating against options.arrayLimit, while indexed notation at line 175 checks index \u003c= options.arrayLimit before creating arrays.\n\nPoCTest 1 - Basic bypass:\n\nnpm install qs\n\n\n\n\n\nconst qs = require('qs');\nconst result = qs.parse('a[]=1\u0026a[]=2\u0026a[]=3\u0026a[]=4\u0026a[]=5\u0026a[]=6', { arrayLimit: 5 });\nconsole.log(result.a.length);  // Output: 6 (should be max 5)\n\n\n\n\n\nTest 2 - DoS demonstration:\n\nconst qs = require('qs');\nconst attack = 'a[]=' + Array(10000).fill('x').join('\u0026a[]=');\nconst result = qs.parse(attack, { arrayLimit: 100 });\nconsole.log(result.a.length);  // Output: 10000 (should be max 100)\n\n\n\n\n\nConfiguration:\n\n  *  arrayLimit: 5 (test 1) or arrayLimit: 100 (test 2)\n  *  Use bracket notation: a[]=value (not indexed a[0]=value)\n\n\nImpactDenial of Service via memory exhaustion. Affects applications using qs.parse() with user-controlled input and arrayLimit for protection.\n\nAttack scenario:\n\n  *  Attacker sends HTTP request: GET /api/search?filters[]=x\u0026filters[]=x\u0026...\u0026filters[]=x (100,000+ times)\n  *  Application parses with qs.parse(query, { arrayLimit: 100 })\n  *  qs ignores limit, parses all 100,000 elements into array\n  *  Server memory exhausted → application crashes or becomes unresponsive\n  *  Service unavailable for all users\nReal-world impact:\n\n  *  Single malicious request can crash server\n  *  No authentication required\n  *  Easy to automate and scale\n  *  Affects any endpoint parsing query strings with bracket notation",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-20"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-15284",
+            "https://github.com/ljharb/qs",
+            "https://github.com/ljharb/qs/commit/3086902ecf7f088d0d1803887643ac6c03d415b9",
+            "https://github.com/ljharb/qs/security/advisories/GHSA-6rw7-vpxm-498p",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-15284",
+            "https://www.cve.org/CVERecord?id=CVE-2025-15284"
+          ],
+          "PublishedDate": "2025-12-29T23:15:42.703Z",
+          "LastModifiedDate": "2025-12-31T20:43:25.83Z"
+        }
+      ]
+    }
+  ]
+}

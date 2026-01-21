@@ -1,0 +1,155 @@
+2026/01/21 19:38:09 --> GET https://ghcr.io/v2/
+2026/01/21 19:38:09 GET /v2/ HTTP/1.1
+Host: ghcr.io
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Accept-Encoding: gzip
+
+
+2026/01/21 19:38:09 <-- 401 https://ghcr.io/v2/ (127.576517ms)
+2026/01/21 19:38:09 HTTP/2.0 401 Unauthorized
+Content-Length: 73
+Content-Type: application/json
+Date: Wed, 21 Jan 2026 19:38:09 GMT
+Docker-Distribution-Api-Version: registry/2.0
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+Www-Authenticate: Bearer realm="https://ghcr.io/token",service="ghcr.io",scope="repository:user/image:pull"
+X-Github-Request-Id: 601B:1E0EE7:B18CE2:BF645A:69712B21
+
+{"errors":[{"code":"UNAUTHORIZED","message":"authentication required"}]}
+
+2026/01/21 19:38:09 --> GET https://ghcr.io/token?scope=repository%3Afrani1611%2Fsocial-media-dashboard%3Apull&service=ghcr.io [body redacted: basic token response contains credentials]
+2026/01/21 19:38:09 GET /token?scope=repository%3Afrani1611%2Fsocial-media-dashboard%3Apull&service=ghcr.io HTTP/1.1
+Host: ghcr.io
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Authorization: <redacted>
+Accept-Encoding: gzip
+
+
+2026/01/21 19:38:10 <-- 200 https://ghcr.io/token?scope=repository%3Afrani1611%2Fsocial-media-dashboard%3Apull&service=ghcr.io (126.808512ms) [body redacted: basic token response contains credentials]
+2026/01/21 19:38:10 HTTP/2.0 200 OK
+Content-Length: 69
+Content-Type: application/json
+Date: Wed, 21 Jan 2026 19:38:10 GMT
+Docker-Distribution-Api-Version: registry/2.0
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Github-Request-Id: 601B:1E0EE7:B18CFB:BF6486:69712B21
+
+
+2026/01/21 19:38:10 --> GET https://ghcr.io/v2/frani1611/social-media-dashboard/manifests/0ae422e0781cdd641ddd3a94f69678d90154d63b
+2026/01/21 19:38:10 GET /v2/frani1611/social-media-dashboard/manifests/0ae422e0781cdd641ddd3a94f69678d90154d63b HTTP/1.1
+Host: ghcr.io
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Accept: application/vnd.docker.distribution.manifest.v1+json,application/vnd.docker.distribution.manifest.v1+prettyjws,application/vnd.docker.distribution.manifest.v2+json,application/vnd.oci.image.manifest.v1+json,application/vnd.docker.distribution.manifest.list.v2+json,application/vnd.oci.image.index.v1+json
+Authorization: <redacted>
+Accept-Encoding: gzip
+
+
+2026/01/21 19:38:10 <-- 200 https://ghcr.io/v2/frani1611/social-media-dashboard/manifests/0ae422e0781cdd641ddd3a94f69678d90154d63b (127.966467ms)
+2026/01/21 19:38:10 HTTP/2.0 200 OK
+Content-Length: 3048
+Content-Type: application/vnd.docker.distribution.manifest.v2+json
+Date: Wed, 21 Jan 2026 19:38:10 GMT
+Docker-Content-Digest: sha256:e84a0ff3492b64b33d0fc2a98dac23ec296d29e38b1f885b478452d29f622272
+Docker-Distribution-Api-Version: registry/2.0
+Etag: "sha256:e84a0ff3492b64b33d0fc2a98dac23ec296d29e38b1f885b478452d29f622272"
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Github-Request-Id: 601B:1E0EE7:B18D38:BF64BC:69712B22
+
+{
+   "schemaVersion": 2,
+   "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+   "config": {
+      "mediaType": "application/vnd.docker.container.image.v1+json",
+      "size": 8125,
+      "digest": "sha256:cf048960381a31ced063f0240dbecf0af86a7a388956da840c889f7470494256"
+   },
+   "layers": [
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 49566528,
+         "digest": "sha256:4fe438ca4bc0162fba19a456ca07cc462ba7bcbe8d3212cc520a37aac9352b88"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 24036867,
+         "digest": "sha256:64538a062a61add8dc8b290fa69475e8902eb839c497a5f5dcd5a950422e493c"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 64395833,
+         "digest": "sha256:fd1872fa12cc6b1145803f1a0679ca26cc65fa1b4e0ee389bfb30267594736b6"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 211485124,
+         "digest": "sha256:4925cf9d8be888d2b942e0479d921815942727632813c006bad6a067e6363663"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 3323,
+         "digest": "sha256:a4e7ff66fb574f30ee8396a76fe2d073f19558b76601bac43211b489900fba64"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 48410303,
+         "digest": "sha256:a3a70fd5f6e74460bae18e0d40d0acd78ba6ed6d3317d4ae2ef70632d0471aad"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 1250675,
+         "digest": "sha256:40d284f66487da627a7f122088036a9e975f84240096887ef7cd28cb59f8a40a"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 447,
+         "digest": "sha256:5caff02cd241c050110d17efc57f33f3ea8ee1d1a5778e34359fdfed357e85da"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 93,
+         "digest": "sha256:2e4076bde1d66f85a976c341baaf17bc340a671c7af05fc881dd69045324c85e"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 32809,
+         "digest": "sha256:0adeed2c8bd435571d14470943b4ac3c5eb9b55209579eecd9daac335420186c"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 16827798,
+         "digest": "sha256:50870b3cc3848c28610db733e1afcdf552447dcc0f59efbf45d9b3b47107de93"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 46059,
+         "digest": "sha256:a77e344a87ecb75c0539fb6e6fa8e569e656c772f8a2ee82906da450502f4600"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 2355,
+         "digest": "sha256:aaf5c77337a42a24cf4be8870ead4cf68725d063a8988f025161af8efd38e661"
+      }
+   ]
+}
+2026/01/21 19:38:10 --> GET https://ghcr.io/v2/frani1611/social-media-dashboard/manifests/sha256-e84a0ff3492b64b33d0fc2a98dac23ec296d29e38b1f885b478452d29f622272.sig
+2026/01/21 19:38:10 GET /v2/frani1611/social-media-dashboard/manifests/sha256-e84a0ff3492b64b33d0fc2a98dac23ec296d29e38b1f885b478452d29f622272.sig HTTP/1.1
+Host: ghcr.io
+User-Agent: cosign/v2.5.2 (linux; amd64) go-containerregistry/v0.20.6
+Accept: application/vnd.docker.distribution.manifest.v1+json,application/vnd.docker.distribution.manifest.v1+prettyjws,application/vnd.docker.distribution.manifest.v2+json,application/vnd.oci.image.manifest.v1+json,application/vnd.docker.distribution.manifest.list.v2+json,application/vnd.oci.image.index.v1+json
+Authorization: <redacted>
+Accept-Encoding: gzip
+
+
+2026/01/21 19:38:10 <-- 404 https://ghcr.io/v2/frani1611/social-media-dashboard/manifests/sha256-e84a0ff3492b64b33d0fc2a98dac23ec296d29e38b1f885b478452d29f622272.sig (110.827072ms)
+2026/01/21 19:38:10 HTTP/2.0 404 Not Found
+Content-Length: 70
+Content-Type: application/json
+Date: Wed, 21 Jan 2026 19:38:10 GMT
+Docker-Distribution-Api-Version: registry/2.0
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Github-Request-Id: 601B:1E0EE7:B18D66:BF64EA:69712B22
+
+{"errors":[{"code":"MANIFEST_UNKNOWN","message":"manifest unknown"}]}
+
+Error: no signatures found
+error during command execution: no signatures found
